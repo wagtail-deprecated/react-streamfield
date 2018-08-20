@@ -1,0 +1,190 @@
+$grid-gutter-width: 30px;
+$block-padding: 4px;
+$collapse-transition-duration: 0.3s;
+$add-transition-duration: 0.3s;
+$hide-transition-duration: 0.3s;
+$bounce-transition-timing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$border-radius: 3px;
+$teal: #43b1b0;
+$header-text-color-focus: #4d4d4d;
+$header-text-color: #888888;
+
+body {
+  background: #F6F6F6;
+}
+
+.children-container {
+  position: relative;
+  padding: 21px;
+   > button.add {
+    transition: opacity $add-transition-duration ease-in-out;
+    opacity: 1;
+  }
+  &.is-dragging {
+    > button.add {
+      opacity: 0;
+    }
+  }
+  .block {
+    position: relative;
+    padding: $block-padding;
+    > .block-container {
+      border: 1px solid lightGrey;
+      border-radius: $border-radius;
+      overflow: hidden;
+      background: white;
+      > header {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        background: #FAFAFA;
+        cursor: grab;
+        user-select: none;
+        h3 {
+          flex: 1 1 auto;
+          margin: 0;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          color: $header-text-color;
+          .type-icon {
+            margin-right: $grid-gutter-width / 4;
+            color: $header-text-color;
+          }
+          .block-type {
+            margin-left: 0;
+          }
+        }
+        .block-type {
+          margin: 0 $grid-gutter-width / 4;
+          font-weight: normal;
+          font-style: italic;
+          font-size: 85%;
+          line-height: 85%;
+          color: $header-text-color;
+        }
+        > aside {
+          flex: 0 0 auto;
+          > .actions {
+            > button {
+              appearance: none;
+              border: none;
+              background: none;
+              cursor: pointer;
+              color: $header-text-color;
+              opacity: 1;
+              transition: opacity $hide-transition-duration ease-in-out;
+              &.disabled {
+                opacity: 0.2;
+                pointer-events: none;
+              }
+            }
+          }
+        }
+      }
+      > .content-container > .content {
+        padding: 12px;
+        border-top: 1px solid lightGrey;
+      }
+    }
+    &:hover, &:focus, &:focus-within {
+      > .block-container {
+        border-color: #BBBBBB;
+        box-shadow: 3px 2px 3px -1px rgba(0, 0, 0, .1);
+        > header {
+          h3 {
+            color: $header-text-color-focus;
+            .type-icon {
+              color: $header-text-color-focus;
+            }
+          }
+          > aside > .actions > button {
+            color: $header-text-color-focus;
+          }
+        }
+      }
+    }
+  }
+  button.add {
+    position: absolute;
+    appearance: none;
+    border: none;
+    color: $teal;
+    font-weight: bold;
+    background: none;
+    transform: translate(-100%, -50%);
+    font-size: 30px;
+    line-height: 30px;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    backface-visibility: hidden;
+    overflow: hidden;  // Makes the rotated i box not clickable.
+    user-select: none;
+    i {
+      display: block;
+      transition: transform $add-transition-duration $bounce-transition-timing;
+      font-style: normal;
+    }
+    &.close i {
+      transform: rotate(45deg);
+    }
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    + label {
+      margin-top: $grid-gutter-width / 2;
+    }
+  }
+
+  .field {
+    + .field {
+      padding-top: $grid-gutter-width / 2;
+    }
+    label {
+      .label-text {
+        margin-bottom: $grid-gutter-width / 4;
+      }
+    }
+    &.required > label > .label-text::after {
+      content: '*';
+      color: #cd3238;
+      font-weight: 700;
+      display: inline-block;
+      margin-left: .5em;
+      line-height: 1em;
+      font-size: 13px;
+    }
+  }
+
+
+  .add-panel {
+    position: relative;
+    margin: $block-padding;
+    padding: $grid-gutter-width / 4;
+    background: #EEEEEE;
+    border-radius: $border-radius;
+    user-select: none;
+    button.type {
+      margin: $grid-gutter-width / 4;
+      appearance: none;
+      background: $teal;
+      color: white;
+      padding: 0;
+      border: none;
+      border-radius: $border-radius;
+      outline: none;
+      cursor: pointer;
+      overflow: hidden;
+      .icon, .label {
+        display: inline-block;
+        padding: 4px 8px;
+      }
+      .icon {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}

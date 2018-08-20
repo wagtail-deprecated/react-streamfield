@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>react-streamfield</title>
+    <meta charset="utf-8" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: sans-serif;
+      }
+    </style>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="/dist/react-streamfield.css" />
+    <link rel="stylesheet" href="example.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous" />
+  </head>
+  <body>
+    <h1>StreamField without nesting, 1 type of block</h1>
+    <h3>Similar to an InlinePanel</h3>
+    <script type="application/json" data-streamfield="stream-1">
+      {
+        "required": true,
+        "minNum": null,
+        "maxNum": null,
+        "blockDefinitions": [
+          {
+            "key": "title",
+            "icon": "<i class=\"fas fa-heading\"></i>",
+            "className": "full title",
+            "html": "<input type=\"text\" name=\"title\" />"
+          }
+        ],
+        "value": [{"type": "title", "value": "Wagtail is awesome!"}]
+      }
+    </script>
+    <h1>StreamField without nesting, 2 types of block</h1>
+    <script type="application/json" data-streamfield="stream-2">
+      {
+        "required": true,
+        "minNum": null,
+        "maxNum": null,
+        "blockDefinitions": [
+          {
+            "key": "title",
+            "icon": "<i class=\"fas fa-heading\"></i>",
+            "className": "full title",
+            "html": "<input type=\"text\" name=\"title\" />"
+          },
+          {
+            "key": "text",
+            "icon": "<i class=\"fas fa-align-justify\"></i>",
+            "className": "full",
+            "html": "<textarea name=\"text\"></textarea>"
+          }
+        ],
+        "value": [{"type": "title", "value": "Wagtail is awesome!"},
+                  {"type": "text", "value": "And it’s always getting better 😃"}]
+      }
+    </script>
+    <h1>StreamField without nesting, 2 types of block, custom per-value HTML</h1>
+    <script type="application/json" data-streamfield="stream-3">
+      {
+        "required": true,
+        "minNum": null,
+        "maxNum": null,
+        "blockDefinitions": [
+          {
+            "key": "title",
+            "icon": "<i class=\"fas fa-heading\"></i>",
+            "className": "full title",
+            "html": "<input type=\"text\" name=\"title\" />"
+          },
+          {
+            "key": "text",
+            "icon": "<i class=\"fas fa-align-justify\"></i>",
+            "className": "full",
+            "html": "<textarea name=\"text\"></textarea>"
+          }
+        ],
+        "value": [{"type": "title", "html": "<div style='padding: 6px 12px 0; color: grey;'>Do you see it?</div> <input type='text' name='title' />", "value": "Custom HTML for this value!"},
+                  {"type": "title", "value": "This time, no custom HTML."},
+                  {"type": "text", "value": "And it’s always getting better 😃"}]
+      }
+    </script>
+    <h1>Complex nested StreamField</h1>
+    <script type="application/json" data-streamfield="stream-4">
+      {
+        "required": true,
+        "minNum": null,
+        "maxNum": null,
+        "blockDefinitions": [
+          {
+            "key": "title",
+            "icon": "<i class=\"fas fa-heading\"></i>",
+            "className": "full title",
+            "html": "<input type=\"text\" name=\"title\" />"
+          },
+          {
+            "key": "text",
+            "icon": "<i class=\"fas fa-align-justify\"></i>",
+            "className": "full",
+            "html": "<textarea name=\"text\"></textarea>"
+          },
+          {
+            "key": "block-type",
+            "label": "Block type",
+            "icon": "<i class=\"fas fa-heart\"></i>",
+            "titleTemplate": "${start_date} — ${end_date}",
+            "isStruct": true,
+            "children": [
+              {
+                "key": "start_date",
+                "html": "<input type=\"date\" name=\"start_date\" />",
+                "required": true
+              },
+              {
+                "key": "end_date",
+                "html": "<input type=\"date\" name=\"end_date\" />",
+                "required": true
+              },
+              {
+                "key": "image",
+                "html": "<input type=\"file\" accept=\"image/*\" name=\"image\" />"
+              },
+              {
+                "key": "public",
+                "html": "<input type=\"checkbox\" name=\"public\" />"
+              },
+              {
+                "key": "tags"
+              },
+              {
+                "key": "size",
+                "html": "<input type=\"number\" name=\"size\" />"
+              },
+              {
+                "key": "color",
+                "html": "<input type=\"color\" name=\"color\" />"
+              },
+              {
+                "key": "sub-blocks",
+                "children": [
+                  {
+                    "key": "sub-block-type",
+                    "label": "Sub-block type",
+                    "icon": "<i class=\"fas fa-heartbeat\"></i>",
+                    "isStruct": true,
+                    "children": [
+                      {
+                        "key": "name"
+                      },
+                      {
+                        "key": "password",
+                        "html": "<input type=\"password\" name=\"password\" />"
+                      },
+                      {
+                        "key": "sub-sub-blocks",
+                        "children": [
+                          {
+                            "key": "sub-sub-block-type",
+                            "name": "Sub-sub-block type",
+                            "icon": "<i class=\"fas fa-smile\"></i>"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "value": [{"type": "title", "value": "Wagtail is awesome!"}, {"type": "text", "value": "And it\u2019s always getting better! \ud83d\ude03"}, {"type": "block-type", "value": [{"type": "start_date", "value": "1768-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1769-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1770-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1771-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1772-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1773-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1774-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1775-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1776-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1777-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1778-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1779-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1780-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1781-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1782-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1783-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1784-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1785-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1786-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1787-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1788-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1789-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1790-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1791-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1792-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1793-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1794-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1795-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1796-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1797-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1798-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1799-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1800-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1801-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1802-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1803-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1804-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1805-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1806-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1807-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1808-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1809-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1810-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1811-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1812-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1813-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1814-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1815-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1816-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}, {"type": "block-type", "value": [{"type": "start_date", "value": "1817-03-04"}, {"type": "public", "value": true}, {"type": "size", "value": 3.14}, {"type": "color", "value": "#F11C32"}, {"type": "sub-blocks", "value": [{"type": "sub-block-type", "value": [{"type": "name", "value": "admin"}, {"type": "password", "value": "admin"}, {"type": "sub-sub-blocks", "value": [{"type": "sub-sub-block-type", "html": "<input type=\"text\" name=\"sub-sub-block-type\" /><div><small>Or hi, if you prefer.</small></div>", "value": "hello"}, {"type": "sub-sub-block-type", "value": "world"}]}]}]}]}]
+      }
+    </script>
+    <script src="/dist/react-streamfield.js"></script>
+  </body>
+</html>

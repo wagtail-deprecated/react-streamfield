@@ -1,0 +1,33 @@
+.children-container .block > .block-container > .content-container > .content.full {
+    padding: 0;
+}
+
+.children-container .block > .block-container > .content-container > .content.full input,
+.children-container .block > .block-container > .content-container > .content.full textarea {
+  display: block;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
+  padding: 12px;
+  border: none;
+  outline: none;
+}
+
+.children-container .block > .block-container > .content-container > .content.full input {
+  font-size: 30px;
+}
+
+input[type="text"], input[type="password"], input[type="email"],
+input[type="date"], input[type="time"], input[type="number"], select {
+  padding: 5px 8px;
+  border: 1px solid lightGrey;
+  border-radius: 3px;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+}

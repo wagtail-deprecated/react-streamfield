@@ -1,0 +1,65 @@
+{
+  "name": "react-streamfield",
+  "version": "0.1.0",
+  "author": "NoriPyt <contact@noripyt.com> (https://noripyt.com)",
+  "description": "Powerful field for inserting multiple blocks with nesting.",
+  "keywords": ["react", "react-component", "field"],
+  "homepage": "https://github.com/noripyt/react-streamfield",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noripyt/react-streamfield"
+  },
+  "bugs": {
+    "url": "https://github.com/noripyt/react-streamfield/issues"
+  },
+  "license": "BSD",
+  "files": ["src"],
+  "main": "src/index.js",
+  "dependencies": {
+    "babel-cli": "6.26.0",
+    "babel-loader": "7.1.5",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-decorators-legacy": "1.3.5",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "babel-preset-react": "6.24.1",
+    "classnames": "2.2.6",
+    "css-loader": "1.0.0",
+    "mini-css-extract-plugin": "0.4.1",
+    "node-sass": "4.9.3",
+    "prop-types": "15.6.2",
+    "react": "16.4.2",
+    "react-animate-height": "2.0.4",
+    "react-beautiful-dnd": "9.0.0",
+    "react-dom": "16.4.2",
+    "react-redux": "5.0.7",
+    "redux": "4.0.0",
+    "redux-thunk": "2.3.0",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.22.1",
+    "uuid": "3.3.2",
+    "webpack": "4.16.5",
+    "webpack-cli": "3.1.0"
+  },
+  "devDependencies": {
+    "babel-jest": "23.4.2",
+    "jest": "23.5.0"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ],
+    "plugins": [
+      "transform-class-properties",
+      "transform-object-rest-spread",
+      "transform-decorators-legacy"
+    ]
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js --mode production",
+    "start": "webpack --config webpack.config.js --mode development --watch",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  }
+}
