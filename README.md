@@ -8,6 +8,11 @@ thanks to [a Kickstarter campaign](https://kickstarter.com/projects/noripyt/wagt
 ![React StreamField screenshot](https://raw.github.com/noripyt/react-streamfield/master/react-streamfield-screenshot.png)
 
 
+## Demo
+
+https://noripyt.github.io/react-streamfield/example/
+
+
 ## Getting started
 
 First, install the package from NPM:
