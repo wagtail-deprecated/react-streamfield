@@ -35,9 +35,7 @@ create a stream field:
     "blockDefinitions": [
       {
         "key": "title",
-        "icon": "<i class=\"fas fa-heading\"></i>",
-        "className": "full title",
-        "html": "<input type=\"text\" name=\"title\" />"
+        "icon": "<i class=\"fas fa-heading\"></i>"
       }
     ],
     "value": [{"type": "title", "value": "Wagtail is awesome!"}]
