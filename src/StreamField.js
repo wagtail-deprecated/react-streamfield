@@ -45,11 +45,11 @@ class StreamField extends React.Component {
   };
 
   render() {
-    const {id, name, generatedValue} = this.props;
+    const {id, generatedValue} = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <BlocksContainer fieldId={id} />
-        <input type="hidden" name={name === undefined ? id : name}
+        <input type="hidden" name={id}
                value={JSON.stringify(generatedValue)} />
       </DragDropContext>
     );
@@ -84,7 +84,6 @@ const BlockDefinitionType = PropTypes.shape({
 
 const BlockValueType = PropTypes.shape({
   type: PropTypes.string.isRequired,
-  name: PropTypes.string,
   html: PropTypes.string,
   hasError: PropTypes.bool,
   value: PropTypes.oneOfType([
@@ -98,7 +97,6 @@ const BlockValueType = PropTypes.shape({
 
 StreamField.propTypes = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string,
   required: PropTypes.bool,
   minNum: PropTypes.number,
   maxNum: PropTypes.number,

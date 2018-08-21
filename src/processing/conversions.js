@@ -1,10 +1,9 @@
-import uuidv4 from 'uuid';
 import {
   getBlockDefinition,
   getNestedBlockDefinition,
   isField,
   isStruct,
-  getNewBlock,
+  getNewBlock, getNewId,
 } from './utils';
 
 
@@ -15,7 +14,7 @@ export const getNestedBlocksState = (parentBlockId, blockDefinitions,
   let descendantsBlocksState = {};
 
   for (let block of blocks) {
-    const blockId = block.id === undefined ? uuidv4() : block.id;
+    const blockId = block.id === undefined ? getNewId() : block.id;
     const blockDefinition = blockDefinitions.length === 1 ?
       blockDefinitions[0] : getBlockDefinition(blockDefinitions, block.type);
     const blockIsField = isField(blockDefinition);
@@ -52,7 +51,6 @@ export const getNestedBlocksState = (parentBlockId, blockDefinitions,
     blocksState[blockId] = {
       parent: parentBlockId,
       type: blockDefinition.key,
-      name: block.name,
       html: block.html,
       hasError: block.hasError,
       value: value,

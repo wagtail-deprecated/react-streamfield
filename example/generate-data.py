@@ -18,7 +18,7 @@ def generate_block(i):
                         {'type': 'sub-sub-blocks', 'value': [
                             {'type': 'sub-sub-block-type',
                              'html': '<input type="text" '
-                                     'name="sub-sub-block-type" />'
+                                     "name='field-__ID__' />"
                                      '<div>'
                                      '<small>Or hi, if you prefer.</small>'
                                      '</div>',

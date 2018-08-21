@@ -1,11 +1,10 @@
-import uuidv4 from 'uuid';
 import {
   applyToBlocks,
   getBlockDefinition,
   getChildrenIds,
   getDescendantsIds,
   getNestedBlockDefinition,
-  getNewBlock,
+  getNewBlock, getNewId,
   isField,
   isStruct,
 } from './utils';
@@ -121,7 +120,7 @@ export const getIndex = (state, fieldId, blockId) => {
 export const cloneBlock = (state, fieldId, parentId, blockId) => {
   const fieldData = state[fieldId];
   const blocks = {...fieldData.blocks};
-  const newBlockId = uuidv4();
+  const newBlockId = getNewId();
   const newBlock = {...blocks[blockId], parent: parentId};
   let newBlocks = {[newBlockId]: newBlock};
   const blockDefinition = getNestedBlockDefinition(state, fieldId, blockId);

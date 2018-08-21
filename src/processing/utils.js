@@ -1,5 +1,16 @@
 import uuidv4 from "uuid";
 
+
+export const getNewId = () => {
+  return uuidv4();
+};
+
+
+export const getFieldName = blockId => {
+  return `field-${blockId}`;
+};
+
+
 export const isField = blockDefinition => {
   return (blockDefinition.children === undefined)
       || (blockDefinition.children.length === 0);
@@ -152,7 +163,7 @@ export const structValueToObject = (state, fieldId, structValue) => {
 
 export const getNewBlock = (parentId, blockDefinition) => {
   let extraBlocks = {};
-  const blockId = uuidv4();
+  const blockId = getNewId();
 
   let value;
 

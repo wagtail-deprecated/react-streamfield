@@ -13,7 +13,7 @@ import {
   shouldRunInnerScripts,
   structValueToObject,
   isRequired,
-  getDescendantsIds,
+  getDescendantsIds, getFieldName,
 } from './processing/utils';
 import {changeBlockValue} from './actions';
 import BlocksContainer from './BlocksContainer';
@@ -35,23 +35,18 @@ const MutationObserver = window.MutationObserver
   const newProps = {
     blockDefinition,
     blockId,
-    name: block.name,
     html: block.html,
     closed: block.closed && !hasDescendantError,
   };
   if (isStruct(blockDefinition)) {
-    const childIdsByInputName = {};
+    const childIdsByType = {};
     const childBlocksByType = {};
     for (let childBlockId of value) {
       const childBlock = blocks[childBlockId];
-      let inputName = childBlock.name;
-      if (inputName === undefined) {
-        inputName = childBlock.type;
-      }
-      childIdsByInputName[inputName] = childBlockId;
+      childIdsByType[childBlock.type] = childBlockId;
       childBlocksByType[childBlock.type] = childBlock;
     }
-    newProps.childIdsByInputName = childIdsByInputName;
+    newProps.childIdsByType = childIdsByType;
     newProps.value = structValueToObject(state, fieldId, value);
     newProps.childBlocksByType = childBlocksByType;
   } else {
@@ -97,65 +92,52 @@ class BlockContent extends React.Component {
     }
   }
 
-  findInput(inputName) {
+  findInput(blockId) {
+    const name = getFieldName(blockId);
     const contentNode = ReactDOM.findDOMNode(this);
-    const inputs = [...contentNode.querySelectorAll(`[name="${inputName}"]`)];
+    const inputs = [...contentNode.querySelectorAll(`[name="${name}"]`)];
     if (inputs.length === 0) {
-      throw Error(`Could not find input with name "${inputName}"`);
+      throw Error(`Could not find input with name "${name}"`);
     }
-    this._inputs[inputName] = inputs;
+    this._inputs[blockId] = inputs;
     for (let input of inputs) {
       if (input.type === 'hidden') {
         new MutationObserver(() => {
           input.dispatchEvent(new Event('change'));
         }).observe(input, {attributes: true, attributeFilter: ['value']});
       }
-      input.setAttribute('data-name', inputName);
+      input.id = blockId;
+      // We remove the name attribute to remove inputs from the submitted form.
       input.removeAttribute('name');
     }
   }
 
-  get inputName() {
-    const {blockDefinition, name} = this.props;
-    if (isField(blockDefinition)) {
-      if (name === undefined) {
-        return blockDefinition.key;
-      }
-      return name;
-    }
-  }
-
-  getChildInputName(childBlockDefinition) {
-    const {childBlocksByType} = this.props;
+  getChildId(childBlockDefinition) {
     if (isField(childBlockDefinition)) {
-      let blockType = childBlockDefinition.key;
-      let inputName = childBlocksByType[blockType].name;
-      if (inputName === undefined) {
-        return childBlockDefinition.key;
-      }
-      return inputName
+      const {childIdsByType} = this.props;
+      return childIdsByType[childBlockDefinition.key];
     }
   }
 
   findInputs() {
     this._inputs = {};
-    const {blockDefinition} = this.props;
+    const {blockDefinition, blockId} = this.props;
     if (isField(blockDefinition)) {
-      this.findInput(this.inputName);
+      this.findInput(blockId);
     } else if (isStruct(blockDefinition)) {
       for (let childBlockDefinition of blockDefinition.children) {
         if (isField(childBlockDefinition)) {
-          this.findInput(this.getChildInputName(childBlockDefinition));
+          this.findInput(this.getChildId(childBlockDefinition));
         }
       }
     }
   }
 
-  setInputValue(name, value) {
+  setInputValue(blockId, value) {
     if (value === undefined) {
       value = null;
     }
-    const inputs = this._inputs[name];
+    const inputs = this._inputs[blockId];
     for (let input of inputs) {
       if (input.type === 'file') {
         input.files = value;
@@ -175,19 +157,19 @@ class BlockContent extends React.Component {
     if (this._inputs === null) {
       this.findInputs();
     }
-    const {blockDefinition, value} = this.props;
+    const {blockDefinition, blockId, value} = this.props;
     if (isStruct(blockDefinition)) {
       for (const childBlockDefinition of blockDefinition.children) {
         if (isField(childBlockDefinition)) {
           let blockType = childBlockDefinition.key;
           if (this.getChildHtml(childBlockDefinition) === undefined) {
-            this.setInputValue(this.getChildInputName(childBlockDefinition),
+            this.setInputValue(this.getChildId(childBlockDefinition),
                                value[blockType]);
           }
         }
       }
     } else if (isField(blockDefinition)) {
-      this.setInputValue(this.inputName, value);
+      this.setInputValue(blockId, value);
     }
   }
 
@@ -207,7 +189,11 @@ class BlockContent extends React.Component {
     return childBlocksByType[blockDefinition.key].html;
   };
 
-  getFieldInput = (blockDefinition, inputName=null) => {
+  formatHtml(html, id) {
+    return html.replace(/__ID__/g, id);
+  }
+
+  getFieldInput = (blockDefinition, blockId=null) => {
     let {fieldId, value} = this.props;
     const {key} = blockDefinition;
     const label = getLabel(blockDefinition);
@@ -230,19 +216,19 @@ class BlockContent extends React.Component {
     if ((html === undefined) && (blockDefinition.html !== undefined)) {
       html = blockDefinition.html;
     }
-    if (inputName === null) {
-      inputName = this.getChildInputName(blockDefinition)
+    if (blockId === null) {
+      blockId = this.getChildId(blockDefinition);
     }
     let input = html === undefined ?
-      <input name={inputName} type="text"
+      <input id={blockId} name={getFieldName(blockId)} type="text"
              defaultValue={value}/>
       :
       <div key={key} className="field"
-           dangerouslySetInnerHTML={{__html: html}}/>;
+           dangerouslySetInnerHTML={{__html: this.formatHtml(html, blockId)}}/>;
     if (isParentStruct) {
       return (
         <React.Fragment>
-          <label>{label}</label>
+          <label htmlFor={blockId}>{label}</label>
           {input}
         </React.Fragment>
       );
@@ -250,13 +236,13 @@ class BlockContent extends React.Component {
     return input;
   };
 
-  getField = (blockDefinition, inputName=null) => {
+  getField = (blockDefinition, blockId=null) => {
     const {key} = blockDefinition;
     return (
       <div className={'field'
                       + (isRequired(blockDefinition) ? ' required' : '')}
            key={key}>
-        {this.getFieldInput(blockDefinition, inputName)}
+        {this.getFieldInput(blockDefinition, blockId)}
       </div>
     );
   };
@@ -265,12 +251,16 @@ class BlockContent extends React.Component {
     const {html, blockDefinition, fieldId, blockId} = this.props;
     if (html !== undefined) {
       return (
-        <div dangerouslySetInnerHTML={{__html: html}} />
+        <div dangerouslySetInnerHTML={
+          {__html: this.formatHtml(html, blockId)}
+        } />
       );
     }
     if (blockDefinition.html !== undefined) {
       return (
-        <div dangerouslySetInnerHTML={{__html: blockDefinition.html}} />
+        <div dangerouslySetInnerHTML={
+          {__html: this.formatHtml(blockDefinition.html, blockId)}
+        } />
       );
     }
     if (isStruct(blockDefinition)) {
@@ -279,29 +269,25 @@ class BlockContent extends React.Component {
       );
     }
     if (isField(blockDefinition)) {
-      return this.getField(blockDefinition, this.inputName);
+      return this.getField(blockDefinition, blockId);
     }
     return <BlocksContainer fieldId={fieldId} id={blockId} />;
   }
 
   onChange = event => {
     const input = event.target;
-    const inputName = input.getAttribute('data-name');
+    const blockId = input.id;
     let value;
     if (input.type === 'file') {
       value = input.files;
     } else if (input.type === 'checkbox' || input.type === 'radio') {
-      const boxes = this._inputs[inputName];
+      const boxes = this._inputs[blockId];
       value = boxes.filter(box => box.checked).map(box => box.value);
     } else if (input.tagName === 'SELECT') {
       value = input.options[input.selectedIndex].value;
     } else {
       value = input.value;
     }
-    const blockId = isStruct(this.props.blockDefinition) ?
-      this.props.childIdsByInputName[inputName]
-      :
-      this.props.blockId;
     this.props.changeBlockValue(blockId, value);
   };
 
