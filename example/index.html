@@ -111,8 +111,33 @@
         }]
       }
     </script>
-    <h1>Complex nested StreamField</h1>
+    <h1>Error in one of the nested blocks</h1>
     <script type="application/json" data-streamfield="stream-5">
+      {
+        "required": true,
+        "minNum": null,
+        "maxNum": null,
+        "blockDefinitions": [
+          {
+            "key": "list",
+            "children": [
+              {
+                "key": "bool",
+                "html": "<input type='checkbox' name='bool' />"
+              }
+            ]
+          }
+        ],
+        "value": [
+          {"type": "list", "value": [
+            {"type": "bool", "value": true},
+            {"type": "bool", "value": false, "hasError": true}
+          ]
+        }]
+      }
+    </script>
+    <h1>Complex nested StreamField</h1>
+    <script type="application/json" data-streamfield="stream-6">
       {
         "required": true,
         "minNum": null,

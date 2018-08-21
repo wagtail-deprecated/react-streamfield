@@ -86,6 +86,7 @@ const BlockValueType = PropTypes.shape({
   type: PropTypes.string.isRequired,
   name: PropTypes.string,
   html: PropTypes.string,
+  hasError: PropTypes.bool,
   value: PropTypes.oneOfType([
     PropTypes.arrayOf(lazyFunction(() => BlockValueType)),
     PropTypes.string,

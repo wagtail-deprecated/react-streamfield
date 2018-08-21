@@ -7,8 +7,13 @@ import {connect} from 'react-redux';
 import AnimateHeight from 'react-animate-height';
 import {
   getLabel,
-  getNestedBlockDefinition, isField,
-  isStruct, shouldRunInnerScripts, structValueToObject, isRequired,
+  getNestedBlockDefinition,
+  isField,
+  isStruct,
+  shouldRunInnerScripts,
+  structValueToObject,
+  isRequired,
+  getDescendantsIds,
 } from './processing/utils';
 import {changeBlockValue} from './actions';
 import BlocksContainer from './BlocksContainer';
@@ -25,12 +30,14 @@ const MutationObserver = window.MutationObserver
   const block = blocks[blockId];
   const value = block.value;
   const blockDefinition = getNestedBlockDefinition(state, fieldId, blockId);
+  const hasDescendantError = getDescendantsIds(state, fieldId, blockId, true)
+    .some(descendantBlockId => blocks[descendantBlockId].hasError);
   const newProps = {
     blockDefinition,
     blockId,
     name: block.name,
     html: block.html,
-    closed: block.closed,
+    closed: block.closed && !hasDescendantError,
   };
   if (isStruct(blockDefinition)) {
     const childIdsByInputName = {};

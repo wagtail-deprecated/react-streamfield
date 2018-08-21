@@ -32,6 +32,7 @@ import BlockContent from './BlockContent';
   return {
     blockDefinition,
     parentId: block.parent,
+    hasError: block.hasError,
     value: isStruct(blockDefinition) ?
              structValueToObject(state, fieldId, value)
              :
@@ -156,7 +157,9 @@ class Block extends React.Component {
   }
 
   render() {
-    const {fieldId, id, parentId, blockDefinition, index} = this.props;
+    const {
+      fieldId, id, parentId, blockDefinition, index, hasError,
+    } = this.props;
     const title = this.title;
     const blockType = (
       <span className="block-type">
@@ -171,7 +174,8 @@ class Block extends React.Component {
           <Draggable draggableId={id} index={index}
                      type={`${fieldId}-${parentId}`}>
             {(provided, snapshot) => (
-              <article className="block" ref={provided.innerRef}
+              <article className={'block' + (hasError ? ' error' : '')}
+                       ref={provided.innerRef}
                        {...provided.draggableProps}>
                 <div className="block-container">
                   <header onClick={this.props.toggleBlock}
