@@ -87,6 +87,11 @@ class BlockContent extends React.Component {
   bindInputEvents() {
     for (let inputs of Object.values(this._inputs)) {
       for (let input of inputs) {
+        if (input.type === 'hidden') {
+          new MutationObserver(() => {
+            input.dispatchEvent(new Event('change'));
+          }).observe(input, {attributes: true, attributeFilter: ['value']});
+        }
         input.addEventListener('change', this.onChange);
       }
     }
@@ -101,11 +106,6 @@ class BlockContent extends React.Component {
     }
     this._inputs[blockId] = inputs;
     for (let input of inputs) {
-      if (input.type === 'hidden') {
-        new MutationObserver(() => {
-          input.dispatchEvent(new Event('change'));
-        }).observe(input, {attributes: true, attributeFilter: ['value']});
-      }
       input.id = blockId;
       // We remove the name attribute to remove inputs from the submitted form.
       input.removeAttribute('name');
