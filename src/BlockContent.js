@@ -77,6 +77,7 @@ class BlockContent extends React.Component {
     this.runInnerScripts();
     this.setInputsValues();
     this.forceUpdate();  // Renders nested BlocksContainer.
+    this.bindInputEvents();
   }
 
   runInnerScripts() {
@@ -84,6 +85,14 @@ class BlockContent extends React.Component {
       for (let script of ReactDOM.findDOMNode(this).querySelectorAll('script')) {
         script.parentNode.removeChild(script);
         window.eval(script.innerHTML);
+      }
+    }
+  }
+
+  bindInputEvents() {
+    for (let inputs of Object.values(this._inputs)) {
+      for (let input of inputs) {
+        input.addEventListener('change', this.onChange);
       }
     }
   }
@@ -99,9 +108,8 @@ class BlockContent extends React.Component {
       if (input.type === 'hidden') {
         new MutationObserver(() => {
           input.dispatchEvent(new Event('change'));
-        }).observe(input, {attributes: true});
+        }).observe(input, {attributes: true, attributeFilter: ['value']});
       }
-      input.addEventListener('change', this.onChange);
       input.setAttribute('data-name', inputName);
       input.removeAttribute('name');
     }
