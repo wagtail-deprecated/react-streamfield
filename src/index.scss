@@ -3,6 +3,7 @@ $block-padding: 4px;
 $collapse-transition-duration: 0.3s;
 $add-transition-duration: 0.3s;
 $hide-transition-duration: 0.3s;
+$hover-transition-duration: 0.3s;
 $bounce-transition-timing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $border-radius: 3px;
 $teal: #43b1b0;
@@ -55,6 +56,7 @@ $error-background-color: #fbefef;
       border-radius: $border-radius;
       overflow: hidden;
       background: white;
+      transition: $hover-transition-duration border-color ease-in-out;
       > header {
         display: flex;
         align-items: center;
@@ -62,6 +64,7 @@ $error-background-color: #fbefef;
         background: $block-background;
         cursor: grab;
         user-select: none;
+        transition: $hover-transition-duration background-color ease-in-out;
         h3 {
           flex: 1 1 auto;
           margin: 0;
