@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import AnimateHeight from 'react-animate-height';
 import {Draggable} from 'react-beautiful-dnd';
@@ -6,7 +7,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
   blockUpdated,
-  deleteBlock, duplicateBlock, hideBlock, moveBlock,
+  deleteBlock, duplicateBlock, hideBlock,
   showBlock,
   toggleBlock
 } from './actions';
@@ -15,7 +16,7 @@ import {
   getLabel,
   getNestedBlockDefinition,
   getSiblingsIds,
-  isStruct, structValueToObject
+  isStruct, structValueToObject, triggerKeyboardEvent
 } from './processing/utils';
 import AddButton from './AddButton';
 import BlockContent from './BlockContent';
@@ -51,7 +52,6 @@ import BlockContent from './BlockContent';
     blockUpdated: () => blockUpdated(fieldId, id),
     showBlock: () => showBlock(fieldId, id),
     hideBlock: () => hideBlock(fieldId, id),
-    moveBlock: newIndex => moveBlock(fieldId, id, newIndex),
     duplicateBlock: () => duplicateBlock(fieldId, id),
     deleteBlock: () => deleteBlock(fieldId, id),
   }, dispatch);
@@ -59,6 +59,7 @@ import BlockContent from './BlockContent';
 class Block extends React.Component {
   constructor(props) {
     super(props);
+    this.dragHandleRef = React.createRef();
     this.contentRef = React.createRef();
   }
 
@@ -114,16 +115,27 @@ class Block extends React.Component {
     return null;
   }
 
+  sendKeyToDragHandle = key => {
+    const dragHandle = ReactDOM.findDOMNode(this.dragHandleRef.current);
+    triggerKeyboardEvent(dragHandle, 32);  // 32 for spacebar, to drag
+    setTimeout(() => {
+      triggerKeyboardEvent(dragHandle, key);
+      setTimeout(() => {
+        triggerKeyboardEvent(dragHandle, 32);  // Drop at the new position
+      }, 100);  // 100 ms is the duration of a move in react-beautiful-dnd
+    }, 0);
+  };
+
   moveUpHandler = event => {
     event.preventDefault();
     event.stopPropagation();
-    this.props.moveBlock(this.props.index - 1);
+    this.sendKeyToDragHandle(38);  // 38 for up arrow
   };
 
   moveDownHandler = event => {
     event.preventDefault();
     event.stopPropagation();
-    this.props.moveBlock(this.props.index + 1);
+    this.sendKeyToDragHandle(40);  // 40 for down arrow
   };
 
   duplicateHandler = event => {
@@ -180,7 +192,8 @@ class Block extends React.Component {
                        ref={provided.innerRef}
                        {...provided.draggableProps}>
                 <div className="block-container">
-                  <header onClick={this.props.toggleBlock}
+                  <header ref={this.dragHandleRef}
+                          onClick={this.props.toggleBlock}
                           {...provided.dragHandleProps}>
                     <h3>
                       {this.icon}&nbsp;{title === null ? blockType : title}

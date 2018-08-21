@@ -242,3 +242,17 @@ export const applyToBlocks = (state, fieldId, blocksIds, func) => {
 export const applyToBlock = (state, fieldId, blockId, func) => {
   return applyToBlocks(state, fieldId, [blockId], func);
 };
+
+
+export const triggerKeyboardEvent = (element, key) => {
+  let event = document.createEvent('Event');
+
+  event.initEvent('keydown', true, true);
+
+  event.key = key;            // These four lines
+  event.keyIdentifier = key;  // are here
+  event.keyCode = key;        // to fix cross-browser
+  event.which = key;          // compatibility issues.
+
+  element.dispatchEvent(event);
+};
