@@ -86,8 +86,33 @@
                   {"type": "text", "value": "And it’s always getting better 😃"}]
       }
     </script>
-    <h1>Complex nested StreamField</h1>
+    <h1>Simple list inside the root list</h1>
     <script type="application/json" data-streamfield="stream-4">
+      {
+        "required": true,
+        "minNum": null,
+        "maxNum": null,
+        "blockDefinitions": [
+          {
+            "key": "list",
+            "children": [
+              {
+                "key": "bool",
+                "html": "<input type='checkbox' name='bool' />"
+              }
+            ]
+          }
+        ],
+        "value": [
+          {"type": "list", "value": [
+            {"type": "bool", "value": true},
+            {"type": "bool", "value": false}
+          ]
+        }]
+      }
+    </script>
+    <h1>Complex nested StreamField</h1>
+    <script type="application/json" data-streamfield="stream-5">
       {
         "required": true,
         "minNum": null,

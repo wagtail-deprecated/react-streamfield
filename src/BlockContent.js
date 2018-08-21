@@ -127,7 +127,7 @@ class BlockContent extends React.Component {
     const {blockDefinition} = this.props;
     if (isField(blockDefinition)) {
       this.findInput(this.inputName);
-    } else {
+    } else if (isStruct(blockDefinition)) {
       for (let childBlockDefinition of blockDefinition.children) {
         if (isField(childBlockDefinition)) {
           this.findInput(this.getChildInputName(childBlockDefinition));
@@ -171,7 +171,7 @@ class BlockContent extends React.Component {
           }
         }
       }
-    } else {
+    } else if (isField(blockDefinition)) {
       this.setInputValue(this.inputName, value);
     }
   }
@@ -192,10 +192,22 @@ class BlockContent extends React.Component {
     return childBlocksByType[blockDefinition.key].html;
   };
 
-  getFieldHtml = (blockDefinition, inputName) => {
-    const isParentStruct = isStruct(this.props.blockDefinition);
-    const {fieldId, value} = this.props;
+  getFieldInput = (blockDefinition, inputName=null) => {
+    let {fieldId, value} = this.props;
     const {key} = blockDefinition;
+    const label = getLabel(blockDefinition);
+    const isParentStruct = isStruct(this.props.blockDefinition);
+    if (isParentStruct) {
+      value = value[key];
+    }
+    if (!isField(blockDefinition)) {
+      return (
+        <React.Fragment>
+          <label>{label}</label>
+          <BlocksContainer fieldId={fieldId} id={value} />
+        </React.Fragment>
+      );
+    }
     let html;
     if (isParentStruct) {
       html = this.getChildHtml(blockDefinition);
@@ -203,45 +215,39 @@ class BlockContent extends React.Component {
     if ((html === undefined) && (blockDefinition.html !== undefined)) {
       html = blockDefinition.html;
     }
-    const label = getLabel(blockDefinition);
-    let input;
-    if (html !== undefined) {
-      input = (
-        <div key={key} className="field"
-             dangerouslySetInnerHTML={{__html: html}} />
-      );
-    } else {
-      input = (
-        <input name={inputName} type="text"
-               defaultValue={isParentStruct ? value[key] : value} />
+    if (inputName === null) {
+      inputName = this.getChildInputName(blockDefinition)
+    }
+    let input = html === undefined ?
+      <input name={inputName} type="text"
+             defaultValue={value}/>
+      :
+      <div key={key} className="field"
+             dangerouslySetInnerHTML={{__html: html}}/>;
+    if (isParentStruct) {
+      return (
+        <label>
+          <div className="label-text">{label}</div>
+          {input}
+        </label>
       );
     }
+    return input;
+  };
+
+  getField = (blockDefinition, inputName=null) => {
+    const {key} = blockDefinition;
     return (
       <div className={'field'
                       + (isRequired(blockDefinition) ? ' required' : '')}
            key={key}>
-        {isField(blockDefinition) ?
-          (
-            isParentStruct ?
-              <label>
-                <div className="label-text">{label}</div>
-                {input}
-              </label>
-            :
-              input
-          )
-          :
-          <React.Fragment>
-            <label>{label}</label>
-            <BlocksContainer fieldId={fieldId} id={value[key]} />
-          </React.Fragment>
-        }
+        {this.getFieldInput(blockDefinition, inputName)}
       </div>
     );
   };
 
   get html() {
-    const {html, blockDefinition} = this.props;
+    const {html, blockDefinition, fieldId, blockId} = this.props;
     if (html !== undefined) {
       return (
         <div dangerouslySetInnerHTML={{__html: html}} />
@@ -252,13 +258,15 @@ class BlockContent extends React.Component {
         <div dangerouslySetInnerHTML={{__html: blockDefinition.html}} />
       );
     }
-    if (isField(blockDefinition)) {
-      return this.getFieldHtml(blockDefinition, this.inputName);
+    if (isStruct(blockDefinition)) {
+      return blockDefinition.children.map(
+        childBlockDefinition => this.getField(childBlockDefinition)
+      );
     }
-    return blockDefinition.children.map(
-      childBlockDefinition => this.getFieldHtml(
-        childBlockDefinition, this.getChildInputName(childBlockDefinition))
-    );
+    if (isField(blockDefinition)) {
+      return this.getField(blockDefinition, this.inputName);
+    }
+    return <BlocksContainer fieldId={fieldId} id={blockId} />;
   }
 
   onChange = event => {

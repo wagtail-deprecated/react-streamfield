@@ -1,3 +1,8 @@
+body {
+  background: #F6F6F6;
+  padding: 15px;
+}
+
 .children-container .block > .block-container > .content-container > .content.full {
     padding: 0;
 }
