@@ -9,15 +9,15 @@
   .children-container .block {
     position: relative;
     padding: 4px; }
-    .children-container .block.error > .block-container {
+    .children-container .block.has-error > .block-container {
       border-color: #dbc7c8; }
-      .children-container .block.error > .block-container > header {
+      .children-container .block.has-error > .block-container > header {
         background: #fbefef; }
-      .children-container .block.error > .block-container > .content-container > .content {
+      .children-container .block.has-error > .block-container > .content-container > .content {
         border-color: #dbc7c8; }
-    .children-container .block.error:hover > .block-container, .children-container .block.error:focus > .block-container, .children-container .block.error:focus-within > .block-container {
+    .children-container .block.has-error:hover > .block-container, .children-container .block.has-error:focus > .block-container, .children-container .block.has-error:focus-within > .block-container {
       border-color: #cdb2b3; }
-      .children-container .block.error:hover > .block-container > .content-container > .content, .children-container .block.error:focus > .block-container > .content-container > .content, .children-container .block.error:focus-within > .block-container > .content-container > .content {
+      .children-container .block.has-error:hover > .block-container > .content-container > .content, .children-container .block.has-error:focus > .block-container > .content-container > .content, .children-container .block.has-error:focus-within > .block-container > .content-container > .content {
         border-color: #cdb2b3; }
     .children-container .block > .block-container {
       border: 1px solid #d3d3d3;

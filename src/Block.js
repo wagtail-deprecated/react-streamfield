@@ -11,7 +11,7 @@ import {
   toggleBlock
 } from './actions';
 import {
-  extractText,
+  extractText, getDescendantsIds,
   getLabel,
   getNestedBlockDefinition,
   getSiblingsIds,
@@ -29,10 +29,12 @@ import BlockContent from './BlockContent';
   const siblings = getSiblingsIds(state, fieldId, id);
   const value = block.value;
   const blockDefinition = getNestedBlockDefinition(state, fieldId, id);
+  const hasDescendantError = getDescendantsIds(state, fieldId, id, true)
+    .some(descendantBlockId => blocks[descendantBlockId].hasError);
   return {
     blockDefinition,
     parentId: block.parent,
-    hasError: block.hasError,
+    hasError: hasDescendantError,
     value: isStruct(blockDefinition) ?
              structValueToObject(state, fieldId, value)
              :
@@ -174,7 +176,7 @@ class Block extends React.Component {
           <Draggable draggableId={id} index={index}
                      type={`${fieldId}-${parentId}`}>
             {(provided, snapshot) => (
-              <article className={'block' + (hasError ? ' error' : '')}
+              <article className={'block' + (hasError ? ' has-error' : '')}
                        ref={provided.innerRef}
                        {...provided.draggableProps}>
                 <div className="block-container">

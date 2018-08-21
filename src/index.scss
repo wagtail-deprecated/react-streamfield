@@ -31,7 +31,7 @@ $error-background-color: #fbefef;
   .block {
     position: relative;
     padding: $block-padding;
-    &.error {
+    &.has-error {
       > .block-container {
         border-color: $error-border-color;
         > header {
