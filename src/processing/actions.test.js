@@ -995,6 +995,8 @@ describe('deleteBlock', () => {
         blocks: {
           [structBlockId]: {
             ...structBlockState,
+            closed: false,
+            shouldUpdate: true,
             value: [
               structBlockHeightId,
               structBlockRelatedPagesId,
@@ -1015,6 +1017,8 @@ describe('deleteBlock', () => {
         blocks: {
           [structBlockId]: {
             ...structBlockState,
+            closed: false,
+            shouldUpdate: true,
             value: [
               structBlockHeightId,
             ],
@@ -1060,6 +1064,8 @@ describe('deleteBlock', () => {
           [structBlockHeightId]: structBlockHeightState,
           [structBlockImagesId]: {
             ...structBlockImagesState,
+            closed: false,
+            shouldUpdate: true,
             value: [structBlockImageCell2Id],
           },
           [structBlockImageCell2Id]: {
@@ -1084,6 +1090,8 @@ describe('deleteBlock', () => {
           [structBlockHeightId]: structBlockHeightState,
           [structBlockImagesId]: {
             ...structBlockImagesState,
+            closed: false,
+            shouldUpdate: true,
             value: [],
           },
           [structBlockRelatedPagesId]: structBlockRelatedPagesState,
@@ -1102,10 +1110,14 @@ describe('deleteBlock', () => {
           [structBlockHeightId]: structBlockHeightState,
           [structBlockImagesId]: {
             ...structBlockImagesState,
+            closed: false,
+            shouldUpdate: true,
             value: [],
           },
           [structBlockRelatedPagesId]: {
             ...structBlockRelatedPagesState,
+            closed: false,
+            shouldUpdate: true,
             value: [],
           },
         },

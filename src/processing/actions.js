@@ -190,6 +190,9 @@ export const deleteBlock = (state, fieldId, blockId) => {
     }
     blocks[block.parent] = {
       ...parentBlock,
+      closed: false,       // We make sure it’s open for when we remove
+      shouldUpdate: true,  // an errored block from a list block, and we
+                           // force update the header color.
       value: parentBlock.value.filter(
         childBlockId => childBlockId !== blockId),
     };
