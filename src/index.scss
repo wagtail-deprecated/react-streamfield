@@ -169,11 +169,9 @@ $error-background-color: #fbefef;
       padding-top: $grid-gutter-width / 2;
     }
     label {
-      .label-text {
-        margin-bottom: $grid-gutter-width / 4;
-      }
+      margin-bottom: $grid-gutter-width / 4;
     }
-    &.required > label > .label-text::after {
+    &.required > label::after {
       content: '*';
       color: #cd3238;
       font-weight: 700;

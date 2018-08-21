@@ -106,9 +106,9 @@
       margin-top: 15px; }
   .children-container .field + .field {
     padding-top: 15px; }
-  .children-container .field label .label-text {
+  .children-container .field label {
     margin-bottom: 7.5px; }
-  .children-container .field.required > label > .label-text::after {
+  .children-container .field.required > label::after {
     content: '*';
     color: #cd3238;
     font-weight: 700;

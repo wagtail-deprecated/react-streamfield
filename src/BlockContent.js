@@ -238,13 +238,13 @@ class BlockContent extends React.Component {
              defaultValue={value}/>
       :
       <div key={key} className="field"
-             dangerouslySetInnerHTML={{__html: html}}/>;
+           dangerouslySetInnerHTML={{__html: html}}/>;
     if (isParentStruct) {
       return (
-        <label>
-          <div className="label-text">{label}</div>
+        <React.Fragment>
+          <label>{label}</label>
           {input}
-        </label>
+        </React.Fragment>
       );
     }
     return input;
@@ -298,12 +298,11 @@ class BlockContent extends React.Component {
     } else {
       value = input.value;
     }
-    if (isStruct(this.props.blockDefinition)) {
-      this.props.changeBlockValue(this.props.childIdsByInputName[inputName],
-                                  value);
-    } else {
-      this.props.changeBlockValue(this.props.blockId, value);
-    }
+    const blockId = isStruct(this.props.blockDefinition) ?
+      this.props.childIdsByInputName[inputName]
+      :
+      this.props.blockId;
+    this.props.changeBlockValue(blockId, value);
   };
 
   get height() {
