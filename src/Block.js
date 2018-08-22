@@ -139,19 +139,17 @@ class Block extends React.Component {
       <BlockContent ref={this.contentRef} fieldId={fieldId} blockId={id}
                     collapsible={collapsible} />
     );
-    const block = (
-      <AnimateHeight className="draggable-container"
-                   height={this.draggableHeight}
-                   onAnimationEnd={this.onDraggableContainerAnimationEnd}>
-        {this.wrapSortable(blockContent)}
-      </AnimateHeight>
-    );
+    const block = this.wrapSortable(blockContent);
     if (standalone) {
       return block;
     }
     return (
       <React.Fragment>
-        {block}
+        <AnimateHeight className="draggable-container"
+                   height={this.draggableHeight}
+                   onAnimationEnd={this.onDraggableContainerAnimationEnd}>
+          {block}
+        </AnimateHeight>
         <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
                    visible={canAdd} />
       </React.Fragment>
