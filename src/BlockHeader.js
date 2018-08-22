@@ -182,13 +182,11 @@ class BlockHeader extends React.Component {
                 </React.Fragment>
                 :
                 null}
-              {canDuplicate ?
-                <button onClick={this.duplicateHandler}
-                        title="Duplicate">
-                  <i className="fas fa-clone" />
-                </button>
-                :
-                null}
+              <button onClick={this.duplicateHandler}
+                      title="Duplicate"
+                      className={canDuplicate ? null : 'disabled'}>
+                <i className="fas fa-clone" />
+              </button>
               <button onClick={this.deleteHandler}
                       title="Delete">
                 <i className="fas fa-trash" />
