@@ -37,8 +37,8 @@ export const shouldRunInnerScripts = blockDefinition => {
 export const getLabel = blockDefinition => {
   let {key, label} = blockDefinition;
   if (label === undefined) {
-    label = key.replace('_', ' ').split(' ').map(
-      word => word[0].toUpperCase() + word.substring(1)).join(' ');
+    label = key.replace('_', ' ');
+    label = label[0].toUpperCase() + label.substring(1);
   }
   return label;
 };
