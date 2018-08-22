@@ -79,7 +79,7 @@ class AddButton extends React.Component {
     return (
       this.state.open && visible && this.hasChoice ?
         <React.Fragment>
-          <button onClick={this.toggle} className="add close">
+          <button onClick={this.toggle} className="add close visible">
             <i>+</i>
           </button>
           <div className="add-panel">
