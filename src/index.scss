@@ -21,7 +21,7 @@ $error-background-color: #fbefef;
   position: relative;
   padding: 21px;
   &.is-dragging {
-    > button.add {
+    > button.add.visible {
       opacity: 0;
       pointer-events: none;
     }
