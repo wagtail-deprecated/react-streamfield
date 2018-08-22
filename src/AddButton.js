@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import AnimateHeight from 'react-animate-height';
 import {addBlock} from './actions';
 import {
   getLabel,
@@ -74,15 +75,25 @@ class AddButton extends React.Component {
     } />;
   }
 
+  get panelHeight() {
+    return this.state.open && this.props.visible ? 'auto' : 0;
+  }
+
   render() {
     const {visible} = this.props;
-    return (
-      this.state.open && visible && this.hasChoice ?
+    const button = (
+      <button onClick={this.toggle}
+              className={classNames('add', visible && 'visible',
+                                    this.state.open && 'close')}>
+        <i>+</i>
+      </button>
+    );
+    if (this.hasChoice) {
+      return (
         <React.Fragment>
-          <button onClick={this.toggle} className="add close visible">
-            <i>+</i>
-          </button>
-          <div className="add-panel">
+          {button}
+          <AnimateHeight height={this.panelHeight} easing="ease-in-out"
+                         contentClassName="add-panel">
             {this.props.blockDefinitions.map(blockDefinition => (
               <button key={blockDefinition.key} onClick={this.addHandler}
                       value={blockDefinition.key} className="type">
@@ -90,14 +101,11 @@ class AddButton extends React.Component {
                 <span className="label">{getLabel(blockDefinition)}</span>
               </button>
             ))}
-          </div>
+          </AnimateHeight>
         </React.Fragment>
-        :
-        <button onClick={this.toggle}
-                className={classNames('add', visible && 'visible')}>
-          <i>+</i>
-        </button>
-    );
+      );
+    }
+    return button;
   }
 }
 
