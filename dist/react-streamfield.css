@@ -30,9 +30,13 @@
         align-items: center;
         padding: 8px;
         background: #f5f5f5;
-        cursor: grab;
         user-select: none;
-        transition: 0.3s background-color ease-in-out; }
+        transition: 0.3s background-color ease-in-out;
+        cursor: default; }
+        .children-container .block > .block-container > header.collapsible {
+          cursor: pointer; }
+        .children-container .block > .block-container > header.sortable {
+          cursor: grab; }
         .children-container .block > .block-container > header h3 {
           flex: 1 1 auto;
           margin: 0;

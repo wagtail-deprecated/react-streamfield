@@ -62,9 +62,15 @@ $error-background-color: #fbefef;
         align-items: center;
         padding: 8px;
         background: $block-background;
-        cursor: grab;
         user-select: none;
         transition: $hover-transition-duration background-color ease-in-out;
+        cursor: default;
+        &.collapsible {
+          cursor: pointer;
+        }
+        &.sortable {
+          cursor: grab;
+        }
         h3 {
           flex: 1 1 auto;
           margin: 0;

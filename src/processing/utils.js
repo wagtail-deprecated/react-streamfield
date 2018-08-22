@@ -1,4 +1,4 @@
-import uuidv4 from "uuid";
+import uuidv4 from 'uuid';
 
 
 export const getNewId = () => {
@@ -255,4 +255,19 @@ export const triggerKeyboardEvent = (element, key) => {
   event.which = key;          // compatibility issues.
 
   element.dispatchEvent(event);
+};
+
+
+export const triggerCustomEvent = (element, name, data=null) => {
+  if (data === null) {
+    data = {};
+  }
+  const event = new CustomEvent(`streamfield:${name}`, {
+    detail: {
+      target: element,
+      ...data,
+    },
+  });
+  element.dispatchEvent(event);
+  window.dispatchEvent(event);
 };

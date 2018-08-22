@@ -136,8 +136,48 @@
         }]
       }
     </script>
-    <h1>Complex nested StreamField</h1>
+    <h1>Nested struct block</h1>
     <script type="application/json" data-streamfield="stream-6">
+      {
+        "value": [],
+        "blockDefinitions": [
+          {
+            "key": "struct",
+            "isStruct": true,
+            "required": false,
+            "dangerouslyRunInnerScripts": true,
+            "children": [
+              {
+                "key": "some_field"
+              },
+              {
+                "key": "inner_struct",
+                "isStruct": true,
+                "required": false,
+                "dangerouslyRunInnerScripts": true,
+                "children": [
+                  {
+                    "key": "bool",
+                    "dangerouslyRunInnerScripts": true,
+                    "required": true,
+                    "html": "\n<div class=\"field boolean_field widget-checkbox_input fieldname-bool\">\n    <div class=\"field-content\">\n        <div class=\"input\">\n            <input type=\"checkbox\" name=\"field-__ID__\" id=\"field-__ID__\" placeholder=\"Bool\" />\n\n            \n            <span></span>\n        </div>\n        \n\n        \n    </div>\n</div>",
+                    "icon": "<i class=\"icon icon-tick-inverse\"></i>",
+                    "label": "Bool"
+                  }
+                ],
+                "label": "Inner struct"
+              },
+              {
+                "key": "another_field"
+              }
+            ],
+            "label": "Struct"
+          }
+        ]
+      }
+    </script>
+    <h1>Complex nested StreamField</h1>
+    <script type="application/json" data-streamfield="stream-7">
       {
         "required": true,
         "minNum": null,

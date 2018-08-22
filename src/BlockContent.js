@@ -17,6 +17,7 @@ import {
 } from './processing/utils';
 import {changeBlockValue} from './actions';
 import BlocksContainer from './BlocksContainer';
+import Block from './Block';
 
 
 const MutationObserver = window.MutationObserver
@@ -201,7 +202,14 @@ class BlockContent extends React.Component {
     if (isParentStruct) {
       value = value[key];
     }
-    if (!isField(blockDefinition)) {
+    if (isStruct(blockDefinition)) {  // Nested StructBlock
+      return (
+        <React.Fragment>
+          <Block fieldId={fieldId} id={value}
+                 standalone sortable={false} collapsible={false} />
+        </React.Fragment>
+      );
+    } else if (!isField(blockDefinition)) {
       return (
         <React.Fragment>
           <label>{label}</label>
@@ -308,12 +316,9 @@ class BlockContent extends React.Component {
   };
 
   render() {
-    const {fieldId, blockId, blockDefinition} = this.props;
-    return (
-      <AnimateHeight height={this.height} easing="ease-in-out"
-                     className="content-container"
-                     contentClassName={classNames('content',
-                                                  blockDefinition.className)}>
+    const {fieldId, blockId, blockDefinition, collapsible} = this.props;
+    const content = (
+      <React.Fragment>
         <div ref={this.htmlRef}>
           {this.html}
         </div>
@@ -327,7 +332,24 @@ class BlockContent extends React.Component {
               streamChildrenNode
             )
         )}
-      </AnimateHeight>
+      </React.Fragment>
+    );
+    const className = classNames('content', blockDefinition.className);
+    if (collapsible) {
+      return (
+        <AnimateHeight height={this.height} easing="ease-in-out"
+                       className="content-container"
+                       contentClassName={className}>
+          {content}
+        </AnimateHeight>
+      );
+    }
+    return (
+      <div className="content-container">
+        <div className={className}>
+          {content}
+        </div>
+      </div>
     );
   }
 }
@@ -336,6 +358,12 @@ class BlockContent extends React.Component {
 BlockContent.propTypes = {
   fieldId: PropTypes.string.isRequired,
   blockId: PropTypes.string.isRequired,
+  collapsible: PropTypes.bool,
+};
+
+
+BlockContent.defaultProps = {
+  collapsible: true,
 };
 
 
