@@ -83,8 +83,9 @@ class AddButton extends React.Component {
     const {visible} = this.props;
     const button = (
       <button onClick={this.toggle}
-              className={classNames('add', visible && 'visible',
-                                    this.state.open && 'close')}>
+              className={classNames(
+                'add', visible && 'visible',
+                (this.state.open && this.hasChoice) && 'close')}>
         <i>+</i>
       </button>
     );
