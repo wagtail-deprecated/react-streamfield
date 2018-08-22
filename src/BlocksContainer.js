@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Droppable} from 'react-beautiful-dnd';
 import Block from './Block';
 import AddButton from './AddButton';
+import {getNestedBlockDefinition} from "./processing/utils";
 
 
 @connect((state, props) => {
@@ -13,16 +14,32 @@ import AddButton from './AddButton';
     fieldData.rootBlocks
     :
     fieldData.blocks[id].value;
+  let minNum, maxNum;
+  if (id === null) {
+    minNum = fieldData.minNum;
+    maxNum = fieldData.maxNum;
+  } else {
+    const blockDefinition = getNestedBlockDefinition(state, fieldId, id);
+    minNum = blockDefinition.minNum;
+    maxNum = blockDefinition.maxNum;
+  }
+  if ((minNum === undefined) || (minNum === null)) {
+    minNum = 0;
+  }
+  if ((maxNum === undefined) || (maxNum === null)) {
+    maxNum = Infinity;
+  }
   return {
+    minNum, maxNum,
     blocksIds: blocksIds,
   };
 })
 class BlocksContainer extends React.Component {
-  renderBlock(blockId) {
+  renderBlock(blockId, canAdd=true) {
     return (
       <Block key={blockId}
              fieldId={this.props.fieldId}
-             id={blockId} />
+             id={blockId} canAdd={canAdd} />
     );
   }
 
@@ -35,16 +52,22 @@ class BlocksContainer extends React.Component {
   }
 
   render() {
-    const {fieldId, id, blocksIds} = this.props;
+    const {fieldId, id, blocksIds, maxNum} = this.props;
     const droppableId = `${fieldId}-${id}`;
+    const num = blocksIds.length;
+    const canAdd = num < maxNum;
     return (
       <Droppable droppableId={droppableId} type={droppableId}>
         {(provided, snapshot) => (
           <div ref={provided.innerRef}
                className={BlocksContainer.getClassName(snapshot)}>
-            <AddButton fieldId={fieldId} parentId={id}
-                       open={blocksIds.length === 0} />
-            {blocksIds.map(blockId => this.renderBlock(blockId))}
+            {canAdd ?
+              <AddButton fieldId={fieldId} parentId={id}
+                         open={blocksIds.length === 0} />
+              :
+              null
+            }
+            {blocksIds.map(blockId => this.renderBlock(blockId, canAdd))}
             {provided.placeholder}
           </div>
         )}

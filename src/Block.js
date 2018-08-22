@@ -91,7 +91,8 @@ class Block extends React.Component {
 
   wrapSortable(blockContent) {
     const {
-      fieldId, id, parentId, index, hasError, standalone, collapsible, sortable
+      fieldId, id, parentId, index, hasError,
+      standalone, collapsible, sortable, canAdd,
     } = this.props;
     const className = 'block' + (hasError ? ' has-error' : '');
     if (sortable) {
@@ -107,6 +108,7 @@ class Block extends React.Component {
                              standaloneBlock={standalone}
                              collapsibleBlock={collapsible}
                              sortableBlock={sortable}
+                             canDuplicate={canAdd}
                              dragHandleProps={provided.dragHandleProps} />
                 {blockContent}
               </div>
@@ -121,7 +123,8 @@ class Block extends React.Component {
           <BlockHeader fieldId={fieldId} blockId={id}
                        standaloneBlock={standalone}
                        collapsibleBlock={collapsible}
-                       sortableBlock={sortable} />
+                       sortableBlock={sortable}
+                       canDuplicate={canAdd} />
           {blockContent}
         </div>
       </article>
@@ -130,8 +133,7 @@ class Block extends React.Component {
 
   render() {
     const {
-      fieldId, id, parentId, standalone,
-      collapsible,
+      fieldId, id, parentId, standalone, collapsible, canAdd,
     } = this.props;
     const blockContent = (
       <BlockContent ref={this.contentRef} fieldId={fieldId} blockId={id}
@@ -144,7 +146,7 @@ class Block extends React.Component {
         {this.wrapSortable(blockContent)}
       </AnimateHeight>
     );
-    if (standalone) {
+    if (standalone || !canAdd) {
       return block;
     }
     return (
@@ -163,6 +165,7 @@ Block.propTypes = {
   standalone: PropTypes.bool,
   collapsible: PropTypes.bool,
   sortable: PropTypes.bool,
+  canAdd: PropTypes.bool,
 };
 
 
@@ -170,6 +173,7 @@ Block.defaultProps = {
   standalone: false,
   collapsible: true,
   sortable: true,
+  canAdd: true,
 };
 
 

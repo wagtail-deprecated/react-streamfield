@@ -143,7 +143,7 @@ class BlockHeader extends React.Component {
   render() {
     const {
       blockDefinition, dragHandleProps,
-      standaloneBlock, collapsibleBlock, sortableBlock,
+      standaloneBlock, collapsibleBlock, sortableBlock, canDuplicate,
     } = this.props;
     const icon = this.icon;
     const title = this.title;
@@ -182,10 +182,13 @@ class BlockHeader extends React.Component {
                 </React.Fragment>
                 :
                 null}
-              <button onClick={this.duplicateHandler}
-                      title="Duplicate">
-                <i className="fas fa-clone" />
-              </button>
+              {canDuplicate ?
+                <button onClick={this.duplicateHandler}
+                        title="Duplicate">
+                  <i className="fas fa-clone" />
+                </button>
+                :
+                null}
               <button onClick={this.deleteHandler}
                       title="Delete">
                 <i className="fas fa-trash" />
@@ -205,6 +208,7 @@ BlockHeader.propTypes = {
   standaloneBlock: PropTypes.bool,
   collapsibleBlock: PropTypes.bool,
   sortableBlock: PropTypes.bool,
+  canDuplicate: PropTypes.bool,
   dragHandleProps: PropTypes.object,
 };
 
@@ -213,6 +217,7 @@ BlockHeader.defaultProps = {
   standaloneBlock: false,
   collapsibleBlock: true,
   sortableBlock: true,
+  canDuplicate: true,
 };
 
 

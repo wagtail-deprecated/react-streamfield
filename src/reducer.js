@@ -19,13 +19,15 @@ const initialState = {};
 export default (state=initialState, action) => {
   if (action.type === 'INITIALIZE_STREAM_FIELD') {
     const data = deepCopy(action.data);
+    const {required, minNum, maxNum, blockDefinitions, value} = data;
     state = {
       ...state,
       [action.id]: {
-        blockDefinitions: data.blockDefinitions,
+        required, minNum, maxNum,
+        blockDefinitions,
       },
     };
-    return valueToState(state, action.id, data.value);
+    return valueToState(state, action.id, value);
   }
   if (action.type === 'BLOCK_UPDATED') {
     const {fieldId, blockId} = action;
