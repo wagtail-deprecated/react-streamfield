@@ -61,12 +61,8 @@ class BlocksContainer extends React.Component {
         {(provided, snapshot) => (
           <div ref={provided.innerRef}
                className={BlocksContainer.getClassName(snapshot)}>
-            {canAdd ?
-              <AddButton fieldId={fieldId} parentId={id}
-                         open={blocksIds.length === 0} />
-              :
-              null
-            }
+            <AddButton fieldId={fieldId} parentId={id}
+                       open={blocksIds.length === 0} visible={canAdd} />
             {blocksIds.map(blockId => this.renderBlock(blockId, canAdd))}
             {provided.placeholder}
           </div>

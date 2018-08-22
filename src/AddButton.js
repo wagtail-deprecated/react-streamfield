@@ -1,6 +1,6 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {addBlock} from './actions';
@@ -75,8 +75,9 @@ class AddButton extends React.Component {
   }
 
   render() {
+    const {visible} = this.props;
     return (
-      this.state.open && this.hasChoice ?
+      this.state.open && visible && this.hasChoice ?
         <React.Fragment>
           <button onClick={this.toggle} className="add close">
             <i>+</i>
@@ -92,7 +93,8 @@ class AddButton extends React.Component {
           </div>
         </React.Fragment>
         :
-        <button onClick={this.toggle} className="add">
+        <button onClick={this.toggle}
+                className={classNames('add', visible && 'visible')}>
           <i>+</i>
         </button>
     );
@@ -105,11 +107,13 @@ AddButton.propTypes = {
   parentId: PropTypes.string,
   blockId: PropTypes.string,
   open: PropTypes.bool,
+  visible: PropTypes.bool,
 };
 
 
 AddButton.defaultProps = {
   open: false,
+  visible: true,
 };
 
 

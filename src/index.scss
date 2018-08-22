@@ -20,13 +20,10 @@ $error-background-color: #fbefef;
 .children-container {
   position: relative;
   padding: 21px;
-   > button.add {
-    transition: opacity $add-transition-duration ease-in-out;
-    opacity: 1;
-  }
   &.is-dragging {
     > button.add {
       opacity: 0;
+      pointer-events: none;
     }
   }
   .block {
@@ -155,6 +152,13 @@ $error-background-color: #fbefef;
     backface-visibility: hidden;
     overflow: hidden;  // Makes the rotated i box not clickable.
     user-select: none;
+    opacity: 0;
+    transition: opacity $hover-transition-duration ease-in-out;
+    pointer-events: none;
+    &.visible {
+      opacity: 1;
+      pointer-events: unset;
+    }
     i {
       display: block;
       transition: transform $add-transition-duration $bounce-transition-timing;

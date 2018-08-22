@@ -146,13 +146,14 @@ class Block extends React.Component {
         {this.wrapSortable(blockContent)}
       </AnimateHeight>
     );
-    if (standalone || !canAdd) {
+    if (standalone) {
       return block;
     }
     return (
       <React.Fragment>
         {block}
-        <AddButton fieldId={fieldId} parentId={parentId} blockId={id}/>
+        <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
+                   visible={canAdd} />
       </React.Fragment>
     );
   }
