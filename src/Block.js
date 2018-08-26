@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import AnimateHeight from 'react-animate-height';
 import {Draggable} from 'react-beautiful-dnd';
 import {bindActionCreators} from 'redux';
@@ -72,10 +71,6 @@ class Block extends React.Component {
     if (this.props.hidden) {
       this.triggerCustomEvent('delete');
       this.props.deleteBlock();
-    } else {
-      // TODO: Restore when we’re able to enable it on block creation,
-      //       not duplication.
-      // this.contentRef.current.getWrappedInstance().focusFirstInput();
     }
   };
 
@@ -91,8 +86,7 @@ class Block extends React.Component {
 
   wrapSortable(blockContent) {
     const {
-      fieldId, id, parentId, index, hasError,
-      standalone, collapsible, sortable, canAdd,
+      fieldId, id, parentId, index, hasError, collapsible, sortable, canAdd,
     } = this.props;
     const className = 'block' + (hasError ? ' has-error' : '');
     if (sortable) {
@@ -105,7 +99,6 @@ class Block extends React.Component {
                      {...provided.draggableProps}>
               <div className="block-container">
                 <BlockHeader fieldId={fieldId} blockId={id}
-                             standaloneBlock={standalone}
                              collapsibleBlock={collapsible}
                              sortableBlock={sortable}
                              canDuplicate={canAdd}
@@ -121,7 +114,6 @@ class Block extends React.Component {
       <article className={className}>
         <div className="block-container">
           <BlockHeader fieldId={fieldId} blockId={id}
-                       standaloneBlock={standalone}
                        collapsibleBlock={collapsible}
                        sortableBlock={sortable}
                        canDuplicate={canAdd} />
@@ -139,16 +131,21 @@ class Block extends React.Component {
       <BlockContent ref={this.contentRef} fieldId={fieldId} blockId={id}
                     collapsible={collapsible} />
     );
-    const block = this.wrapSortable(blockContent);
     if (standalone) {
-      return block;
+      return (
+        <article className="block">
+          <div className="block-container">
+            {blockContent}
+          </div>
+        </article>
+      );
     }
     return (
       <React.Fragment>
         <AnimateHeight className="draggable-container"
                    height={this.draggableHeight}
                    onAnimationEnd={this.onDraggableContainerAnimationEnd}>
-          {block}
+          {this.wrapSortable(blockContent)}
         </AnimateHeight>
         <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
                    visible={canAdd} />

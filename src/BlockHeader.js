@@ -143,7 +143,7 @@ class BlockHeader extends React.Component {
   render() {
     const {
       blockDefinition, dragHandleProps,
-      standaloneBlock, collapsibleBlock, sortableBlock, canDuplicate,
+      collapsibleBlock, sortableBlock, canDuplicate,
     } = this.props;
     const icon = this.icon;
     const title = this.title;
@@ -162,38 +162,34 @@ class BlockHeader extends React.Component {
           {title === null ? blockType : title}
         </h3>
         {title === null ? null : blockType}
-        {standaloneBlock ?
-          null
-          :
-          <aside>
-            <div className="actions">
-              {sortableBlock ?
-                <React.Fragment>
-                  <button onClick={this.moveUpHandler}
-                          title="Move up"
-                          className={this.isFirst ? 'disabled' : null}>
-                    <i className="fas fa-chevron-up" />
-                  </button>
-                  <button onClick={this.moveDownHandler}
-                          title="Move down"
-                          className={this.isLast ? 'disabled' : null}>
-                    <i className="fas fa-chevron-down" />
-                  </button>
-                </React.Fragment>
-                :
-                null}
-              <button onClick={this.duplicateHandler}
-                      title="Duplicate"
-                      className={canDuplicate ? null : 'disabled'}>
-                <i className="fas fa-clone" />
-              </button>
-              <button onClick={this.deleteHandler}
-                      title="Delete">
-                <i className="fas fa-trash" />
-              ️</button>
-            </div>
-          </aside>
-        }
+        <aside>
+          <div className="actions">
+            {sortableBlock ?
+              <React.Fragment>
+                <button onClick={this.moveUpHandler}
+                        title="Move up"
+                        className={this.isFirst ? 'disabled' : null}>
+                  <i className="fas fa-chevron-up" />
+                </button>
+                <button onClick={this.moveDownHandler}
+                        title="Move down"
+                        className={this.isLast ? 'disabled' : null}>
+                  <i className="fas fa-chevron-down" />
+                </button>
+              </React.Fragment>
+              :
+              null}
+            <button onClick={this.duplicateHandler}
+                    title="Duplicate"
+                    className={canDuplicate ? null : 'disabled'}>
+              <i className="fas fa-clone" />
+            </button>
+            <button onClick={this.deleteHandler}
+                    title="Delete">
+              <i className="fas fa-trash" />
+            ️</button>
+          </div>
+        </aside>
       </header>
     );
   }
@@ -203,7 +199,6 @@ class BlockHeader extends React.Component {
 BlockHeader.propTypes = {
   fieldId: PropTypes.string.isRequired,
   blockId: PropTypes.string.isRequired,
-  standaloneBlock: PropTypes.bool,
   collapsibleBlock: PropTypes.bool,
   sortableBlock: PropTypes.bool,
   canDuplicate: PropTypes.bool,
@@ -212,7 +207,6 @@ BlockHeader.propTypes = {
 
 
 BlockHeader.defaultProps = {
-  standaloneBlock: false,
   collapsibleBlock: true,
   sortableBlock: true,
   canDuplicate: true,
