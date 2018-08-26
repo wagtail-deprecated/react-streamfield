@@ -31,7 +31,7 @@ class RawHtmlFieldInput extends React.Component {
 
   setValue(input) {
     const {value} = this.props;
-    if (value !== undefined) {
+    if ((value !== undefined) && (value !== null)) {
       if (input.type === 'file') {
         input.files = value;
       } else if ((input.type === 'checkbox') || (input.type === 'radio')) {
