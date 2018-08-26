@@ -44,6 +44,14 @@ class StreamField extends React.Component {
     this.props.moveBlock(draggableId, destination.index);
   };
 
+  componentWillMount() {
+    // Removes the input with the same name if it exists.
+    const input = document.querySelector(`[name="${this.props.id}"]`);
+    if (input !== null) {
+      input.parentNode.removeChild(input);
+    }
+  }
+
   render() {
     const {id, generatedValue} = this.props;
     return (
