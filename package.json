@@ -1,6 +1,6 @@
 {
   "name": "react-streamfield",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "NoriPyt <contact@noripyt.com> (https://noripyt.com)",
   "description": "Powerful field for inserting multiple blocks with nesting.",
   "keywords": ["react", "react-component", "field"],
