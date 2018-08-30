@@ -80,7 +80,7 @@ class RawHtmlFieldInput extends React.Component {
     } else if (input.type === 'checkbox' || input.type === 'radio') {
       const boxes = this.inputs;
       value = boxes.filter(box => box.checked).map(box => box.value);
-    } else if (input.tagName === 'SELECT') {
+    } else if (input.tagName === 'select') {
       value = input.options[input.selectedIndex].value;
     } else {
       value = input.value;
