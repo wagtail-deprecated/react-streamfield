@@ -22,6 +22,12 @@ import FieldInput from './FieldInput';
   };
 })
 class StructChildField extends React.Component {
+  static propTypes = {
+    fieldId: PropTypes.string.isRequired,
+    parentBlockId: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  };
+
   render() {
     const {fieldId, blockId, blockDefinition} = this.props;
     return (
@@ -35,13 +41,6 @@ class StructChildField extends React.Component {
     );
   }
 }
-
-
-StructChildField.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  parentBlockId: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-};
 
 
 export default StructChildField;

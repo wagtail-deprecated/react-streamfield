@@ -39,6 +39,21 @@ import {duplicateBlock, hideBlock, toggleBlock} from './actions';
   }, dispatch);
 })
 class BlockHeader extends React.Component {
+  static propTypes = {
+    fieldId: PropTypes.string.isRequired,
+    blockId: PropTypes.string.isRequired,
+    collapsibleBlock: PropTypes.bool,
+    sortableBlock: PropTypes.bool,
+    canDuplicate: PropTypes.bool,
+    dragHandleProps: PropTypes.object,
+  };
+
+  static defaultProps = {
+    collapsibleBlock: true,
+    sortableBlock: true,
+    canDuplicate: true,
+  };
+
   constructor(props) {
     super(props);
     this.dragHandleRef = React.createRef();
@@ -194,23 +209,6 @@ class BlockHeader extends React.Component {
     );
   }
 }
-
-
-BlockHeader.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  blockId: PropTypes.string.isRequired,
-  collapsibleBlock: PropTypes.bool,
-  sortableBlock: PropTypes.bool,
-  canDuplicate: PropTypes.bool,
-  dragHandleProps: PropTypes.object,
-};
-
-
-BlockHeader.defaultProps = {
-  collapsibleBlock: true,
-  sortableBlock: true,
-  canDuplicate: true,
-};
 
 
 export default BlockHeader;

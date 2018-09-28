@@ -35,6 +35,15 @@ import {getNestedBlockDefinition} from "./processing/utils";
   };
 })
 class BlocksContainer extends React.Component {
+  static propTypes = {
+    fieldId: PropTypes.string.isRequired,
+    id: PropTypes.string,
+  };
+
+  static defaultProps = {
+    id: null,
+  };
+
   renderBlock(blockId, canAdd=true) {
     return (
       <Block key={blockId}
@@ -71,17 +80,6 @@ class BlocksContainer extends React.Component {
     );
   }
 }
-
-
-BlocksContainer.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  id: PropTypes.string,
-};
-
-
-BlocksContainer.defaultProps = {
-  id: null,
-};
 
 
 export default BlocksContainer;

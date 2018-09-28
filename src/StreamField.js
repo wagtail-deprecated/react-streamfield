@@ -11,58 +11,7 @@ import {stateToValue} from './processing/conversions';
 import BlocksContainer from './BlocksContainer';
 
 
-@connect((state, props) => {
-  const {id} = props;
-  return {
-    generatedValue: state[id] === undefined ? '' : stateToValue(state, id),
-  };
-}, (dispatch, props) => {
-  const {id} = props;
-  return bindActionCreators({
-    initializeStreamField: data => initializeStreamField(id, data),
-    moveBlock: (blockId, newIndex) => moveBlock(id, blockId, newIndex),
-  }, dispatch);
-})
-class StreamField extends React.Component {
-  constructor(props) {
-    super(props);
-    const {
-      initializeStreamField, required, minNum, maxNum, blockDefinitions, value,
-    } = this.props;
-    initializeStreamField({
-      required, minNum, maxNum, blockDefinitions, value,
-    });
-  }
 
-  onDragEnd = result => {
-    const {draggableId, source, destination} = result;
-    if (!destination || (result.reason === 'CANCEL')
-        || (destination.droppableId !== source.droppableId)
-        || (destination.index === source.index)) {
-      return;
-    }
-    this.props.moveBlock(draggableId, destination.index);
-  };
-
-  componentWillMount() {
-    // Removes the input with the same name if it exists.
-    const input = document.querySelector(`[name="${this.props.id}"]`);
-    if (input !== null) {
-      input.parentNode.removeChild(input);
-    }
-  }
-
-  render() {
-    const {id, generatedValue} = this.props;
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <BlocksContainer fieldId={id} />
-        <input type="hidden" name={id}
-               value={JSON.stringify(generatedValue)} />
-      </DragDropContext>
-    );
-  }
-}
 
 
 function lazyFunction(f) {
@@ -103,21 +52,73 @@ const BlockValueType = PropTypes.shape({
 });
 
 
-StreamField.propTypes = {
-  id: PropTypes.string.isRequired,
-  required: PropTypes.bool,
-  minNum: PropTypes.number,
-  maxNum: PropTypes.number,
-  blockDefinitions: PropTypes.arrayOf(BlockDefinitionType).isRequired,
-  value: PropTypes.arrayOf(BlockValueType).isRequired,
-};
+@connect((state, props) => {
+  const {id} = props;
+  return {
+    generatedValue: state[id] === undefined ? '' : stateToValue(state, id),
+  };
+}, (dispatch, props) => {
+  const {id} = props;
+  return bindActionCreators({
+    initializeStreamField: data => initializeStreamField(id, data),
+    moveBlock: (blockId, newIndex) => moveBlock(id, blockId, newIndex),
+  }, dispatch);
+})
+class StreamField extends React.Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    required: PropTypes.bool,
+    minNum: PropTypes.number,
+    maxNum: PropTypes.number,
+    blockDefinitions: PropTypes.arrayOf(BlockDefinitionType).isRequired,
+    value: PropTypes.arrayOf(BlockValueType).isRequired,
+  };
 
+  static defaultProps = {
+    required: false,
+    minNum: 0,
+    maxNum: Infinity,
+  };
 
-StreamField.defaultProps = {
-  required: false,
-  minNum: 0,
-  maxNum: Infinity,
-};
+  constructor(props) {
+    super(props);
+    const {
+      initializeStreamField, required, minNum, maxNum, blockDefinitions, value,
+    } = this.props;
+    initializeStreamField({
+      required, minNum, maxNum, blockDefinitions, value,
+    });
+  }
+
+  onDragEnd = result => {
+    const {draggableId, source, destination} = result;
+    if (!destination || (result.reason === 'CANCEL')
+        || (destination.droppableId !== source.droppableId)
+        || (destination.index === source.index)) {
+      return;
+    }
+    this.props.moveBlock(draggableId, destination.index);
+  };
+
+  componentWillMount() {
+    // Removes the input with the same name if it exists.
+    const input = document.querySelector(`[name="${this.props.id}"]`);
+    if (input !== null) {
+      input.parentNode.removeChild(input);
+    }
+  }
+
+  render() {
+    const {id, generatedValue} = this.props;
+    return (
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <BlocksContainer fieldId={id} />
+        <input type="hidden" name={id}
+               value={JSON.stringify(generatedValue)} />
+      </DragDropContext>
+    );
+  }
+}
 
 
 export default StreamField;

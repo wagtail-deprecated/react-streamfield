@@ -19,6 +19,14 @@ const MutationObserver = window.MutationObserver
   }, dispatch);
 })
 class RawHtmlFieldInput extends React.Component {
+  static propTypes = {
+    fieldId: PropTypes.string.isRequired,
+    blockDefinition: PropTypes.object.isRequired,
+    blockId: PropTypes.string.isRequired,
+    html: PropTypes.string.isRequired,
+    value: PropTypes.any,
+  };
+
   runInnerScripts() {
     if (shouldRunInnerScripts(this.props.blockDefinition)) {
       for (let script
@@ -99,15 +107,6 @@ class RawHtmlFieldInput extends React.Component {
     );
   }
 }
-
-
-RawHtmlFieldInput.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  blockDefinition: PropTypes.object.isRequired,
-  blockId: PropTypes.string.isRequired,
-  html: PropTypes.string.isRequired,
-  value: PropTypes.any,
-};
 
 
 export default RawHtmlFieldInput;

@@ -29,6 +29,11 @@ import RawHtmlFieldInput from './RawHtmlFieldInput';
   }, dispatch);
 })
 class FieldInput extends React.Component {
+  static propTypes = {
+    fieldId: PropTypes.string.isRequired,
+    blockId: PropTypes.string.isRequired,
+  };
+
   render() {
     const {fieldId, blockDefinition, blockId, value} = this.props;
     if (isStruct(blockDefinition)) {  // Nested StructBlock
@@ -58,12 +63,6 @@ class FieldInput extends React.Component {
     );
   }
 }
-
-
-FieldInput.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  blockId: PropTypes.string.isRequired,
-};
 
 
 export default FieldInput;

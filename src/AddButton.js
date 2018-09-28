@@ -37,6 +37,19 @@ import {
   }, dispatch);
 })
 class AddButton extends React.Component {
+  static propTypes = {
+    fieldId: PropTypes.string.isRequired,
+    parentId: PropTypes.string,
+    blockId: PropTypes.string,
+    open: PropTypes.bool,
+    visible: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    open: false,
+    visible: true,
+  };
+
   constructor(props) {
     super(props);
     this.state = {open: props.open};
@@ -109,21 +122,6 @@ class AddButton extends React.Component {
     return button;
   }
 }
-
-
-AddButton.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  parentId: PropTypes.string,
-  blockId: PropTypes.string,
-  open: PropTypes.bool,
-  visible: PropTypes.bool,
-};
-
-
-AddButton.defaultProps = {
-  open: false,
-  visible: true,
-};
 
 
 export default AddButton;

@@ -25,6 +25,16 @@ import FieldInput from './FieldInput';
   };
 })
 class BlockContent extends React.Component {
+  static propTypes = {
+    fieldId: PropTypes.string.isRequired,
+    blockId: PropTypes.string.isRequired,
+    collapsible: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    collapsible: true,
+  };
+
   get html() {
     const {fieldId, blockDefinition, blockId} = this.props;
     if (isStruct(blockDefinition)) {
@@ -63,18 +73,6 @@ class BlockContent extends React.Component {
     );
   }
 }
-
-
-BlockContent.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  blockId: PropTypes.string.isRequired,
-  collapsible: PropTypes.bool,
-};
-
-
-BlockContent.defaultProps = {
-  collapsible: true,
-};
 
 
 export default BlockContent;

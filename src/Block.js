@@ -48,6 +48,16 @@ import BlockHeader from './BlockHeader';
   }, dispatch);
 })
 class Block extends React.Component {
+  static propTypes = {
+    fieldId: PropTypes.string.isRequired,
+    blockId: PropTypes.string.isRequired,
+    collapsible: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    collapsible: true,
+  };
+
   constructor(props) {
     super(props);
     this.contentRef = React.createRef();
