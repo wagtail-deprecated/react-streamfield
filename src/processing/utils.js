@@ -180,7 +180,8 @@ export const getNewBlock = (parentId, blockDefinition) => {
       };
     }
   } else if (isField(blockDefinition)) {
-    value = null;
+    value = blockDefinition.default === undefined ? null
+                                                  : blockDefinition.default;
   } else {
     value = [];
   }
