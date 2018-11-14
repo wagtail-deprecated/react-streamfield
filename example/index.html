@@ -138,7 +138,7 @@
         }]
       }
     </script>
-    <h2>List block, 2 children block types</h2>
+    <h2>List block, 2 children block types with groups</h2>
     <script type="application/json" data-streamfield="stream-7">
       {
         "required": true,
@@ -152,10 +152,21 @@
                 "key": "title",
                 "icon": "<i class='fas fa-heading'></i>",
                 "className": "full title",
+                "group": "Text",
                 "html": "<input type='text' name='field-__ID__' />"
               },
               {
                 "key": "bool",
+                "group": "Other",
+                "html": "<input type='checkbox' name='field-__ID__' />"
+              },
+              {
+                "key": "second_bool",
+                "group": "Other",
+                "html": "<input type='checkbox' name='field-__ID__' />"
+              },
+              {
+                "key": "third_bool",
                 "html": "<input type='checkbox' name='field-__ID__' />"
               }
             ]

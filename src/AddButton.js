@@ -92,6 +92,23 @@ class AddButton extends React.Component {
     return this.state.open && this.props.visible ? 'auto' : 0;
   }
 
+  get groupedBlockDefinitions() {
+    const grouped = {};
+    for (const blockDefinition of this.props.blockDefinitions) {
+      let key = blockDefinition.group;
+      if (key === undefined) {
+        key = '';
+      }
+      let others = grouped[key];
+      if (others === undefined) {
+        others = [];
+      }
+      others.push(blockDefinition);
+      grouped[key] = others;
+    }
+    return grouped;
+  }
+
   render() {
     const {visible} = this.props;
     const button = (
@@ -108,12 +125,18 @@ class AddButton extends React.Component {
           {button}
           <AnimateHeight height={this.panelHeight} easing="ease-in-out"
                          contentClassName="add-panel">
-            {this.props.blockDefinitions.map(blockDefinition => (
-              <button key={blockDefinition.key} onClick={this.addHandler}
-                      value={blockDefinition.key} className="type">
-                {this.getIcon(blockDefinition)}
-                <span className="label">{getLabel(blockDefinition)}</span>
-              </button>
+            {Object.entries(this.groupedBlockDefinitions).map(
+              ([group, blockDefinitions]) => (
+                <div key={group}>
+                  <h4 className="group-name">{group}</h4>
+                  {blockDefinitions.map(blockDefinition =>
+                    <button key={blockDefinition.key} onClick={this.addHandler}
+                            value={blockDefinition.key} className="type">
+                      {this.getIcon(blockDefinition)}
+                      <span className="label">{getLabel(blockDefinition)}</span>
+                    </button>
+                  )}
+                </div>
             ))}
           </AnimateHeight>
         </React.Fragment>

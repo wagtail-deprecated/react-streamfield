@@ -205,6 +205,9 @@ $error-background-color: #fbefef;
     background: #EEEEEE;
     border-radius: $border-radius;
     user-select: none;
+    .group-name {
+      margin: $grid-gutter-width / 4 $grid-gutter-width / 4 0;
+    }
     button.type {
       margin: $grid-gutter-width / 4;
       appearance: none;
