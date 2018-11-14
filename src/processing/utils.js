@@ -19,7 +19,13 @@ export const isField = blockDefinition => {
 
 export const isStruct = blockDefinition => {
   return (blockDefinition.isStruct !== undefined)
-      && (blockDefinition.isStruct);
+      && blockDefinition.isStruct;
+};
+
+
+export const isStatic = blockDefinition => {
+  return (blockDefinition.isStatic !== undefined)
+       && blockDefinition.isStatic;
 };
 
 

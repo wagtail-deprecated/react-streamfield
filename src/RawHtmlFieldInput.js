@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {changeBlockValue} from './actions';
-import {getFieldName, shouldRunInnerScripts} from './processing/utils';
+import {
+  getFieldName,
+  isStatic,
+  shouldRunInnerScripts
+} from './processing/utils';
 
 
 const MutationObserver = window.MutationObserver
@@ -64,18 +68,20 @@ class RawHtmlFieldInput extends React.Component {
   }
 
   componentDidMount() {
-    const {blockId} = this.props;
-    const name = getFieldName(blockId);
-    this.inputs = [
-      ...ReactDOM.findDOMNode(this).querySelectorAll(`[name="${name}"]`)];
-    if (this.inputs.length === 0) {
-      throw Error(`Could not find input with name "${name}"`);
-    }
-    for (let input of this.inputs) {
-      this.setValue(input);
-      this.bindChange(input);
-      // We remove the name attribute to remove inputs from the submitted form.
-      input.removeAttribute('name');
+    const {blockDefinition, blockId} = this.props;
+    if (!isStatic(blockDefinition)) {
+      const name = getFieldName(blockId);
+      this.inputs = [
+        ...ReactDOM.findDOMNode(this).querySelectorAll(`[name="${name}"]`)];
+      if (this.inputs.length === 0) {
+        throw Error(`Could not find input with name "${name}"`);
+      }
+      for (let input of this.inputs) {
+        this.setValue(input);
+        this.bindChange(input);
+        // We remove the name attribute to remove inputs from the submitted form.
+        input.removeAttribute('name');
+      }
     }
     this.runInnerScripts();
   }
@@ -97,7 +103,10 @@ class RawHtmlFieldInput extends React.Component {
   };
 
   get html() {
-    const {html, blockId} = this.props;
+    const {blockDefinition, html, blockId} = this.props;
+    if (isStatic(blockDefinition)) {
+      return html;
+    }
     return html.replace(/__ID__/g, blockId);
   }
 

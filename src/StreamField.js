@@ -35,6 +35,7 @@ const BlockDefinitionType = PropTypes.shape({
   titleTemplate: PropTypes.string,
   html: PropTypes.string,
   isStruct: PropTypes.bool,
+  isStatic: PropTypes.bool,
   dangerouslyRunInnerScripts: PropTypes.bool,
   children: PropTypes.arrayOf(lazyFunction(() => BlockDefinitionType)),
 });
