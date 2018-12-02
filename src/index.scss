@@ -33,6 +33,7 @@ $error-background-color: #fbefef;
   }
   .block {
     position: relative;
+    display: flex;
     padding: $block-vertical-padding $block-padding
              $block-vertical-padding $block-left-padding;
     &.has-error {
@@ -58,6 +59,8 @@ $error-background-color: #fbefef;
       }
     }
     > .block-container {
+      flex: 1 1 auto;
+      width: 0;  // Trick to prevent overflow from the title.
       border: 1px solid $block-border-color;
       border-radius: $border-radius;
       background: white;
