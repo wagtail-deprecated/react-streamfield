@@ -36,3 +36,7 @@ input[type="color"] {
   border: none;
   background: none;
 }
+
+textarea {
+  max-width: 100%;
+}

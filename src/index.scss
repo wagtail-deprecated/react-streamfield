@@ -1,17 +1,21 @@
 $grid-gutter-width: 30px;
 $block-padding: 4px;
+$block-vertical-padding: 3px;
+$block-left-padding: 6px;
+$children-container-padding: 21px;
+$add-button-size: 28px;
+$action-font-size: 15px;
 $collapse-transition-duration: 0.3s;
 $add-transition-duration: 0.3s;
-$hide-transition-duration: 0.3s;
 $hover-transition-duration: 0.3s;
 $bounce-transition-timing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $border-radius: 3px;
 $teal: #43b1b0;
 $header-text-color-focus: #4d4d4d;
 $header-text-color: #888888;
-$block-border-color: #d3d3d3;
+$block-border-color: #e6e6e6;
 $block-border-color-focus: #bbbbbb;
-$block-background: #f5f5f5;
+$block-hover-background: #f5f5f5;
 $error-color: #cd3238;
 $error-border-color: #dbc7c8;
 $error-border-color-focus: #cdb2b3;
@@ -19,7 +23,8 @@ $error-background-color: #fbefef;
 
 .children-container {
   position: relative;
-  padding: 21px;
+  padding: $children-container-padding $block-padding
+           $children-container-padding $children-container-padding;
   &.is-dragging {
     > button.add.visible {
       opacity: 0;
@@ -28,7 +33,8 @@ $error-background-color: #fbefef;
   }
   .block {
     position: relative;
-    padding: $block-padding;
+    padding: $block-vertical-padding $block-padding
+             $block-vertical-padding $block-left-padding;
     &.has-error {
       > .block-container {
         border-color: $error-border-color;
@@ -42,6 +48,9 @@ $error-background-color: #fbefef;
       &:hover, &:focus, &:focus-within {
         > .block-container {
           border-color: $error-border-color-focus;
+          > header {
+            background: $error-background-color;
+          }
           > .content-container > .content {
             border-color: $error-border-color-focus;
           }
@@ -53,14 +62,14 @@ $error-background-color: #fbefef;
       border-radius: $border-radius;
       overflow: hidden;
       background: white;
-      transition: $hover-transition-duration border-color ease-in-out;
+      transition: border-color $hover-transition-duration ease-in-out;
+      transition-property: border-color, box-shadow;
       > header {
         display: flex;
         align-items: center;
-        padding: 8px;
-        background: $block-background;
+        padding: $block-padding * 2;
         user-select: none;
-        transition: $hover-transition-duration background-color ease-in-out;
+        transition: background-color $hover-transition-duration ease-in-out;
         cursor: default;
         &.collapsible {
           cursor: pointer;
@@ -78,6 +87,7 @@ $error-background-color: #fbefef;
           .type-icon {
             margin-right: $grid-gutter-width / 4;
             color: $header-text-color;
+            transition: color $hover-transition-duration ease-in-out;
           }
           .block-type {
             margin-left: 0;
@@ -101,16 +111,15 @@ $error-background-color: #fbefef;
               cursor: pointer;
               color: $header-text-color;
               opacity: 1;
-              transition: opacity $hide-transition-duration ease-in-out;
+              transition: opacity $hover-transition-duration ease-in-out;
+              transition-property: opacity, color;
+              font-size: $action-font-size;
               &.disabled {
                 opacity: 0.2;
                 pointer-events: none;
               }
             }
           }
-        }
-        + .content-container > .content {
-          border-top: 1px solid $block-border-color;
         }
       }
       > .content-container > .content {
@@ -122,6 +131,7 @@ $error-background-color: #fbefef;
         border-color: $block-border-color-focus;
         box-shadow: 3px 2px 3px -1px rgba(0, 0, 0, .1);
         > header {
+          background: $block-hover-background;
           h3 {
             color: $header-text-color-focus;
             .type-icon {
@@ -165,6 +175,8 @@ $error-background-color: #fbefef;
       display: block;
       transition: transform $add-transition-duration $bounce-transition-timing;
       font-style: normal;
+      font-size: $add-button-size;
+      line-height: $add-button-size;
     }
     &.close i {
       transform: rotate(45deg);
