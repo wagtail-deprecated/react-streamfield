@@ -44,8 +44,8 @@ export const isSimpleLayout = blockDefinition => {
 
 export const isClosed = blockDefinition => {
   return !isSimpleLayout(blockDefinition)
-      || (blockDefinition.closed === undefined)
-      || blockDefinition.closed;
+      && ((blockDefinition.closed === undefined)
+          || blockDefinition.closed);
 };
 
 
