@@ -11,7 +11,7 @@ import {
   showBlock,
 } from './actions';
 import {
-  getDescendantsIds,
+  getDescendantsIds, getLayout,
   getNestedBlockDefinition,
   getSiblingsIds,
   triggerCustomEvent,
@@ -19,6 +19,7 @@ import {
 import AddButton from './AddButton';
 import BlockContent from './BlockContent';
 import BlockHeader from './BlockHeader';
+import BlockActions from './BlockActions';
 
 
 @connect((state, props) => {
@@ -50,16 +51,24 @@ import BlockHeader from './BlockHeader';
 class Block extends React.Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
-    blockId: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    standalone: PropTypes.bool,
     collapsible: PropTypes.bool,
+    sortable: PropTypes.bool,
+    canAdd: PropTypes.bool,
   };
 
+
   static defaultProps = {
+    standalone: false,
     collapsible: true,
+    sortable: true,
+    canAdd: true,
   };
 
   constructor(props) {
     super(props);
+    this.dragHandleRef = React.createRef();
     this.contentRef = React.createRef();
   }
 
@@ -96,9 +105,11 @@ class Block extends React.Component {
 
   wrapSortable(blockContent) {
     const {
-      fieldId, id, parentId, index, hasError, collapsible, sortable, canAdd,
+      blockDefinition, fieldId, id, parentId, index, hasError, collapsible,
+      sortable, canAdd,
     } = this.props;
-    const className = 'block' + (hasError ? ' has-error' : '');
+    const className = `block${hasError ? ' has-error' : ''}`;
+    var isSimpleLayout = getLayout(blockDefinition) === 'SIMPLE';
     if (sortable) {
       return (
         <Draggable draggableId={id} index={index}
@@ -107,13 +118,20 @@ class Block extends React.Component {
             <article className={className}
                      ref={provided.innerRef}
                      {...provided.draggableProps}>
-              <div className="block-container">
+              <div className={`block-container ${getLayout(blockDefinition)}`}>
                 <BlockHeader fieldId={fieldId} blockId={id}
                              collapsibleBlock={collapsible}
                              sortableBlock={sortable}
                              canDuplicate={canAdd}
+                             dragHandleRef={this.dragHandleRef}
                              dragHandleProps={provided.dragHandleProps} />
                 {blockContent}
+                {isSimpleLayout ?
+                  <BlockActions fieldId={fieldId} blockId={id}
+                                sortableBlock={sortable} canDuplicate={canAdd}
+                                dragHandleRef={this.dragHandleRef} />
+                  :
+                  null}
               </div>
             </article>
           )}
@@ -126,7 +144,8 @@ class Block extends React.Component {
           <BlockHeader fieldId={fieldId} blockId={id}
                        collapsibleBlock={collapsible}
                        sortableBlock={sortable}
-                       canDuplicate={canAdd} />
+                       canDuplicate={canAdd}
+                       dragHandleRef={this.dragHandleRef} />
           {blockContent}
         </div>
       </article>
@@ -163,24 +182,6 @@ class Block extends React.Component {
     );
   }
 }
-
-
-Block.propTypes = {
-  fieldId: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  standalone: PropTypes.bool,
-  collapsible: PropTypes.bool,
-  sortable: PropTypes.bool,
-  canAdd: PropTypes.bool,
-};
-
-
-Block.defaultProps = {
-  standalone: false,
-  collapsible: true,
-  sortable: true,
-  canAdd: true,
-};
 
 
 export default Block;

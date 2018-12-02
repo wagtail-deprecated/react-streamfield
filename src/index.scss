@@ -60,10 +60,59 @@ $error-background-color: #fbefef;
     > .block-container {
       border: 1px solid $block-border-color;
       border-radius: $border-radius;
-      overflow: hidden;
       background: white;
       transition: border-color $hover-transition-duration ease-in-out;
       transition-property: border-color, box-shadow;
+      &.SIMPLE {
+        display: flex;
+        flex-flow: row nowrap;
+        > header {
+          position: relative;
+          flex: 0 0 auto;
+          h3 {
+            position: sticky;
+            top: $grid-gutter-width / 4;
+            bottom: $grid-gutter-width / 4;
+            .type-icon {
+            }
+          }
+        }
+        > .content-container {
+          flex: 1 1 auto;
+          overflow: auto;
+        }
+        > aside {
+          display: flex;
+          flex-flow: column nowrap;
+          align-items: flex-end;
+          padding: $block-padding * 2;
+          .block-type {
+            margin-top: $grid-gutter-width / 4;
+          }
+        }
+      }
+      &.COLLAPSIBLE {
+        overflow: hidden;
+        > header {
+          h3 {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            .type-icon {
+              margin-right: $grid-gutter-width / 4;
+            }
+            .block-type {
+              text-transform: none;
+              font-weight: normal;
+              font-style: italic;
+              font-size: 85%;
+            }
+          }
+          > aside {
+            flex: 0 0 auto;
+          }
+        }
+      }
       > header {
         display: flex;
         align-items: center;
@@ -80,44 +129,37 @@ $error-background-color: #fbefef;
         h3 {
           flex: 1 1 auto;
           margin: 0;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
           color: $header-text-color;
           .type-icon {
-            margin-right: $grid-gutter-width / 4;
             color: $header-text-color;
             transition: color $hover-transition-duration ease-in-out;
           }
-          .block-type {
-            margin-left: 0;
-          }
         }
+      }
+      > header, & {
         .block-type {
-          margin: 0 $grid-gutter-width / 4;
-          font-weight: normal;
-          font-style: italic;
-          font-size: 85%;
-          line-height: 85%;
+          text-transform: uppercase;
+          text-align: right;
+          font-size: 80%;
+          line-height: 100%;
           color: $header-text-color;
         }
-        > aside {
-          flex: 0 0 auto;
-          > .actions {
-            > button {
-              appearance: none;
-              border: none;
-              background: none;
-              cursor: pointer;
-              color: $header-text-color;
-              opacity: 1;
-              transition: opacity $hover-transition-duration ease-in-out;
-              transition-property: opacity, color;
-              font-size: $action-font-size;
-              &.disabled {
-                opacity: 0.2;
-                pointer-events: none;
-              }
+        > aside > .actions {
+          white-space: nowrap;
+          > button {
+            appearance: none;
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: $header-text-color;
+            opacity: 1;
+            transition: opacity $hover-transition-duration ease-in-out;
+            transition-property: opacity, color;
+            font-size: $action-font-size;
+
+            &.disabled {
+              opacity: 0.2;
+              pointer-events: none;
             }
           }
         }

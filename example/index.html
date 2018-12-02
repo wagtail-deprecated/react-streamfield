@@ -182,8 +182,55 @@
         }]
       }
     </script>
-    <h2>Maximum number of blocks</h2>
+    <h2>Simple block layout</h2>
     <script type="application/json" data-streamfield="stream-9">
+      {
+        "required": true,
+        "blockDefinitions": [
+          {
+            "key": "title",
+            "layout": "SIMPLE",
+            "icon": "<i class='fas fa-heading'></i>",
+            "className": "full title",
+            "html": "<input type='text' name='field-__ID__' />"
+          },
+          {
+            "key": "text",
+            "layout": "SIMPLE",
+            "icon": "<i class='fas fa-align-justify'></i>",
+            "className": "full",
+            "html": "<textarea name='field-__ID__'></textarea>"
+          }
+        ],
+        "value": [{"type": "title", "value": "Wagtail is awesome!"},
+                  {"type": "text", "value": "And it’s always getting better 😃"}]
+      }
+    </script>
+    <h2>Mixed block layouts</h2>
+    <script type="application/json" data-streamfield="stream-10">
+      {
+        "required": true,
+        "blockDefinitions": [
+          {
+            "key": "title",
+            "layout": "SIMPLE",
+            "icon": "<i class='fas fa-heading'></i>",
+            "className": "full title",
+            "html": "<input type='text' name='field-__ID__' />"
+          },
+          {
+            "key": "text",
+            "icon": "<i class='fas fa-align-justify'></i>",
+            "className": "full",
+            "html": "<textarea name='field-__ID__'></textarea>"
+          }
+        ],
+        "value": [{"type": "title", "value": "Wagtail is awesome!"},
+                  {"type": "text", "value": "And it’s always getting better 😃"}]
+      }
+    </script>
+    <h2>Maximum number of blocks</h2>
+    <script type="application/json" data-streamfield="stream-11">
       {
         "required": true,
         "minNum": null,
@@ -209,7 +256,7 @@
       }
     </script>
     <h2>Error in one of the nested blocks</h2>
-    <script type="application/json" data-streamfield="stream-10">
+    <script type="application/json" data-streamfield="stream-12">
       {
         "required": true,
         "blockDefinitions": [
@@ -232,7 +279,7 @@
       }
     </script>
     <h2>Struct block</h2>
-    <script type="application/json" data-streamfield="stream-11">
+    <script type="application/json" data-streamfield="stream-13">
       {
         "value": [],
         "blockDefinitions": [
@@ -253,7 +300,7 @@
       }
     </script>
     <h2>Struct block as a struct block field</h2>
-    <script type="application/json" data-streamfield="stream-12">
+    <script type="application/json" data-streamfield="stream-14">
       {
         "value": [],
         "blockDefinitions": [
@@ -288,7 +335,7 @@
       }
     </script>
     <h2>StructBlock as a list block child</h2>
-    <script type="application/json" data-streamfield="stream-13">
+    <script type="application/json" data-streamfield="stream-15">
       {
         "required": true,
         "blockDefinitions": [
@@ -316,7 +363,7 @@
       }
     </script>
     <h2>Complex nested StreamField</h2>
-    <script type="application/json" data-streamfield="stream-14">
+    <script type="application/json" data-streamfield="stream-16">
       {
         "required": true,
         "blockDefinitions": [

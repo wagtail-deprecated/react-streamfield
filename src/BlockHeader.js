@@ -6,11 +6,12 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
   getLabel,
-  getNestedBlockDefinition,
-  getSiblingsIds,
-  isStruct, structValueToObject, triggerCustomEvent, triggerKeyboardEvent
+  getNestedBlockDefinition, isSimpleLayout,
+  isStruct, structValueToObject, triggerCustomEvent
 } from './processing/utils';
-import {duplicateBlock, hideBlock, toggleBlock} from './actions';
+import {toggleBlock} from './actions';
+import BlockActions from './BlockActions';
+import {refType} from './types';
 
 
 @connect((state, props) => {
@@ -19,12 +20,9 @@ import {duplicateBlock, hideBlock, toggleBlock} from './actions';
   const blocks = fieldData.blocks;
   const block = blocks[blockId];
   const blockDefinition = getNestedBlockDefinition(state, fieldId, blockId);
-  const siblings = getSiblingsIds(state, fieldId, blockId);
   const value = block.value;
   return {
     blockDefinition,
-    siblings,
-    index: siblings.indexOf(blockId),
     value: isStruct(blockDefinition) ?
              structValueToObject(state, fieldId, value)
              :
@@ -34,8 +32,6 @@ import {duplicateBlock, hideBlock, toggleBlock} from './actions';
   const {fieldId, blockId} = props;
   return bindActionCreators({
     toggleBlock: () => toggleBlock(fieldId, blockId),
-    hideBlock: () => hideBlock(fieldId, blockId),
-    duplicateBlock: () => duplicateBlock(fieldId, blockId),
   }, dispatch);
 })
 class BlockHeader extends React.Component {
@@ -45,6 +41,7 @@ class BlockHeader extends React.Component {
     collapsibleBlock: PropTypes.bool,
     sortableBlock: PropTypes.bool,
     canDuplicate: PropTypes.bool,
+    dragHandleRef: refType,
     dragHandleProps: PropTypes.object,
   };
 
@@ -53,19 +50,6 @@ class BlockHeader extends React.Component {
     sortableBlock: true,
     canDuplicate: true,
   };
-
-  constructor(props) {
-    super(props);
-    this.dragHandleRef = React.createRef();
-  }
-
-  get isFirst() {
-    return this.props.index === 0;
-  }
-
-  get isLast() {
-    return this.props.index === (this.props.siblings.length - 1);
-  }
 
   get icon() {
     return <span className="type-icon" dangerouslySetInnerHTML={
@@ -106,59 +90,17 @@ class BlockHeader extends React.Component {
   }
 
   toggle = () => {
+    if (isSimpleLayout(this.props.blockDefinition)) {
+      return;
+    }
     this.props.toggleBlock();
     this.triggerCustomEvent('toggle', {closed: !this.props.closed});
   };
 
-  sendKeyToDragHandle = key => {
-    const dragHandle = ReactDOM.findDOMNode(this.dragHandleRef.current);
-    triggerKeyboardEvent(dragHandle, 32);  // 32 for spacebar, to drag
-    return new Promise(resolve => {
-      setTimeout(() => {
-        triggerKeyboardEvent(dragHandle, key);
-        setTimeout(() => {
-          triggerKeyboardEvent(dragHandle, 32);  // Drop at the new position
-          resolve();
-        }, 100);  // 100 ms is the duration of a move in react-beautiful-dnd
-      }, 0);
-    });
-  };
-
-  moveUpHandler = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.sendKeyToDragHandle(38)  // 38 for up arrow
-      .then(() => {
-        this.triggerCustomEvent('move', {index: this.props.index});
-      });
-  };
-
-  moveDownHandler = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.sendKeyToDragHandle(40)  // 40 for down arrow
-      .then(() => {
-        this.triggerCustomEvent('move', {index: this.props.index});
-      });
-  };
-
-  duplicateHandler = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.props.duplicateBlock();
-    this.triggerCustomEvent('duplicate');
-  };
-
-  deleteHandler = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.props.hideBlock();
-  };
-
   render() {
     const {
-      blockDefinition, dragHandleProps,
-      collapsibleBlock, sortableBlock, canDuplicate,
+      fieldId, blockId, blockDefinition, dragHandleProps,
+      collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
     } = this.props;
     const icon = this.icon;
     const title = this.title;
@@ -167,44 +109,32 @@ class BlockHeader extends React.Component {
         {getLabel(blockDefinition)}
       </span>
     );
+    let content;
+    if (isSimpleLayout(blockDefinition)) {
+      content = (
+        <h3>{icon}</h3>
+      );
+    } else {
+      content = (
+        <React.Fragment>
+          <h3>
+            {icon ? <React.Fragment>{icon}&nbsp;</React.Fragment> : null}
+            {title === null ? blockType : title}
+          </h3>
+          {title === null ? null : blockType}
+          <BlockActions fieldId={fieldId} blockId={blockId}
+                        sortableBlock={sortableBlock}
+                        canDuplicate={canDuplicate}
+                        dragHandleRef={dragHandleRef} />
+        </React.Fragment>
+      );
+    }
     return (
-      <header ref={this.dragHandleRef}  onClick={this.toggle}
+      <header ref={dragHandleRef}  onClick={this.toggle}
               {...dragHandleProps}
               className={classNames(collapsibleBlock && 'collapsible',
                                     sortableBlock && 'sortable')}>
-        <h3>
-          {icon ? <React.Fragment>{icon}&nbsp;</React.Fragment> : null}
-          {title === null ? blockType : title}
-        </h3>
-        {title === null ? null : blockType}
-        <aside>
-          <div className="actions">
-            {sortableBlock ?
-              <React.Fragment>
-                <button onClick={this.moveUpHandler}
-                        title="Move up"
-                        className={this.isFirst ? 'disabled' : null}>
-                  <i className="fas fa-chevron-up" />
-                </button>
-                <button onClick={this.moveDownHandler}
-                        title="Move down"
-                        className={this.isLast ? 'disabled' : null}>
-                  <i className="fas fa-chevron-down" />
-                </button>
-              </React.Fragment>
-              :
-              null}
-            <button onClick={this.duplicateHandler}
-                    title="Duplicate"
-                    className={canDuplicate ? null : 'disabled'}>
-              <i className="fas fa-clone" />
-            </button>
-            <button onClick={this.deleteHandler}
-                    title="Delete">
-              <i className="fas fa-trash" />
-            ️</button>
-          </div>
-        </aside>
+        {content}
       </header>
     );
   }

@@ -6,7 +6,7 @@ import AnimateHeight from 'react-animate-height';
 import {
   getNestedBlockDefinition,
   isStruct,
-  getDescendantsIds,
+  getDescendantsIds, isSimpleLayout,
 } from './processing/utils';
 import StructChildField from './StructChildField';
 import FieldInput from './FieldInput';
@@ -55,7 +55,7 @@ class BlockContent extends React.Component {
     const {blockDefinition, collapsible} = this.props;
     const content = this.html;
     const className = classNames('content', blockDefinition.className);
-    if (collapsible) {
+    if (collapsible && !isSimpleLayout(blockDefinition)) {
       return (
         <AnimateHeight height={this.height} easing="ease-in-out"
                        className="content-container"

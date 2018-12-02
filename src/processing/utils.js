@@ -29,8 +29,21 @@ export const isStatic = blockDefinition => {
 };
 
 
+export const getLayout = blockDefinition => {
+  if (blockDefinition.layout === undefined) {
+    return 'COLLAPSIBLE';
+  }
+  return blockDefinition.layout;
+};
+
+
+export const isSimpleLayout = blockDefinition => {
+  return getLayout(blockDefinition) === 'SIMPLE';
+};
+
+
 export const isClosed = blockDefinition => {
-  return (blockDefinition.layout === 'SIMPLE')
+  return !isSimpleLayout(blockDefinition)
       || (blockDefinition.closed === undefined)
       || blockDefinition.closed;
 };
