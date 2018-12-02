@@ -79,7 +79,11 @@ $error-background-color: #fbefef;
         }
         > .content-container {
           flex: 1 1 auto;
-          overflow: auto;
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: space-around;
+          width: 0;  // Trick to prevent content from overflowing, while
+                     // allowing for some overflow, like Draftail tooltips.
         }
         > aside {
           display: flex;
