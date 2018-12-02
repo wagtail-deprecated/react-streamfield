@@ -27,7 +27,7 @@
         "blockDefinitions": [
           {
             "key": "title",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "html": "<input type='text' name='field-__ID__' />"
           }
@@ -42,7 +42,7 @@
         "blockDefinitions": [
           {
             "key": "title",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "closed": false,
             "html": "<input type='text' name='field-__ID__' />"
@@ -73,7 +73,7 @@
           {
             "key": "title",
             "default": "The default title",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "html": "<input type='text' name='field-__ID__' />"
           }
@@ -88,7 +88,7 @@
         "blockDefinitions": [
           {
             "key": "title",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "html": "<input type='text' name='field-__ID__' />"
           }
@@ -104,13 +104,13 @@
         "blockDefinitions": [
           {
             "key": "title",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "html": "<input type='text' name='field-__ID__' />"
           },
           {
             "key": "text",
-            "icon": "<i class='fas fa-align-justify'></i>",
+            "icon": "<i class='fas fa-align-justify fa-fw'></i>",
             "className": "full",
             "html": "<textarea name='field-__ID__'></textarea>"
           }
@@ -152,7 +152,7 @@
             "children": [
               {
                 "key": "title",
-                "icon": "<i class='fas fa-heading'></i>",
+                "icon": "<i class='fas fa-heading fa-fw'></i>",
                 "className": "full title",
                 "group": "Text",
                 "html": "<input type='text' name='field-__ID__' />"
@@ -190,20 +190,27 @@
           {
             "key": "title",
             "layout": "SIMPLE",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "html": "<input type='text' name='field-__ID__' />"
           },
           {
             "key": "text",
             "layout": "SIMPLE",
-            "icon": "<i class='fas fa-align-justify'></i>",
+            "icon": "<i class='fas fa-align-justify fa-fw'></i>",
             "className": "full",
             "html": "<textarea name='field-__ID__'></textarea>"
+          },
+          {
+            "key": "static",
+            "layout": "SIMPLE",
+            "isStatic": true,
+            "html": "Some static block"
           }
         ],
         "value": [{"type": "title", "value": "Wagtail is awesome!"},
-                  {"type": "text", "value": "And it’s always getting better 😃"}]
+                  {"type": "text", "value": "And it’s always getting better 😃"},
+                  {"type": "static"}]
       }
     </script>
     <h2>Mixed block layouts</h2>
@@ -214,19 +221,26 @@
           {
             "key": "title",
             "layout": "SIMPLE",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "html": "<input type='text' name='field-__ID__' />"
           },
           {
             "key": "text",
-            "icon": "<i class='fas fa-align-justify'></i>",
+            "icon": "<i class='fas fa-align-justify fa-fw'></i>",
             "className": "full",
             "html": "<textarea name='field-__ID__'></textarea>"
+          },
+          {
+            "key": "static",
+            "layout": "SIMPLE",
+            "isStatic": true,
+            "html": "Some static block"
           }
         ],
         "value": [{"type": "title", "value": "Wagtail is awesome!"},
-                  {"type": "text", "value": "And it’s always getting better 😃"}]
+                  {"type": "text", "value": "And it’s always getting better 😃"},
+                  {"type": "static"}]
       }
     </script>
     <h2>Maximum number of blocks</h2>
@@ -369,20 +383,20 @@
         "blockDefinitions": [
           {
             "key": "title",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "html": "<input type='text' name='field-__ID__' />"
           },
           {
             "key": "text",
-            "icon": "<i class='fas fa-align-justify'></i>",
+            "icon": "<i class='fas fa-align-justify fa-fw'></i>",
             "className": "full",
             "html": "<textarea name='field-__ID__'></textarea>"
           },
           {
             "key": "block-type",
             "label": "Block type",
-            "icon": "<i class='fas fa-heart'></i>",
+            "icon": "<i class='fas fa-heart fa-fw'></i>",
             "titleTemplate": "${start_date} — ${end_date}",
             "isStruct": true,
             "children": [
@@ -421,7 +435,7 @@
                   {
                     "key": "sub-block-type",
                     "label": "Sub-block type",
-                    "icon": "<i class='fas fa-heartbeat'></i>",
+                    "icon": "<i class='fas fa-heartbeat fa-fw'></i>",
                     "isStruct": true,
                     "children": [
                       {
@@ -437,7 +451,7 @@
                           {
                             "key": "sub-sub-block-type",
                             "name": "Sub-sub-block type",
-                            "icon": "<i class='fas fa-smile'></i>"
+                            "icon": "<i class='fas fa-smile fa-fw'></i>"
                           }
                         ]
                       }
@@ -464,7 +478,7 @@
         "blockDefinitions": [
           {
             "key": "title",
-            "icon": "<i class='fas fa-heading'></i>",
+            "icon": "<i class='fas fa-heading fa-fw'></i>",
             "className": "full title",
             "html": "<input type='text' name='field-__ID__' />"
           }

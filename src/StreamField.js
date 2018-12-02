@@ -78,6 +78,7 @@ class StreamField extends React.Component {
       moveDown: PropTypes.string,
       duplicate: PropTypes.string,
       delete: PropTypes.string,
+      grip: PropTypes.string,
     }),
     blockDefinitions: PropTypes.arrayOf(BlockDefinitionType).isRequired,
     value: PropTypes.arrayOf(BlockValueType).isRequired,

@@ -52,9 +52,12 @@ class BlockHeader extends React.Component {
   };
 
   get icon() {
-    return <span className="type-icon" dangerouslySetInnerHTML={
-      {__html: this.props.blockDefinition.icon}
-    } />;
+    const {blockDefinition} = this.props;
+    if (blockDefinition.icon !== undefined) {
+      return <span className="type-icon" dangerouslySetInnerHTML={
+        {__html: blockDefinition.icon}
+      } />;
+    }
   }
 
   get title() {
@@ -97,6 +100,14 @@ class BlockHeader extends React.Component {
     this.triggerCustomEvent('toggle', {closed: !this.props.closed});
   };
 
+  get gripIcon() {
+    const {icons} = this.props;
+    if ((icons === undefined) || (icons.grip === undefined)) {
+      return <i className="fas fa-grip-vertical fa-fw" />;
+    }
+    return <span dangerouslySetInnerHTML={{__html: icons.grid}} />;
+  }
+
   render() {
     const {
       fieldId, blockId, blockDefinition, dragHandleProps,
@@ -112,7 +123,7 @@ class BlockHeader extends React.Component {
     let content;
     if (isSimpleLayout(blockDefinition)) {
       content = (
-        <h3>{icon}</h3>
+        <h3>{icon ? icon : this.gripIcon}</h3>
       );
     } else {
       content = (

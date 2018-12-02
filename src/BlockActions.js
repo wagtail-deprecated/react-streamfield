@@ -52,7 +52,6 @@ class BlockActions extends (React.Component) {
     return <span dangerouslySetInnerHTML={{__html: icons.moveUp}} />;
   }
 
-
   get moveDownIcon() {
     const {icons} = this.props;
     if ((icons === undefined) || (icons.moveDown === undefined)) {
@@ -61,7 +60,6 @@ class BlockActions extends (React.Component) {
     return <span dangerouslySetInnerHTML={{__html: icons.moveDown}} />;
   }
 
-
   get duplicateIcon() {
     const {icons} = this.props;
     if ((icons === undefined) || (icons.duplicate === undefined)) {
@@ -69,7 +67,6 @@ class BlockActions extends (React.Component) {
     }
     return <span dangerouslySetInnerHTML={{__html: icons.duplicate}} />;
   }
-
 
   get deleteIcon() {
     const {icons} = this.props;
