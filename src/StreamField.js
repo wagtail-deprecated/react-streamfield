@@ -73,6 +73,12 @@ class StreamField extends React.Component {
     required: PropTypes.bool,
     minNum: PropTypes.number,
     maxNum: PropTypes.number,
+    icons: PropTypes.shape({
+      moveUp: PropTypes.string,
+      moveDown: PropTypes.string,
+      duplicate: PropTypes.string,
+      delete: PropTypes.string,
+    }),
     blockDefinitions: PropTypes.arrayOf(BlockDefinitionType).isRequired,
     value: PropTypes.arrayOf(BlockValueType).isRequired,
   };
@@ -86,10 +92,11 @@ class StreamField extends React.Component {
   constructor(props) {
     super(props);
     const {
-      initializeStreamField, required, minNum, maxNum, blockDefinitions, value,
+      initializeStreamField, required, minNum, maxNum, icons, blockDefinitions,
+      value,
     } = this.props;
     initializeStreamField({
-      required, minNum, maxNum, blockDefinitions, value,
+      required, minNum, maxNum, icons, blockDefinitions, value,
     });
   }
 

@@ -20,6 +20,7 @@ import {refType} from './types';
   return {
     blockDefinition,
     siblings,
+    icons: state[fieldId].icons,
     index: siblings.indexOf(blockId),
   };
 }, (dispatch, props) => {
@@ -42,6 +43,41 @@ class BlockActions extends (React.Component) {
     sortableBlock: true,
     canDuplicate: true,
   };
+
+  get moveUpIcon() {
+    const {icons} = this.props;
+    if ((icons === undefined) || (icons.moveUp === undefined)) {
+      return <i className="fas fa-chevron-up" />;
+    }
+    return <span dangerouslySetInnerHTML={{__html: icons.moveUp}} />;
+  }
+
+
+  get moveDownIcon() {
+    const {icons} = this.props;
+    if ((icons === undefined) || (icons.moveDown === undefined)) {
+      return <i className="fas fa-chevron-down" />;
+    }
+    return <span dangerouslySetInnerHTML={{__html: icons.moveDown}} />;
+  }
+
+
+  get duplicateIcon() {
+    const {icons} = this.props;
+    if ((icons === undefined) || (icons.duplicate === undefined)) {
+      return <i className="fas fa-clone" />;
+    }
+    return <span dangerouslySetInnerHTML={{__html: icons.duplicate}} />;
+  }
+
+
+  get deleteIcon() {
+    const {icons} = this.props;
+    if ((icons === undefined) || (icons.delete === undefined)) {
+      return <i className="fas fa-trash" />;
+    }
+    return <span dangerouslySetInnerHTML={{__html: icons.delete}} />;
+  }
 
   get isFirst() {
     return this.props.index === 0;
@@ -110,12 +146,12 @@ class BlockActions extends (React.Component) {
               <button onClick={this.moveUpHandler}
                       title="Move up"
                       className={this.isFirst ? 'disabled' : null}>
-                <i className="fas fa-chevron-up" />
+                {this.moveUpIcon}
               </button>
               <button onClick={this.moveDownHandler}
                       title="Move down"
                       className={this.isLast ? 'disabled' : null}>
-                <i className="fas fa-chevron-down" />
+                {this.moveDownIcon}
               </button>
             </React.Fragment>
             :
@@ -123,11 +159,11 @@ class BlockActions extends (React.Component) {
           <button onClick={this.duplicateHandler}
                   title="Duplicate"
                   className={canDuplicate ? null : 'disabled'}>
-            <i className="fas fa-clone" />
+            {this.duplicateIcon}
           </button>
           <button onClick={this.deleteHandler}
                   title="Delete">
-            <i className="fas fa-trash" />
+            {this.deleteIcon}
           ️</button>
         </div>
         {isSimpleLayout(blockDefinition) ?
