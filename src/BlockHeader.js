@@ -23,6 +23,7 @@ import {refType} from './types';
   const value = block.value;
   return {
     blockDefinition,
+    icons: fieldData.icons,
     value: isStruct(blockDefinition) ?
              structValueToObject(state, fieldId, value)
              :
@@ -105,7 +106,7 @@ class BlockHeader extends React.Component {
     if ((icons === undefined) || (icons.grip === undefined)) {
       return <i className="fas fa-grip-vertical fa-fw" />;
     }
-    return <span dangerouslySetInnerHTML={{__html: icons.grid}} />;
+    return <span dangerouslySetInnerHTML={{__html: icons.grip}} />;
   }
 
   render() {
