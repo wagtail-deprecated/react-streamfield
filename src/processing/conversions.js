@@ -3,7 +3,7 @@ import {
   getNestedBlockDefinition,
   isField,
   isStruct,
-  getNewBlock, getNewId,
+  getNewBlock, getNewId, isClosed,
 } from './utils';
 
 
@@ -55,7 +55,7 @@ export const getNestedBlocksState = (parentBlockId, blockDefinitions,
       hasError: block.hasError,
       value: value,
       hidden: false,
-      closed: true,
+      closed: isClosed(blockDefinition),
       shouldUpdate: false,
       isField: blockIsField,
     };

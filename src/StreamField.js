@@ -32,6 +32,7 @@ const BlockDefinitionType = PropTypes.shape({
   minNum: PropTypes.number,
   maxNum: PropTypes.number,
   layout: PropTypes.oneOf(['SIMPLE', 'COLLAPSIBLE']),
+  closed: PropTypes.bool,
   titleTemplate: PropTypes.string,
   html: PropTypes.string,
   isStruct: PropTypes.bool,

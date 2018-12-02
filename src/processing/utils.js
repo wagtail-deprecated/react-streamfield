@@ -29,6 +29,13 @@ export const isStatic = blockDefinition => {
 };
 
 
+export const isClosed = blockDefinition => {
+  return (blockDefinition.layout === 'SIMPLE')
+      || (blockDefinition.closed === undefined)
+      || blockDefinition.closed;
+};
+
+
 export const isRequired = blockDefinition => {
   return (blockDefinition.required !== undefined) && blockDefinition.required;
 };

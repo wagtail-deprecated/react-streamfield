@@ -24,8 +24,6 @@
     <script type="application/json" data-streamfield="stream-1">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "title",
@@ -37,12 +35,26 @@
         "value": [{"type": "title", "value": "Wagtail is awesome!"}]
       }
     </script>
-    <h2>1 static block type</h2>
+    <h2>1 open block type</h2>
     <script type="application/json" data-streamfield="stream-2">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
+        "blockDefinitions": [
+          {
+            "key": "title",
+            "icon": "<i class='fas fa-heading'></i>",
+            "className": "full title",
+            "closed": false,
+            "html": "<input type='text' name='field-__ID__' />"
+          }
+        ],
+        "value": [{"type": "title", "value": "Wagtail is awesome!"}]
+      }
+    </script>
+    <h2>1 static block type</h2>
+    <script type="application/json" data-streamfield="stream-3">
+      {
+        "required": true,
         "blockDefinitions": [
           {
             "key": "static",
@@ -54,11 +66,9 @@
       }
     </script>
     <h2>1 block type, default value</h2>
-    <script type="application/json" data-streamfield="stream-3">
+    <script type="application/json" data-streamfield="stream-4">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "title",
@@ -72,11 +82,9 @@
       }
     </script>
     <h2>1 block type, custom per-value HTML</h2>
-    <script type="application/json" data-streamfield="stream-4">
+    <script type="application/json" data-streamfield="stream-5">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "title",
@@ -90,11 +98,9 @@
       }
     </script>
     <h2>2 block types</h2>
-    <script type="application/json" data-streamfield="stream-5">
+    <script type="application/json" data-streamfield="stream-6">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "title",
@@ -114,11 +120,9 @@
       }
     </script>
     <h2>List block, 1 child block type</h2>
-    <script type="application/json" data-streamfield="stream-6">
+    <script type="application/json" data-streamfield="stream-7">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "list",
@@ -139,11 +143,9 @@
       }
     </script>
     <h2>List block, 2 children block types with groups</h2>
-    <script type="application/json" data-streamfield="stream-7">
+    <script type="application/json" data-streamfield="stream-8">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "list",
@@ -181,7 +183,7 @@
       }
     </script>
     <h2>Maximum number of blocks</h2>
-    <script type="application/json" data-streamfield="stream-8">
+    <script type="application/json" data-streamfield="stream-9">
       {
         "required": true,
         "minNum": null,
@@ -207,11 +209,9 @@
       }
     </script>
     <h2>Error in one of the nested blocks</h2>
-    <script type="application/json" data-streamfield="stream-9">
+    <script type="application/json" data-streamfield="stream-10">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "list",
@@ -232,7 +232,7 @@
       }
     </script>
     <h2>Struct block</h2>
-    <script type="application/json" data-streamfield="stream-10">
+    <script type="application/json" data-streamfield="stream-11">
       {
         "value": [],
         "blockDefinitions": [
@@ -253,7 +253,7 @@
       }
     </script>
     <h2>Struct block as a struct block field</h2>
-    <script type="application/json" data-streamfield="stream-11">
+    <script type="application/json" data-streamfield="stream-12">
       {
         "value": [],
         "blockDefinitions": [
@@ -288,11 +288,9 @@
       }
     </script>
     <h2>StructBlock as a list block child</h2>
-    <script type="application/json" data-streamfield="stream-12">
+    <script type="application/json" data-streamfield="stream-13">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "list",
@@ -318,11 +316,9 @@
       }
     </script>
     <h2>Complex nested StreamField</h2>
-    <script type="application/json" data-streamfield="stream-13">
+    <script type="application/json" data-streamfield="stream-14">
       {
         "required": true,
-        "minNum": null,
-        "maxNum": null,
         "blockDefinitions": [
           {
             "key": "title",
