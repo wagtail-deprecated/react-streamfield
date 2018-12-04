@@ -67,15 +67,11 @@
           overflow: hidden; }
           .children-container .block > .block-container.COLLAPSIBLE > header h3 .type-icon {
             margin-right: 7.5px; }
-          .children-container .block > .block-container.COLLAPSIBLE > header h3 .block-type {
-            text-transform: none;
-            font-weight: normal;
-            font-style: italic;
-            font-size: 85%; }
         .children-container .block > .block-container.COLLAPSIBLE > header > aside {
           flex: 0 0 auto; }
       .children-container .block > .block-container > header {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         padding: 8px;
         user-select: none;
@@ -86,18 +82,22 @@
         .children-container .block > .block-container > header.sortable {
           cursor: grab; }
         .children-container .block > .block-container > header h3 {
+          display: inline-block;
           flex: 1 1 auto;
           margin: 0;
-          color: #888888; }
+          color: #888888;
+          vertical-align: middle; }
           .children-container .block > .block-container > header h3 .type-icon {
             color: #888888;
             transition: color 0.3s ease-in-out; }
       .children-container .block > .block-container > header .block-type, .children-container .block > .block-container .block-type {
+        margin-right: 8px;
         text-transform: uppercase;
         text-align: right;
         font-size: 80%;
         line-height: 100%;
-        color: #888888; }
+        color: #888888;
+        vertical-align: middle; }
       .children-container .block > .block-container > header > aside > .actions, .children-container .block > .block-container > aside > .actions {
         white-space: nowrap; }
         .children-container .block > .block-container > header > aside > .actions > button, .children-container .block > .block-container > aside > .actions > button {

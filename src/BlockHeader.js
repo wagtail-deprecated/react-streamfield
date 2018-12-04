@@ -89,6 +89,35 @@ class BlockHeader extends React.Component {
     return null;
   }
 
+  get titleAndType() {
+    const title = this.title;
+    const icon = this.icon;
+    const blockType = (
+      <span className="block-type">
+        {getLabel(this.props.blockDefinition)}
+      </span>
+    );
+    if (title === null) {
+      if (icon === null) {
+        return blockType;
+      }
+
+      return (
+        <span>
+          <h3>{icon}</h3>
+          {blockType}
+        </span>
+      );
+    }
+
+    return (
+      <React.Fragment>
+        <h3>{icon}{title}</h3>
+        {blockType}
+      </React.Fragment>
+    );
+  }
+
   triggerCustomEvent(name, data=null) {
     triggerCustomEvent(ReactDOM.findDOMNode(this), name, data);
   }
@@ -115,12 +144,6 @@ class BlockHeader extends React.Component {
       collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
     } = this.props;
     const icon = this.icon;
-    const title = this.title;
-    const blockType = (
-      <span className="block-type">
-        {getLabel(blockDefinition)}
-      </span>
-    );
     let content;
     if (isSimpleLayout(blockDefinition)) {
       content = (
@@ -129,11 +152,7 @@ class BlockHeader extends React.Component {
     } else {
       content = (
         <React.Fragment>
-          <h3>
-            {icon ? <React.Fragment>{icon}&nbsp;</React.Fragment> : null}
-            {title === null ? blockType : title}
-          </h3>
-          {title === null ? null : blockType}
+          {this.titleAndType}
           <BlockActions fieldId={fieldId} blockId={blockId}
                         sortableBlock={sortableBlock}
                         canDuplicate={canDuplicate}

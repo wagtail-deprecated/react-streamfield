@@ -116,12 +116,6 @@ $screen-xs-max: 768px;
             .type-icon {
               margin-right: $grid-gutter-width / 4;
             }
-            .block-type {
-              text-transform: none;
-              font-weight: normal;
-              font-style: italic;
-              font-size: 85%;
-            }
           }
           > aside {
             flex: 0 0 auto;
@@ -130,6 +124,7 @@ $screen-xs-max: 768px;
       }
       > header {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         padding: $header-padding;
         user-select: none;
@@ -142,9 +137,11 @@ $screen-xs-max: 768px;
           cursor: grab;
         }
         h3 {
+          display: inline-block;
           flex: 1 1 auto;
           margin: 0;
           color: $header-text-color;
+          vertical-align: middle;
           .type-icon {
             color: $header-text-color;
             transition: color $hover-transition-duration ease-in-out;
@@ -153,11 +150,13 @@ $screen-xs-max: 768px;
       }
       > header, & {
         .block-type {
+          margin-right: $header-padding;
           text-transform: uppercase;
           text-align: right;
           font-size: 80%;
           line-height: 100%;
           color: $header-text-color;
+          vertical-align: middle;
         }
         > aside > .actions {
           white-space: nowrap;
