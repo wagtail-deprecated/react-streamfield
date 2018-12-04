@@ -80,12 +80,11 @@ $screen-xs-max: 768px;
         > header {
           position: relative;
           flex: 0 0 auto;
+          padding: $header-padding;
           h3 {
             position: sticky;
             top: $grid-gutter-width / 4;
             bottom: $grid-gutter-width / 4;
-            .type-icon {
-            }
           }
         }
         > .content-container {
@@ -100,9 +99,8 @@ $screen-xs-max: 768px;
           display: flex;
           flex-flow: column nowrap;
           align-items: flex-end;
-          padding: $header-padding;
           .block-type {
-            margin-top: $grid-gutter-width / 4;
+            margin: 0 $header-padding $header-padding $header-padding;
           }
         }
       }
@@ -114,7 +112,7 @@ $screen-xs-max: 768px;
             text-overflow: ellipsis;
             overflow: hidden;
             .type-icon {
-              margin-right: $grid-gutter-width / 4;
+              margin-right: $header-padding;
             }
           }
           > aside {
@@ -126,7 +124,7 @@ $screen-xs-max: 768px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: $header-padding;
+        padding-left: $header-padding;
         user-select: none;
         transition: background-color $hover-transition-duration ease-in-out;
         cursor: default;
@@ -150,19 +148,21 @@ $screen-xs-max: 768px;
       }
       > header, & {
         .block-type {
-          margin-right: $header-padding;
+          margin-right: $header-padding * 2;
           text-transform: uppercase;
           text-align: right;
           font-size: 80%;
           line-height: 100%;
           color: $header-text-color;
           vertical-align: middle;
+          user-select: none;
         }
         > aside > .actions {
           white-space: nowrap;
           > button {
             appearance: none;
             border: none;
+            padding: $header-padding;
             background: none;
             cursor: pointer;
             color: $header-text-color;
