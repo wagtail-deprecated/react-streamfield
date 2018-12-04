@@ -1,6 +1,7 @@
 $grid-gutter-width: 30px;
-$block-padding: 4px;
-$block-vertical-padding: 3px;
+$header-padding: 8px;
+$block-vertical-margin: 3px;
+$block-full-margin: $block-vertical-margin 0;
 $add-button-size: 34px;
 $add-button-font-size: 28px;
 $children-container-padding: $add-button-size / 2;
@@ -23,11 +24,11 @@ $screen-xs-max: 768px;
 
 .children-container {
   position: relative;
-  padding: $children-container-padding $block-padding
+  padding: $children-container-padding 0
            $children-container-padding $add-button-size;
   transition: padding $hover-transition-duration ease-in-out;
   @media (max-width: $screen-xs-max) {
-    padding-left: $block-padding;
+    padding-left: 0;
     padding-top: $children-container-padding + $add-button-size;
   }
   &.is-dragging {
@@ -39,10 +40,9 @@ $screen-xs-max: 768px;
   .block {
     position: relative;
     display: flex;
-    padding: $block-vertical-padding $block-padding
-             $block-vertical-padding 0;
+    margin: $block-full-margin;
     @media (max-width: $screen-xs-max) {
-      margin-bottom: $add-button-size;
+      margin-bottom: $block-vertical-margin + $add-button-size;
     }
     &.has-error {
       > .block-container {
@@ -100,7 +100,7 @@ $screen-xs-max: 768px;
           display: flex;
           flex-flow: column nowrap;
           align-items: flex-end;
-          padding: $block-padding * 2;
+          padding: $header-padding;
           .block-type {
             margin-top: $grid-gutter-width / 4;
           }
@@ -131,7 +131,7 @@ $screen-xs-max: 768px;
       > header {
         display: flex;
         align-items: center;
-        padding: $block-padding * 2;
+        padding: $header-padding;
         user-select: none;
         transition: background-color $hover-transition-duration ease-in-out;
         cursor: default;
@@ -273,7 +273,6 @@ $screen-xs-max: 768px;
 
   .add-panel {
     position: relative;
-    margin: $block-padding;
     padding: $grid-gutter-width / 4;
     background: #EEEEEE;
     border-radius: $border-radius;
