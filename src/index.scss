@@ -1,11 +1,10 @@
 $grid-gutter-width: 30px;
 $block-padding: 4px;
 $block-vertical-padding: 3px;
-$block-left-padding: 6px;
-$children-container-padding: 21px;
-$add-button-size: 28px;
+$add-button-size: 34px;
+$add-button-font-size: 28px;
+$children-container-padding: $add-button-size / 2;
 $action-font-size: 15px;
-$collapse-transition-duration: 0.3s;
 $add-transition-duration: 0.3s;
 $hover-transition-duration: 0.3s;
 $bounce-transition-timing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -20,11 +19,17 @@ $error-color: #cd3238;
 $error-border-color: #dbc7c8;
 $error-border-color-focus: #cdb2b3;
 $error-background-color: #fbefef;
+$screen-xs-max: 768px;
 
 .children-container {
   position: relative;
   padding: $children-container-padding $block-padding
-           $children-container-padding $children-container-padding;
+           $children-container-padding $add-button-size;
+  transition: padding $hover-transition-duration ease-in-out;
+  @media (max-width: $screen-xs-max) {
+    padding-left: $block-padding;
+    padding-top: $children-container-padding + $add-button-size;
+  }
   &.is-dragging {
     > button.add.visible {
       opacity: 0;
@@ -35,7 +40,10 @@ $error-background-color: #fbefef;
     position: relative;
     display: flex;
     padding: $block-vertical-padding $block-padding
-             $block-vertical-padding $block-left-padding;
+             $block-vertical-padding 0;
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: $add-button-size;
+    }
     &.has-error {
       > .block-container {
         border-color: $error-border-color;
@@ -199,14 +207,14 @@ $error-background-color: #fbefef;
   }
   button.add {
     position: absolute;
+    width: $add-button-size;
+    height: $add-button-size;
     appearance: none;
     border: none;
     color: $teal;
     font-weight: bold;
     background: none;
     transform: translate(-100%, -50%);
-    font-size: 30px;
-    line-height: 30px;
     padding: 0;
     cursor: pointer;
     outline: none;
@@ -220,12 +228,16 @@ $error-background-color: #fbefef;
       opacity: 1;
       pointer-events: unset;
     }
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+      transform: translate(0, -100%);
+    }
     i {
       display: block;
       transition: transform $add-transition-duration $bounce-transition-timing;
       font-style: normal;
-      font-size: $add-button-size;
-      line-height: $add-button-size;
+      font-size: $add-button-font-size;
+      line-height: $add-button-font-size;
     }
     &.close i {
       transform: rotate(45deg);
