@@ -3,7 +3,11 @@
   "version": "0.6.5",
   "author": "NoriPyt <contact@noripyt.com> (https://noripyt.com)",
   "description": "Powerful field for inserting multiple blocks with nesting.",
-  "keywords": ["react", "react-component", "field"],
+  "keywords": [
+    "react",
+    "react-component",
+    "field"
+  ],
   "homepage": "https://github.com/noripyt/react-streamfield",
   "repository": {
     "type": "git",
@@ -13,7 +17,9 @@
     "url": "https://github.com/noripyt/react-streamfield/issues"
   },
   "license": "BSD",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "main": "src/index.js",
   "dependencies": {
     "@babel/cli": "7.1.5",
@@ -24,6 +30,7 @@
     "@babel/preset-env": "7.1.6",
     "@babel/preset-react": "7.0.0",
     "babel-loader": "8.0.4",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.21",
     "classnames": "2.2.6",
     "css-loader": "1.0.1",
     "mini-css-extract-plugin": "0.4.5",
@@ -60,7 +67,17 @@
           "legacy": true
         }
       ],
-      "@babel/plugin-proposal-object-rest-spread"
+      "@babel/plugin-proposal-object-rest-spread",
+      [
+        "transform-react-remove-prop-types",
+        {
+          "mode": "remove",
+          "removeImport": true,
+          "ignoreFilenames": [
+            "node_modules"
+          ]
+        }
+      ]
     ]
   },
   "scripts": {
