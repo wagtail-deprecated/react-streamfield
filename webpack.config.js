@@ -5,7 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = (env, argv) => {
   const config = {
-    entry: {'react-streamfield': './src/index.js'},
+    entry: {'react-streamfield': ['./src/index.js', './src/index.scss']},
     output: {
       path: path.resolve('dist'),
       filename: '[name].js',
