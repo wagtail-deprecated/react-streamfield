@@ -44,7 +44,7 @@ export const getWindowWidth = () => {
 
 
 export const getIsMobile = () => {
-  return getWindowWidth() <= 768;
+  return getWindowWidth() <= 799;
 };
 
 
