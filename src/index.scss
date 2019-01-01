@@ -292,10 +292,13 @@ $screen-xs-max: 768px;
       overflow: hidden;
       .icon, .label {
         display: inline-block;
-        padding: 4px 8px;
+        padding: 6px 8px;
       }
       .icon {
         background-color: rgba(0, 0, 0, 0.2);
+      }
+      .label {
+        text-transform: uppercase;
       }
     }
   }

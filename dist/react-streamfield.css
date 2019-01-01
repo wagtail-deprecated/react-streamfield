@@ -202,7 +202,9 @@
       overflow: hidden; }
       .children-container .add-panel button.type .icon, .children-container .add-panel button.type .label {
         display: inline-block;
-        padding: 4px 8px; }
+        padding: 6px 8px; }
       .children-container .add-panel button.type .icon {
         background-color: rgba(0, 0, 0, 0.2); }
+      .children-container .add-panel button.type .label {
+        text-transform: uppercase; }
 
