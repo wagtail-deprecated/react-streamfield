@@ -142,8 +142,27 @@
         }]
       }
     </script>
-    <h2>List block, 2 children block types with groups</h2>
+    <h2>List block, 1 child block type, default value</h2>
     <script type="application/json" data-streamfield="stream-8">
+      {
+        "required": true,
+        "blockDefinitions": [
+          {
+            "key": "list",
+            "children": [
+              {
+                "key": "bool",
+                "html": "<input type='checkbox' name='field-__ID__' />"
+              }
+            ],
+            "default": [{"type": "bool", "value":  true}]
+          }
+        ],
+        "value": []
+      }
+    </script>
+    <h2>List block, 2 children block types with groups</h2>
+    <script type="application/json" data-streamfield="stream-9">
       {
         "required": true,
         "blockDefinitions": [
@@ -171,6 +190,10 @@
                 "key": "third_bool",
                 "html": "<input type='checkbox' name='field-__ID__' />"
               }
+            ],
+            "default": [
+              {"type": "title", "value": "Lorem ipsum"},
+              {"type": "bool", "value": true}
             ]
           }
         ],
@@ -183,7 +206,7 @@
       }
     </script>
     <h2>Simple block layout</h2>
-    <script type="application/json" data-streamfield="stream-9">
+    <script type="application/json" data-streamfield="stream-10">
       {
         "required": true,
         "blockDefinitions": [
@@ -214,7 +237,7 @@
       }
     </script>
     <h2>Mixed block layouts</h2>
-    <script type="application/json" data-streamfield="stream-10">
+    <script type="application/json" data-streamfield="stream-11">
       {
         "required": true,
         "blockDefinitions": [
@@ -244,7 +267,7 @@
       }
     </script>
     <h2>Maximum number of blocks</h2>
-    <script type="application/json" data-streamfield="stream-11">
+    <script type="application/json" data-streamfield="stream-12">
       {
         "required": true,
         "minNum": null,
@@ -270,7 +293,7 @@
       }
     </script>
     <h2>Error in one of the nested blocks</h2>
-    <script type="application/json" data-streamfield="stream-12">
+    <script type="application/json" data-streamfield="stream-13">
       {
         "required": true,
         "blockDefinitions": [
@@ -293,9 +316,8 @@
       }
     </script>
     <h2>Struct block</h2>
-    <script type="application/json" data-streamfield="stream-13">
+    <script type="application/json" data-streamfield="stream-14">
       {
-        "value": [],
         "blockDefinitions": [
           {
             "key": "struct",
@@ -310,11 +332,35 @@
             ],
             "label": "Struct"
           }
-        ]
+        ],
+        "value": []
+      }
+    </script>
+    <h2>Struct block with default value</h2>
+    <script type="application/json" data-streamfield="stream-15">
+      {
+        "blockDefinitions": [
+          {
+            "key": "struct",
+            "isStruct": true,
+            "children": [
+              {
+                "key": "some_field",
+                "default": "Lorem"
+              },
+              {
+                "key": "another_field",
+                "default": "Ipsum"
+              }
+            ],
+            "label": "Struct"
+          }
+        ],
+        "value": []
       }
     </script>
     <h2>Struct block as a struct block field</h2>
-    <script type="application/json" data-streamfield="stream-14">
+    <script type="application/json" data-streamfield="stream-16">
       {
         "value": [],
         "blockDefinitions": [
@@ -331,7 +377,8 @@
                 "children": [
                   {
                     "key": "url",
-                    "label": "URL"
+                    "label": "URL",
+                    "default": "https://noripyt.com"
                   },
                   {
                     "key": "email",
@@ -349,7 +396,7 @@
       }
     </script>
     <h2>StructBlock as a list block child</h2>
-    <script type="application/json" data-streamfield="stream-15">
+    <script type="application/json" data-streamfield="stream-17">
       {
         "required": true,
         "blockDefinitions": [
@@ -377,7 +424,7 @@
       }
     </script>
     <h2>Complex nested StreamField</h2>
-    <script type="application/json" data-streamfield="stream-16">
+    <script type="application/json" data-streamfield="stream-18">
       {
         "required": true,
         "blockDefinitions": [
@@ -459,6 +506,18 @@
                   }
                 ]
               }
+            ],
+            "default": [
+              {"type": "color", "value": "#FF0000"},
+              {"type": "sub-blocks", "value": [
+                {"type": "sub-block-type", "value": [
+                  {"type": "name", "value": "lorem"},
+                  {"type": "password", "value": "ipsum"},
+                  {"type": "sub-sub-blocks", "value": [
+                    {"type": "sub-sub-block-type", "value": "blablabla"}
+                  ]}
+                ]}
+              ]}
             ]
           }
         ],
@@ -466,7 +525,7 @@
       }
     </script>
     <h2>Custom action icons</h2>
-    <script type="application/json" data-streamfield="stream-17">
+    <script type="application/json" data-streamfield="stream-19">
       {
         "required": true,
         "icons": {

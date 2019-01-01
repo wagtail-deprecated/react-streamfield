@@ -1,6 +1,11 @@
 import uuidv4 from 'uuid';
 
 
+export const isNA = value => {
+  return (value === null) || (value === undefined)
+};
+
+
 export const getNewId = () => {
   return uuidv4();
 };
@@ -187,29 +192,58 @@ export const structValueToObject = (state, fieldId, structValue) => {
 };
 
 
-export const getNewBlock = (parentId, blockDefinition) => {
+export const getNewBlock = (parentId, blockDefinition, value=null) => {
   let extraBlocks = {};
+  let childBlockId, childBlock, childExtraBlocks;
   const blockId = getNewId();
 
-  let value;
+  if (isNA(value) && (blockDefinition.default !== undefined)) {
+    value = blockDefinition.default;
+  }
 
   if (isStruct(blockDefinition)) {
-    value = [];
+    const newValue = [];
     for (let childBlockDefinition of blockDefinition.children) {
-      const [childBlockId, childBlock, childExtraBlocks] =
-        getNewBlock(blockId, childBlockDefinition);
-      value.push(childBlockId);
+      let childDefaultValue = null;
+      if (!isNA(value)) {
+        for (let childDefault of value) {
+          if (childDefault.type === childBlockDefinition.key) {
+            childDefaultValue = childDefault.value;
+            break;
+          }
+        }
+      }
+      [childBlockId, childBlock, childExtraBlocks] =
+        getNewBlock(blockId, childBlockDefinition, childDefaultValue);
+      newValue.push(childBlockId);
       extraBlocks = {
         ...extraBlocks,
         ...childExtraBlocks,
         [childBlockId]: childBlock,
       };
     }
-  } else if (isField(blockDefinition)) {
-    value = blockDefinition.default === undefined ? null
-                                                  : blockDefinition.default;
-  } else {
-    value = [];
+    value = newValue;
+  } else if (!isField(blockDefinition)) {
+    const newValue = [];
+    if (!isNA(value)) {
+      for (let childBlock of value) {
+        let childBlockDefinition;
+        for (childBlockDefinition of blockDefinition.children) {
+          if (childBlockDefinition.key === childBlock.type) {
+            break;
+          }
+        }
+        [childBlockId, childBlock, childExtraBlocks] =
+          getNewBlock(blockId, childBlockDefinition, childBlock.value);
+        newValue.push(childBlockId);
+        extraBlocks = {
+          ...extraBlocks,
+          ...childExtraBlocks,
+          [childBlockId]: childBlock,
+        };
+      }
+    }
+    value = newValue;
   }
   return [
     blockId,
