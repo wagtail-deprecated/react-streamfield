@@ -14,12 +14,14 @@ import FieldInput from './FieldInput';
 
 @connect((state, props) => {
   const {fieldId, blockId} = props;
-  const blocks = state[fieldId].blocks;
+  const fieldData = state[fieldId];
+  const blocks = fieldData.blocks;
   const block = blocks[blockId];
   const blockDefinition = getNestedBlockDefinition(state, fieldId, blockId);
   const hasDescendantError = getDescendantsIds(state, fieldId, blockId, true)
     .some(descendantBlockId => blocks[descendantBlockId].hasError);
   return {
+    isSimpleLayout: isSimpleLayout(blockDefinition, fieldData.isMobile),
     blockDefinition,
     closed: block.closed && !hasDescendantError,
   };
@@ -52,10 +54,10 @@ class BlockContent extends React.Component {
   }
 
   render() {
-    const {blockDefinition, collapsible} = this.props;
+    const {isSimpleLayout, blockDefinition, collapsible} = this.props;
     const content = this.html;
     const className = classNames('content', blockDefinition.className);
-    if (collapsible && !isSimpleLayout(blockDefinition)) {
+    if (collapsible && !isSimpleLayout) {
       return (
         <AnimateHeight height={this.height} easing="ease-in-out"
                        className="content-container"

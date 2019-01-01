@@ -13,7 +13,7 @@ import {
 import {
   getDescendantsIds, getLayout,
   getNestedBlockDefinition,
-  getSiblingsIds,
+  getSiblingsIds, isSimpleLayout,
   triggerCustomEvent,
 } from './processing/utils';
 import AddButton from './AddButton';
@@ -33,6 +33,8 @@ import BlockActions from './BlockActions';
     .some(descendantBlockId => blocks[descendantBlockId].hasError);
   return {
     blockDefinition,
+    layout: getLayout(blockDefinition, fieldData.isMobile),
+    isSimpleLayout: isSimpleLayout(blockDefinition, fieldData.isMobile),
     parentId: block.parent,
     hasError: hasDescendantError,
     closed: block.closed,
@@ -73,7 +75,7 @@ class Block extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return nextProps.shouldUpdate;
+    return nextProps.shouldUpdate || (nextProps.layout !== this.props.layout);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -105,11 +107,10 @@ class Block extends React.Component {
 
   wrapSortable(blockContent) {
     const {
-      blockDefinition, fieldId, id, parentId, index, hasError, collapsible,
-      sortable, canAdd,
+      layout, isSimpleLayout, fieldId, id, parentId, index, hasError,
+      collapsible, sortable, canAdd,
     } = this.props;
     const className = `block${hasError ? ' has-error' : ''}`;
-    var isSimpleLayout = getLayout(blockDefinition) === 'SIMPLE';
     if (sortable) {
       return (
         <Draggable draggableId={id} index={index}
@@ -118,7 +119,7 @@ class Block extends React.Component {
             <article className={className}
                      ref={provided.innerRef}
                      {...provided.draggableProps}>
-              <div className={`block-container ${getLayout(blockDefinition)}`}>
+              <div className={`block-container ${layout}`}>
                 <BlockHeader fieldId={fieldId} blockId={id}
                              collapsibleBlock={collapsible}
                              sortableBlock={sortable}

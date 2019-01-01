@@ -6,12 +6,11 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import {
   moveBlock,
   initializeStreamField,
+  setIsMobile
 } from './actions';
 import {stateToValue} from './processing/conversions';
+import {getIsMobile} from './processing/utils';
 import BlocksContainer from './BlocksContainer';
-
-
-
 
 
 function lazyFunction(f) {
@@ -57,13 +56,16 @@ const BlockValueType = PropTypes.shape({
 
 @connect((state, props) => {
   const {id} = props;
+  const fieldData = state[id];
   return {
-    generatedValue: state[id] === undefined ? '' : stateToValue(state, id),
+    generatedValue: fieldData === undefined ? '' : stateToValue(state, id),
+    isMobile: fieldData === undefined ? null : fieldData.isMobile,
   };
 }, (dispatch, props) => {
   const {id} = props;
   return bindActionCreators({
     initializeStreamField: data => initializeStreamField(id, data),
+    setIsMobile: isMobile => setIsMobile(id, isMobile),
     moveBlock: (blockId, newIndex) => moveBlock(id, blockId, newIndex),
   }, dispatch);
 })
@@ -97,9 +99,19 @@ class StreamField extends React.Component {
       value,
     } = this.props;
     initializeStreamField({
-      required, minNum, maxNum, icons, blockDefinitions, value,
+      required, minNum, maxNum, icons, blockDefinitions,
+      isMobile: getIsMobile(),
+      value,
     });
+    window.addEventListener('resize', this.onWindowResize);
   }
+
+  onWindowResize = () => {
+    const value = getIsMobile();
+    if (value !== this.props.isMobile) {
+      this.props.setIsMobile(value);
+    }
+  };
 
   onDragEnd = result => {
     const {draggableId, source, destination} = result;

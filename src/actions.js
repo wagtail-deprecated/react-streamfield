@@ -4,6 +4,12 @@ export const initializeStreamField = (id, data) => ({
 });
 
 
+export const setIsMobile = (id, isMobile) => ({
+  type: 'SET_IS_MOBILE',
+  id, isMobile,
+});
+
+
 export const blockUpdated = (fieldId, blockId) => ({
   type: 'BLOCK_UPDATED',
   fieldId, blockId,

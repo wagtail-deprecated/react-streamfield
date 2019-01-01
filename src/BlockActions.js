@@ -18,6 +18,7 @@ import {refType} from './types';
   const blockDefinition = getNestedBlockDefinition(state, fieldId, blockId);
   const siblings = getSiblingsIds(state, fieldId, blockId);
   return {
+    isSimpleLayout: isSimpleLayout(blockDefinition, state[fieldId].isMobile),
     blockDefinition,
     siblings,
     icons: state[fieldId].icons,
@@ -134,7 +135,9 @@ class BlockActions extends (React.Component) {
   };
 
   render() {
-    const {blockDefinition, sortableBlock, canDuplicate} = this.props;
+    const {
+      blockDefinition, isSimpleLayout, sortableBlock, canDuplicate,
+    } = this.props;
     return (
       <aside>
         <div className="actions">
@@ -163,7 +166,7 @@ class BlockActions extends (React.Component) {
             {this.deleteIcon}
           ️</button>
         </div>
-        {isSimpleLayout(blockDefinition) ?
+        {isSimpleLayout ?
           <span className="block-type">
             {getLabel(blockDefinition)}
           </span>

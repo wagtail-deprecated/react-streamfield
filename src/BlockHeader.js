@@ -22,6 +22,7 @@ import {refType} from './types';
   const blockDefinition = getNestedBlockDefinition(state, fieldId, blockId);
   const value = block.value;
   return {
+    isSimpleLayout: isSimpleLayout(blockDefinition, fieldData.isMobile),
     blockDefinition,
     icons: fieldData.icons,
     value: isStruct(blockDefinition) ?
@@ -123,11 +124,12 @@ class BlockHeader extends React.Component {
   }
 
   toggle = () => {
-    if (isSimpleLayout(this.props.blockDefinition)) {
+    const {isSimpleLayout, toggleBlock, closed} = this.props;
+    if (isSimpleLayout) {
       return;
     }
-    this.props.toggleBlock();
-    this.triggerCustomEvent('toggle', {closed: !this.props.closed});
+    toggleBlock();
+    this.triggerCustomEvent('toggle', {closed: !closed});
   };
 
   get gripIcon() {
@@ -140,12 +142,12 @@ class BlockHeader extends React.Component {
 
   render() {
     const {
-      fieldId, blockId, blockDefinition, dragHandleProps,
+      fieldId, blockId, isSimpleLayout, dragHandleProps,
       collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
     } = this.props;
     const icon = this.icon;
     let content;
-    if (isSimpleLayout(blockDefinition)) {
+    if (isSimpleLayout) {
       content = (
         <h3>{icon ? icon : this.gripIcon}</h3>
       );

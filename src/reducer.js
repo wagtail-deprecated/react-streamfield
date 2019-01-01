@@ -19,14 +19,25 @@ const initialState = {};
 export default (state=initialState, action) => {
   if (action.type === 'INITIALIZE_STREAM_FIELD') {
     const data = deepCopy(action.data);
-    const {required, minNum, maxNum, icons, blockDefinitions, value} = data;
+    const {
+      required, minNum, maxNum, icons, blockDefinitions, isMobile, value,
+    } = data;
     state = {
       ...state,
       [action.id]: {
-        required, minNum, maxNum, icons, blockDefinitions,
+        required, minNum, maxNum, icons, blockDefinitions, isMobile,
       },
     };
     return valueToState(state, action.id, value);
+  }
+  if (action.type === 'SET_IS_MOBILE') {
+    return {
+      ...state,
+      [action.id]: {
+        ...state[action.id],
+        isMobile: action.isMobile,
+      }
+    };
   }
   if (action.type === 'BLOCK_UPDATED') {
     const {fieldId, blockId} = action;

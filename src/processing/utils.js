@@ -35,21 +35,34 @@ export const isStatic = blockDefinition => {
 };
 
 
-export const getLayout = blockDefinition => {
-  if (blockDefinition.layout === undefined) {
+export const getWindowWidth = () => {
+  if (!window.innerWidth) {
+    return document.documentElement.clientWidth;
+  }
+  return window.innerWidth;
+};
+
+
+export const getIsMobile = () => {
+  return getWindowWidth() <= 768;
+};
+
+
+export const getLayout = (blockDefinition, isMobile) => {
+  if ((blockDefinition.layout === undefined) || isMobile) {
     return 'COLLAPSIBLE';
   }
   return blockDefinition.layout;
 };
 
 
-export const isSimpleLayout = blockDefinition => {
-  return getLayout(blockDefinition) === 'SIMPLE';
+export const isSimpleLayout = (blockDefinition, isMobile) => {
+  return getLayout(blockDefinition, isMobile) === 'SIMPLE';
 };
 
 
-export const isClosed = blockDefinition => {
-  return !isSimpleLayout(blockDefinition)
+export const isClosed = (blockDefinition, isMobile) => {
+  return !isSimpleLayout(blockDefinition, isMobile)
       && ((blockDefinition.closed === undefined)
           || blockDefinition.closed);
 };
