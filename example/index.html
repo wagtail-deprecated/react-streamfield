@@ -161,8 +161,27 @@
         "value": []
       }
     </script>
-    <h2>List block, 2 children block types with groups</h2>
+    <h2>List block, 1 child block type, custom HTML</h2>
     <script type="application/json" data-streamfield="stream-9">
+      {
+        "required": true,
+        "blockDefinitions": [
+          {
+            "key": "list",
+            "children": [
+              {
+                "key": "bool",
+                "html": "<input type='checkbox' name='field-__ID__' />"
+              }
+            ],
+            "html": "As you can see by this text, it’s possible to insert some HTML before or after the contained blocks. <BlocksContainer /> You can even have multiple times the same blocks container. <BlocksContainer /> Can’t think of a case where that would be useful, but still, it’s possible if you really want it."
+          }
+        ],
+        "value": []
+      }
+    </script>
+    <h2>List block, 2 children block types with groups</h2>
+    <script type="application/json" data-streamfield="stream-10">
       {
         "required": true,
         "blockDefinitions": [
@@ -206,7 +225,7 @@
       }
     </script>
     <h2>Simple block layout</h2>
-    <script type="application/json" data-streamfield="stream-10">
+    <script type="application/json" data-streamfield="stream-11">
       {
         "required": true,
         "blockDefinitions": [
@@ -237,7 +256,7 @@
       }
     </script>
     <h2>Mixed block layouts</h2>
-    <script type="application/json" data-streamfield="stream-11">
+    <script type="application/json" data-streamfield="stream-12">
       {
         "required": true,
         "blockDefinitions": [
@@ -267,7 +286,7 @@
       }
     </script>
     <h2>Maximum number of blocks</h2>
-    <script type="application/json" data-streamfield="stream-12">
+    <script type="application/json" data-streamfield="stream-13">
       {
         "required": true,
         "minNum": null,
@@ -293,7 +312,7 @@
       }
     </script>
     <h2>Error in one of the nested blocks</h2>
-    <script type="application/json" data-streamfield="stream-13">
+    <script type="application/json" data-streamfield="stream-14">
       {
         "required": true,
         "blockDefinitions": [
@@ -316,7 +335,7 @@
       }
     </script>
     <h2>Struct block</h2>
-    <script type="application/json" data-streamfield="stream-14">
+    <script type="application/json" data-streamfield="stream-15">
       {
         "blockDefinitions": [
           {
@@ -337,7 +356,7 @@
       }
     </script>
     <h2>Struct block with default value</h2>
-    <script type="application/json" data-streamfield="stream-15">
+    <script type="application/json" data-streamfield="stream-16">
       {
         "blockDefinitions": [
           {
@@ -360,7 +379,7 @@
       }
     </script>
     <h2>Struct block as a struct block field</h2>
-    <script type="application/json" data-streamfield="stream-16">
+    <script type="application/json" data-streamfield="stream-17">
       {
         "value": [],
         "blockDefinitions": [
@@ -396,7 +415,7 @@
       }
     </script>
     <h2>StructBlock as a list block child</h2>
-    <script type="application/json" data-streamfield="stream-17">
+    <script type="application/json" data-streamfield="stream-18">
       {
         "required": true,
         "blockDefinitions": [
@@ -424,7 +443,7 @@
       }
     </script>
     <h2>Complex nested StreamField</h2>
-    <script type="application/json" data-streamfield="stream-18">
+    <script type="application/json" data-streamfield="stream-19">
       {
         "required": true,
         "blockDefinitions": [
@@ -508,7 +527,7 @@
               }
             ],
             "default": [
-              {"type": "color", "value": "#FF0000"},
+              {"type": "color", "value": "#00FF00"},
               {"type": "sub-blocks", "value": [
                 {"type": "sub-block-type", "value": [
                   {"type": "name", "value": "lorem"},
@@ -525,7 +544,7 @@
       }
     </script>
     <h2>Custom action icons</h2>
-    <script type="application/json" data-streamfield="stream-19">
+    <script type="application/json" data-streamfield="stream-20">
       {
         "required": true,
         "icons": {

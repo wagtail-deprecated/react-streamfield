@@ -1,3 +1,4 @@
+import React from 'react';
 import uuidv4 from 'uuid';
 
 
@@ -331,4 +332,17 @@ export const triggerCustomEvent = (element, name, data=null) => {
   });
   element.dispatchEvent(event);
   window.dispatchEvent(event);
+};
+
+
+export const replaceWithComponent = (string, placeholder, component) => {
+  const parts = string.split(new RegExp(`(${placeholder})`));
+  for (const i in parts) {
+    let part = parts[i];
+    if (part === placeholder) {
+      part = component
+    }
+    parts[i] = <React.Fragment key={i}>{part}</React.Fragment>
+  }
+  return <React.Fragment>{parts}</React.Fragment>;
 };

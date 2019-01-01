@@ -6,7 +6,7 @@ import {
   getFieldName,
   getNestedBlockDefinition,
   isField,
-  isStruct
+  isStruct, replaceWithComponent
 } from './processing/utils';
 import {changeBlockValue} from './actions';
 import Block from './Block';
@@ -42,25 +42,27 @@ class FieldInput extends React.Component {
                standalone sortable={false} collapsible={false} />
       );
     }
-    if (!isField(blockDefinition)) {
-      return (
-        <BlocksContainer
-          fieldId={fieldId} id={blockId} />
-      );
-    }
     let html = this.props.html;
     if (html === undefined) {
-      if (blockDefinition.html === undefined) {
-        html = `<input id="${blockId}" name="${getFieldName(blockId)}"
-                       type="text" />`;
-      } else {
+      if (blockDefinition.html !== undefined) {
         html = blockDefinition.html;
       }
     }
-    return (
-      <RawHtmlFieldInput fieldId={fieldId} blockDefinition={blockDefinition}
-                         blockId={blockId} html={html} value={value} />
-    );
+    if (isField(blockDefinition)) {
+      if (html === undefined) {
+        html = `<input id="${blockId}" name="${getFieldName(blockId)}"
+                       type="text" />`;
+      }
+      return (
+        <RawHtmlFieldInput fieldId={fieldId} blockDefinition={blockDefinition}
+                           blockId={blockId} html={html} value={value} />
+      );
+    }
+    const blocksContainer = <BlocksContainer fieldId={fieldId} id={blockId} />;
+    if (html === undefined) {
+      return blocksContainer;
+    }
+    return replaceWithComponent(html, '<BlocksContainer />', blocksContainer);
   }
 }
 
