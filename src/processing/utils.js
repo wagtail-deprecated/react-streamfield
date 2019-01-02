@@ -353,9 +353,10 @@ export const replaceWithComponent = (string, placeholder, component) => {
   for (const i in parts) {
     let part = parts[i];
     if (part === placeholder) {
-      part = component
+      parts[i] = <React.Fragment key={i}>{component}</React.Fragment>
+    } else {
+      parts[i] = <span key={i} dangerouslySetInnerHTML={{__html: part}} />
     }
-    parts[i] = <React.Fragment key={i}>{part}</React.Fragment>
   }
   return <React.Fragment>{parts}</React.Fragment>;
 };
