@@ -378,8 +378,30 @@
         "value": []
       }
     </script>
-    <h2>Struct block as a struct block field</h2>
+    <h2>Struct block with custom HTML</h2>
     <script type="application/json" data-streamfield="stream-17">
+      {
+        "blockDefinitions": [
+          {
+            "key": "struct",
+            "isStruct": true,
+            "children": [
+              {
+                "key": "some_field"
+              },
+              {
+                "key": "another_field"
+              }
+            ],
+            "label": "Struct",
+            "html": "Like for lists, we can add HTML before struct fields <BlocksContainer /> and after as well."
+          }
+        ],
+        "value": []
+      }
+    </script>
+    <h2>Struct block as a struct block field</h2>
+    <script type="application/json" data-streamfield="stream-18">
       {
         "value": [],
         "blockDefinitions": [
@@ -415,7 +437,7 @@
       }
     </script>
     <h2>StructBlock as a list block child</h2>
-    <script type="application/json" data-streamfield="stream-18">
+    <script type="application/json" data-streamfield="stream-19">
       {
         "required": true,
         "blockDefinitions": [
@@ -443,7 +465,7 @@
       }
     </script>
     <h2>Complex nested StreamField</h2>
-    <script type="application/json" data-streamfield="stream-19">
+    <script type="application/json" data-streamfield="stream-20">
       {
         "required": true,
         "blockDefinitions": [
@@ -544,7 +566,7 @@
       }
     </script>
     <h2>Custom action icons</h2>
-    <script type="application/json" data-streamfield="stream-20">
+    <script type="application/json" data-streamfield="stream-21">
       {
         "required": true,
         "icons": {

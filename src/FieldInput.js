@@ -44,9 +44,7 @@ class FieldInput extends React.Component {
     }
     let html = this.props.html;
     if (html === undefined) {
-      if (blockDefinition.html !== undefined) {
-        html = blockDefinition.html;
-      }
+      html = blockDefinition.html;
     }
     if (isField(blockDefinition)) {
       if (html === undefined) {

@@ -6,7 +6,7 @@ import AnimateHeight from 'react-animate-height';
 import {
   getNestedBlockDefinition,
   isStruct,
-  getDescendantsIds, isSimpleLayout,
+  getDescendantsIds, isSimpleLayout, replaceWithComponent,
 } from './processing/utils';
 import StructChildField from './StructChildField';
 import FieldInput from './FieldInput';
@@ -23,6 +23,7 @@ import FieldInput from './FieldInput';
   return {
     isSimpleLayout: isSimpleLayout(blockDefinition, fieldData.isMobile),
     blockDefinition,
+    html: block.html,
     closed: block.closed && !hasDescendantError,
   };
 })
@@ -40,11 +41,21 @@ class BlockContent extends React.Component {
   get html() {
     const {fieldId, blockDefinition, blockId} = this.props;
     if (isStruct(blockDefinition)) {
-      return blockDefinition.children.map(childBlockDefinition =>
+      const blocksContainer = blockDefinition.children.map(
+        childBlockDefinition =>
           <StructChildField key={childBlockDefinition.key} fieldId={fieldId}
                             parentBlockId={blockId}
                             type={childBlockDefinition.key}/>
       );
+      let html = this.props.html;
+      if (html === undefined) {
+        html = blockDefinition.html;
+      }
+      if (html === undefined) {
+        return blocksContainer;
+      }
+      return replaceWithComponent(html, '<BlocksContainer />',
+                                  blocksContainer);
     }
     return <FieldInput fieldId={fieldId} blockId={blockId} />;
   }
