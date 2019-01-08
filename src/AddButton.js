@@ -8,7 +8,7 @@ import {addBlock} from './actions';
 import {
   getLabel,
   getNestedBlockDefinition,
-  getSiblingsIds
+  getSiblingsIds, isNA
 } from './processing/utils';
 
 
@@ -80,7 +80,7 @@ class AddButton extends React.Component {
 
   getIcon(blockDefinition) {
     const {icon} = blockDefinition;
-    if ((icon === undefined) || (icon === null)) {
+    if (isNA(icon)) {
       return null;
     }
     return <span className="icon" dangerouslySetInnerHTML={

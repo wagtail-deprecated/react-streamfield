@@ -3,7 +3,7 @@ import {
   getNestedBlockDefinition,
   isField,
   isStruct,
-  getNewBlock, getNewId, isClosed, getIsMobile,
+  getNewBlock, getNewId, isClosed, getIsMobile, isNA,
 } from './utils';
 
 
@@ -20,7 +20,7 @@ export const getNestedBlocksState = (parentBlockId, blockDefinitions,
     const blockIsField = isField(blockDefinition);
     let value = block.value;
     if (!blockIsField) {
-      if ((value === undefined) || (value === null)) {
+      if (isNA(value)) {
         value = [];
       }
       if (isStruct(blockDefinition)) {

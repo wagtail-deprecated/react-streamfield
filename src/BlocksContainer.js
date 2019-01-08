@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Droppable} from 'react-beautiful-dnd';
 import Block from './Block';
 import AddButton from './AddButton';
-import {getNestedBlockDefinition} from "./processing/utils";
+import {getNestedBlockDefinition, isNA} from './processing/utils';
 
 
 @connect((state, props) => {
@@ -23,10 +23,10 @@ import {getNestedBlockDefinition} from "./processing/utils";
     minNum = blockDefinition.minNum;
     maxNum = blockDefinition.maxNum;
   }
-  if ((minNum === undefined) || (minNum === null)) {
+  if (isNA(minNum)) {
     minNum = 0;
   }
-  if ((maxNum === undefined) || (maxNum === null)) {
+  if (isNA(maxNum)) {
     maxNum = Infinity;
   }
   return {

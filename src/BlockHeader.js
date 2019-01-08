@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
   getLabel,
-  getNestedBlockDefinition, isSimpleLayout,
+  getNestedBlockDefinition, isNA, isSimpleLayout,
   isStruct, structValueToObject, triggerCustomEvent
 } from './processing/utils';
 import {toggleBlock} from './actions';
@@ -74,7 +74,7 @@ class BlockHeader extends React.Component {
         let renderedTitle = blockDefinition.titleTemplate.replace(
           /\${([^}]+)}/g, (match, varName) => {
             let childValue = value[varName];
-            if ((childValue === undefined) || (childValue === null)) {
+            if (isNA(childValue)) {
               childValue = '';
             } else if (childValue !== '') {
               isEmpty = false;
