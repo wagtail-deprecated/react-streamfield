@@ -161,10 +161,9 @@ class BlockActions extends (React.Component) {
                   className={canDuplicate ? null : 'disabled'}>
             {this.duplicateIcon}
           </button>
-          <button onClick={this.deleteHandler}
-                  title="Delete">
+          <button onClick={this.deleteHandler} title="Delete">
             {this.deleteIcon}
-          ️</button>
+          </button>
         </div>
         {isSimpleLayout ?
           <span className="block-type">
