@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {
   getFieldName,
   getNestedBlockDefinition,
-  isField,
+  isField, isNA,
   isStruct, replaceWithComponent
 } from './processing/utils';
 import {changeBlockValue} from './actions';
@@ -43,11 +43,11 @@ class FieldInput extends React.Component {
       );
     }
     let html = this.props.html;
-    if (html === undefined) {
+    if (isNA(html)) {
       html = blockDefinition.html;
     }
     if (isField(blockDefinition)) {
-      if (html === undefined) {
+      if (isNA(html)) {
         html = `<input id="${blockId}" name="${getFieldName(blockId)}"
                        type="text" />`;
       }
@@ -57,7 +57,7 @@ class FieldInput extends React.Component {
       );
     }
     const blocksContainer = <BlocksContainer fieldId={fieldId} id={blockId} />;
-    if (html === undefined) {
+    if (isNA(html)) {
       return blocksContainer;
     }
     return replaceWithComponent(html, '<BlocksContainer />', blocksContainer);

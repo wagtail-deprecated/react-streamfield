@@ -6,7 +6,7 @@ import AnimateHeight from 'react-animate-height';
 import {
   getNestedBlockDefinition,
   isStruct,
-  getDescendantsIds, isSimpleLayout, replaceWithComponent,
+  getDescendantsIds, isSimpleLayout, replaceWithComponent, isNA,
 } from './processing/utils';
 import StructChildField from './StructChildField';
 import FieldInput from './FieldInput';
@@ -48,10 +48,10 @@ class BlockContent extends React.Component {
                             type={childBlockDefinition.key}/>
       );
       let html = this.props.html;
-      if (html === undefined) {
+      if (isNA(html)) {
         html = blockDefinition.html;
       }
-      if (html === undefined) {
+      if (isNA(html)) {
         return blocksContainer;
       }
       return replaceWithComponent(html, '<BlocksContainer />',
