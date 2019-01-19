@@ -135,7 +135,8 @@ class StreamField extends React.Component {
     const {id, generatedValue} = this.props;
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <BlocksContainer fieldId={id} />
+      {generatedValue ? (<BlocksContainer fieldId={id} />) : null}
+
         <input type="hidden" name={id}
                value={JSON.stringify(generatedValue)} />
       </DragDropContext>
