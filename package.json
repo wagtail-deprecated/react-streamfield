@@ -90,6 +90,7 @@
     "build": "rollup -c && webpack --config webpack.config.js --mode production",
     "start": "webpack --config webpack.config.js --mode development --watch",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepublishOnly": "npm run build -s"
   }
 }
