@@ -46,11 +46,14 @@
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "@storybook/react": "^4.1.7",
+    "autoprefixer": "^9.4.5",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
     "css-loader": "^1.0.1",
     "jest": "^23.6.0",
+    "postcss-cli": "^6.1.1",
+    "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -63,6 +66,16 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1"
   },
+  "browserslist" : [
+    "Firefox ESR",
+    "ie 11",
+    "last 2 Chrome versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 Edge versions",
+    "last 1 Firefox version",
+    "last 2 iOS versions",
+    "last 2 Safari versions"
+  ],
   "babel": {
     "presets": [
       "@babel/preset-env",
@@ -90,7 +103,7 @@
     ]
   },
   "scripts": {
-    "build": "rollup -c && build-storybook -c .storybook -s example -o public && sass src/index.scss > dist/react-streamfield.css",
+    "build": "rollup -c && build-storybook -c .storybook -s example -o public && sass src/index.scss | npx postcss --use autoprefixer --no-map > dist/react-streamfield.css",
     "start": "start-storybook -c .storybook -s example -p 9001",
     "test": "jest",
     "test:watch": "jest --watch",

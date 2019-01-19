@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const webpack = require("webpack");
 const sass = require("sass");
+const autoprefixer = require("autoprefixer");
 
 const pkg = require("../package.json");
 
@@ -20,6 +21,13 @@ module.exports = (baseConfig, env, defaultConfig) => {
         options: {
           sourceMap: true,
           minimize: true,
+        },
+      },
+      {
+        loader: "postcss-loader",
+        options: {
+          sourceMap: true,
+          plugins: () => [autoprefixer()],
         },
       },
       {
