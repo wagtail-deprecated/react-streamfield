@@ -23,6 +23,7 @@
   ],
   "main": "dist/react-streamfield.cjs.js",
   "module": "dist/react-streamfield.esm.js",
+  "sideEffects": false,
   "peerDependencies": {
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
