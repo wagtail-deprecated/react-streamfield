@@ -45,14 +45,12 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/react": "^4.1.7",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
     "css-loader": "^1.0.1",
     "jest": "^23.6.0",
-    "mini-css-extract-plugin": "^0.4.5",
-    "node-sass": "^4.10.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -61,11 +59,9 @@
     "redux-thunk": "^2.3.0",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.3.1",
+    "sass": "^1.16.1",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.26.1",
-    "webpack-cli": "^3.1.2"
+    "style-loader": "^0.23.1"
   },
   "babel": {
     "presets": [
@@ -94,8 +90,8 @@
     ]
   },
   "scripts": {
-    "build": "rollup -c && webpack --config webpack.config.js --mode production",
-    "start": "webpack --config webpack.config.js --mode development --watch",
+    "build": "rollup -c && build-storybook -c .storybook -s example -o public && sass src/index.scss > dist/react-streamfield.css",
+    "start": "start-storybook -c .storybook -s example -p 9001",
     "test": "jest",
     "test:watch": "jest --watch",
     "prepublishOnly": "npm run build -s"
