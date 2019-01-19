@@ -11,7 +11,7 @@ import { complexNestedStreamField } from './samples'
 const store = createStore(streamFieldReducer, applyMiddleware(thunk));
 
 storiesOf("React StreamField demo", module)
-  .addDecorator(story => <Provider store={store}>{story()}</Provider>)
+.addDecorator(story => <Provider store={store}>{story()}</Provider>)
   .add("1 block type", () => {
     const props = {
       required: true,
