@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/noripyt/react-streamfield/issues"
   },
-  "license": "BSD",
+  "license": "BSD-3-Clause",
   "files": [
     "dist",
     "src"
