@@ -176,7 +176,7 @@ storiesOf('React StreamField demo', module)
             }
           ],
           html:
-            'As you can see by this text, it’s possible <strong>to insert some HTML</strong> before or after the contained blocks. <BlocksContainer /> You can even have multiple times the same blocks container. <BlocksContainer /> Can’t think of a case where that would be useful, but still, it’s possible if you really want it.'
+            'As you can see by this text, it’s possible <strong>to insert some HTML</strong> before or after the contained blocks. <noscript data-blocks-container /> You can even have multiple times the same blocks container. <noscript data-blocks-container /> Can’t think of a case where that would be useful, but still, it’s possible if you really want it.'
         }
       ],
       value: []

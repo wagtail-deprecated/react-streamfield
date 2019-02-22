@@ -61,7 +61,8 @@ class FieldInput extends React.Component {
     if (isNA(html)) {
       return blocksContainer;
     }
-    return replaceWithComponent(html, '<BlocksContainer />', blocksContainer);
+    return replaceWithComponent(
+      html, '<noscript data-blocks-container />', blocksContainer);
   }
 }
 
