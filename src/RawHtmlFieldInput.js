@@ -11,11 +11,6 @@ import {
 } from './processing/utils';
 
 
-const MutationObserver = window.MutationObserver
-                      || window.WebKitMutationObserver
-                      || window.MozMutationObserver;
-
-
 @connect(null, (dispatch, props) => {
   const {fieldId, blockId} = props;
   return bindActionCreators({
@@ -97,7 +92,6 @@ class RawHtmlFieldInput extends React.Component {
 
   componentWillUnmount() {
     for (let observer of this.mutationObservers) {
-      console.log('disconnect', observer)
       observer.disconnect();
     }
     if (!isStatic(this.props.blockDefinition)) {
