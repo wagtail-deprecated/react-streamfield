@@ -76,13 +76,6 @@ export const getLabel = blockDefinition => {
 };
 
 
-export const extractText = html => {
-  const tmp = document.createElement('span');
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText;
-};
-
-
 export const getChildrenIds = (state, fieldId, parentId) => {
   const fieldData = state[fieldId];
   const blocks = fieldData.blocks;
