@@ -303,9 +303,7 @@ export const applyToBlock = (state, fieldId, blockId, func) => {
 
 
 export const triggerKeyboardEvent = (element, key) => {
-  let event = document.createEvent('Event');
-
-  event.initEvent('keydown', true, true);
+  let event = new Event('keydown', {bubbles: true, cancelable: true});
 
   event.key = key;            // These four lines
   event.keyIdentifier = key;  // are here
