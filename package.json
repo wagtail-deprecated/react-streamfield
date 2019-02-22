@@ -53,6 +53,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
     "css-loader": "^1.0.1",
     "jest": "^23.6.0",
+    "npx": "^10.2.0",
     "postcss-cli": "^6.1.1",
     "postcss-loader": "^3.0.0",
     "prop-types": "^15.6.2",

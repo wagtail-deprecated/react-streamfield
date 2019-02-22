@@ -10,7 +10,7 @@ thanks to [a Kickstarter campaign](https://kickstarter.com/projects/noripyt/wagt
 
 ## Demo
 
-https://noripyt.github.io/react-streamfield/example/
+https://noripyt.github.io/react-streamfield/public/
 
 
 ## Getting started
@@ -43,7 +43,7 @@ create a stream field:
 </script>
 ``` 
 
-That’s it for now! See `example/index.html` for more complex examples.
+That’s it for now! See `public/index.html` for more complex examples.
 
 **More documentation, a better API and live demos will arrive soon!** 
 
