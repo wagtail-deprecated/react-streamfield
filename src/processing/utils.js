@@ -35,16 +35,8 @@ export const isStatic = blockDefinition => {
 };
 
 
-export const getWindowWidth = () => {
-  if (!window.innerWidth) {
-    return document.documentElement.clientWidth;
-  }
-  return window.innerWidth;
-};
-
-
 export const getIsMobile = () => {
-  return getWindowWidth() <= 799;
+  return window.matchMedia('(max-width: 799px)').matches;
 };
 
 
