@@ -48,7 +48,7 @@ class BlockActions extends (React.Component) {
   get moveUpIcon() {
     const {icons} = this.props;
     if ((icons === undefined) || (icons.moveUp === undefined)) {
-      return <i className="fas fa-chevron-up" />;
+      return <i className="fas fa-chevron-up" aria-hidden={true} />;
     }
     return <span dangerouslySetInnerHTML={{__html: icons.moveUp}} />;
   }
@@ -56,7 +56,7 @@ class BlockActions extends (React.Component) {
   get moveDownIcon() {
     const {icons} = this.props;
     if ((icons === undefined) || (icons.moveDown === undefined)) {
-      return <i className="fas fa-chevron-down" />;
+      return <i className="fas fa-chevron-down" aria-hidden={true} />;
     }
     return <span dangerouslySetInnerHTML={{__html: icons.moveDown}} />;
   }
@@ -64,7 +64,7 @@ class BlockActions extends (React.Component) {
   get duplicateIcon() {
     const {icons} = this.props;
     if ((icons === undefined) || (icons.duplicate === undefined)) {
-      return <i className="fas fa-clone" />;
+      return <i className="fas fa-clone" aria-hidden={true} />;
     }
     return <span dangerouslySetInnerHTML={{__html: icons.duplicate}} />;
   }
@@ -72,7 +72,7 @@ class BlockActions extends (React.Component) {
   get deleteIcon() {
     const {icons} = this.props;
     if ((icons === undefined) || (icons.delete === undefined)) {
-      return <i className="fas fa-trash" />;
+      return <i className="fas fa-trash" aria-hidden={true} />;
     }
     return <span dangerouslySetInnerHTML={{__html: icons.delete}} />;
   }

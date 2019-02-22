@@ -116,7 +116,7 @@ class AddButton extends React.Component {
               className={classNames(
                 'add', visible && 'visible',
                 (this.state.open && this.hasChoice) && 'close')}>
-        <i>+</i>
+        <i aria-hidden={true}>+</i>
       </button>
     );
     if (this.hasChoice) {

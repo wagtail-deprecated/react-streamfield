@@ -135,7 +135,7 @@ class BlockHeader extends React.Component {
   get gripIcon() {
     const {icons} = this.props;
     if ((icons === undefined) || (icons.grip === undefined)) {
-      return <i className="fas fa-grip-vertical fa-fw" />;
+      return <i className="fas fa-grip-vertical fa-fw" aria-hidden={true} />;
     }
     return <span dangerouslySetInnerHTML={{__html: icons.grip}} />;
   }
