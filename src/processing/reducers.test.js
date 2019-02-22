@@ -1,4 +1,4 @@
-import {addBlock, deleteBlock, moveBlock} from './actions';
+import {addBlock, deleteBlock, moveBlock} from './reducers';
 import {valueToState} from './conversions';
 import {
   initialState,

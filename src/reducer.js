@@ -4,7 +4,7 @@ import {
   deleteBlock,
   duplicateBlock,
   moveBlock
-} from './processing/actions';
+} from './processing/reducers';
 import {valueToState} from './processing/conversions';
 import {
   applyToBlock,
