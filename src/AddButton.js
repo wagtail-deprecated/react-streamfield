@@ -15,11 +15,11 @@ import {
 @connect((state, props) => {
   const {fieldId, parentId, blockId} = props;
   let blockDefinitions;
-  if (parentId === null) {
-    blockDefinitions = state[fieldId].blockDefinitions;
-  } else {
+  if (parentId) {
     blockDefinitions = getNestedBlockDefinition(state, fieldId,
                                                 parentId).children;
+  } else {
+    blockDefinitions = state[fieldId].blockDefinitions;
   }
 
   let index = 0;
@@ -63,7 +63,7 @@ class AddButton extends React.Component {
     event.preventDefault();
     event.stopPropagation();
     if (this.hasChoice) {
-      this.setState({open: !this.state.open});
+      this.setState((state, props) => ({open: !state.open}));
     } else {
       this.props.addBlock(this.props.index,
                           this.props.blockDefinitions[0].key);
@@ -71,8 +71,6 @@ class AddButton extends React.Component {
   };
 
   addHandler = event => {
-    event.preventDefault();
-    event.stopPropagation();
     this.props.addBlock(this.props.index,
                         event.target.closest('button').value);
     this.toggle(event);
@@ -95,14 +93,8 @@ class AddButton extends React.Component {
   get groupedBlockDefinitions() {
     const grouped = {};
     for (const blockDefinition of this.props.blockDefinitions) {
-      let key = blockDefinition.group;
-      if (key === undefined) {
-        key = '';
-      }
-      let others = grouped[key];
-      if (others === undefined) {
-        others = [];
-      }
+      const key = blockDefinition.group || '';
+      const others = grouped[key] || [];
       others.push(blockDefinition);
       grouped[key] = others;
     }
