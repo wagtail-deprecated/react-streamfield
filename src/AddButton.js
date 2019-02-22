@@ -128,7 +128,7 @@ class AddButton extends React.Component {
             {Object.entries(this.groupedBlockDefinitions).map(
               ([group, blockDefinitions]) => (
                 <div key={group}>
-                  <h4 className="group-name">{group}</h4>
+                  {group ? <h4 className="group-name">{group}</h4> : null}
                   {blockDefinitions.map(blockDefinition =>
                     <button key={blockDefinition.key} onClick={this.addHandler}
                             value={blockDefinition.key} className="type">
