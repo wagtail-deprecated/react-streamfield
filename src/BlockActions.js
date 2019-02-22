@@ -17,11 +17,13 @@ import {refType} from './types';
   const {fieldId, blockId} = props;
   const blockDefinition = getNestedBlockDefinition(state, fieldId, blockId);
   const siblings = getSiblingsIds(state, fieldId, blockId);
+  const field = state[fieldId];
   return {
-    isSimpleLayout: isSimpleLayout(blockDefinition, state[fieldId].isMobile),
+    isSimpleLayout: isSimpleLayout(blockDefinition, field.isMobile),
     blockDefinition,
     siblings,
-    icons: state[fieldId].icons,
+    icons: field.icons,
+    labels: field.labels,
     index: siblings.indexOf(blockId),
   };
 }, (dispatch, props) => {
@@ -44,38 +46,6 @@ class BlockActions extends React.Component {
     sortableBlock: true,
     canDuplicate: true,
   };
-
-  get moveUpIcon() {
-    const {icons} = this.props;
-    if ((icons === undefined) || (icons.moveUp === undefined)) {
-      return <i className="fas fa-chevron-up" aria-hidden={true} />;
-    }
-    return <span dangerouslySetInnerHTML={{__html: icons.moveUp}} />;
-  }
-
-  get moveDownIcon() {
-    const {icons} = this.props;
-    if ((icons === undefined) || (icons.moveDown === undefined)) {
-      return <i className="fas fa-chevron-down" aria-hidden={true} />;
-    }
-    return <span dangerouslySetInnerHTML={{__html: icons.moveDown}} />;
-  }
-
-  get duplicateIcon() {
-    const {icons} = this.props;
-    if ((icons === undefined) || (icons.duplicate === undefined)) {
-      return <i className="fas fa-clone" aria-hidden={true} />;
-    }
-    return <span dangerouslySetInnerHTML={{__html: icons.duplicate}} />;
-  }
-
-  get deleteIcon() {
-    const {icons} = this.props;
-    if ((icons === undefined) || (icons.delete === undefined)) {
-      return <i className="fas fa-trash" aria-hidden={true} />;
-    }
-    return <span dangerouslySetInnerHTML={{__html: icons.delete}} />;
-  }
 
   get isFirst() {
     return this.props.index === 0;
@@ -137,6 +107,7 @@ class BlockActions extends React.Component {
   render() {
     const {
       blockDefinition, isSimpleLayout, sortableBlock, canDuplicate,
+      icons, labels,
     } = this.props;
     return (
       <aside>
@@ -144,23 +115,19 @@ class BlockActions extends React.Component {
           {sortableBlock ?
             <>
               <button onClick={this.moveUpHandler}
-                      title="Move up" disabled={this.isFirst}>
-                {this.moveUpIcon}
-              </button>
+                      title={labels.moveUp} disabled={this.isFirst}
+                      dangerouslySetInnerHTML={{__html: icons.moveUp}} />
               <button onClick={this.moveDownHandler}
-                      title="Move down" disabled={this.isLast}>
-                {this.moveDownIcon}
-              </button>
+                      title={labels.moveDown} disabled={this.isLast}
+                      dangerouslySetInnerHTML={{__html: icons.moveDown}} />
             </>
             :
             null}
           <button onClick={this.duplicateHandler}
-                  title="Duplicate" disabled={!canDuplicate}>
-            {this.duplicateIcon}
-          </button>
-          <button onClick={this.deleteHandler} title="Delete">
-            {this.deleteIcon}
-          </button>
+                  title={labels.duplicate} disabled={!canDuplicate}
+                  dangerouslySetInnerHTML={{__html: icons.duplicate}} />
+          <button onClick={this.deleteHandler} title={labels.delete}
+                  dangerouslySetInnerHTML={{__html: icons.delete}} />
         </div>
         {isSimpleLayout ?
           <span className="block-type">

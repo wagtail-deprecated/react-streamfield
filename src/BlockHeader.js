@@ -132,24 +132,16 @@ class BlockHeader extends React.Component {
     this.triggerCustomEvent('toggle', {closed: !closed});
   };
 
-  get gripIcon() {
-    const {icons} = this.props;
-    if ((icons === undefined) || (icons.grip === undefined)) {
-      return <i className="fas fa-grip-vertical fa-fw" aria-hidden={true} />;
-    }
-    return <span dangerouslySetInnerHTML={{__html: icons.grip}} />;
-  }
-
   render() {
     const {
-      fieldId, blockId, isSimpleLayout, dragHandleProps,
+      fieldId, blockId, isSimpleLayout, dragHandleProps, icons,
       collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
     } = this.props;
     const icon = this.icon;
     let content;
     if (isSimpleLayout) {
       content = (
-        <h3>{icon ? icon : this.gripIcon}</h3>
+        <h3 dangerouslySetInnerHTML={{__html: icon ? icon : icons.grip}} />
       );
     } else {
       content = (

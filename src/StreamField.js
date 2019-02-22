@@ -54,6 +54,28 @@ const BlockValueType = PropTypes.shape({
 });
 
 
+const StreamFieldDefaultProps = {
+  required: false,
+  minNum: 0,
+  maxNum: Infinity,
+  icons: {
+    add: '<i aria-hidden="true">+</i>',
+    moveUp: '<i class="fas fa-chevron-up" aria-hidden="true" />',
+    moveDown: '<i class="fas fa-chevron-down" aria-hidden="true" />',
+    duplicate: '<i class="fas fa-clone" aria-hidden="true" />',
+    delete: '<i class="fas fa-trash" aria-hidden="true" />',
+    grip: '<i class="fas fa-grip-vertical fa-fw" aria-hidden="true" />',
+  },
+  labels: {
+    add: 'Add block',
+    moveUp: 'Move up',
+    moveDown: 'Move down',
+    duplicate: 'Duplicate',
+    delete: 'Delete',
+  },
+};
+
+
 @connect((state, props) => {
   const {id} = props;
   const fieldData = state[id];
@@ -76,21 +98,25 @@ class StreamField extends React.Component {
     minNum: PropTypes.number,
     maxNum: PropTypes.number,
     icons: PropTypes.shape({
+      add: PropTypes.string,
       moveUp: PropTypes.string,
       moveDown: PropTypes.string,
       duplicate: PropTypes.string,
       delete: PropTypes.string,
       grip: PropTypes.string,
     }),
+    labels: PropTypes.shape({
+      add: PropTypes.string,
+      moveUp: PropTypes.string,
+      moveDown: PropTypes.string,
+      duplicate: PropTypes.string,
+      delete: PropTypes.string,
+    }),
     blockDefinitions: PropTypes.arrayOf(BlockDefinitionType).isRequired,
     value: PropTypes.arrayOf(BlockValueType).isRequired,
   };
 
-  static defaultProps = {
-    required: false,
-    minNum: 0,
-    maxNum: Infinity,
-  };
+  static defaultProps = StreamFieldDefaultProps;
 
   onWindowResize = () => {
     const value = getIsMobile();
@@ -119,11 +145,13 @@ class StreamField extends React.Component {
 
   componentDidMount() {
     const {
-      initializeStreamField, required, minNum, maxNum, icons, blockDefinitions,
-      value,
+      initializeStreamField, required, minNum, maxNum, blockDefinitions, value,
     } = this.props;
+    const defaultProps = StreamFieldDefaultProps;
+    const icons = {...defaultProps.icons, ...this.props.icons};
+    const labels = {...defaultProps.labels, ...this.props.labels};
     initializeStreamField({
-      required, minNum, maxNum, icons, blockDefinitions,
+      required, minNum, maxNum, icons, labels, blockDefinitions,
       isMobile: getIsMobile(),
       value,
     });

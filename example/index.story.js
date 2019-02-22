@@ -486,11 +486,12 @@ storiesOf('React StreamField demo', module)
     const props = {
       required: true,
       icons: {
-        moveUp: '⇑',
-        moveDown: '⇓',
-        duplicate: '+',
-        delete: '-',
-        grip: '↕'
+        add: '<i aria-hidden="true">⊕</i>',
+        moveUp: '<i aria-hidden="true">⇑</i>',
+        moveDown: '<i aria-hidden="true">⇓</i>',
+        duplicate: '<i aria-hidden="true">⎘</i>',
+        delete: '<i aria-hidden="true">×</i>',
+        grip: '<i aria-hidden="true">↕</i>'
       },
       blockDefinitions: [
         {

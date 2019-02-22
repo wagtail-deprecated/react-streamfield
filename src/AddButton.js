@@ -14,12 +14,13 @@ import {
 
 @connect((state, props) => {
   const {fieldId, parentId, blockId} = props;
+  const field = state[fieldId];
   let blockDefinitions;
   if (parentId) {
     blockDefinitions = getNestedBlockDefinition(state, fieldId,
                                                 parentId).children;
   } else {
-    blockDefinitions = state[fieldId].blockDefinitions;
+    blockDefinitions = field.blockDefinitions;
   }
 
   let index = 0;
@@ -28,7 +29,11 @@ import {
     index = getSiblingsIds(state, fieldId, blockId).indexOf(blockId) + 1;
   }
 
-  return {blockDefinitions, index};
+  return {
+    blockDefinitions, index,
+    icons: field.icons,
+    labels: field.labels,
+  };
 }, (dispatch, props) => {
   const {fieldId, parentId} = props;
   return bindActionCreators({
@@ -102,13 +107,13 @@ class AddButton extends React.Component {
   }
 
   render() {
-    const {visible} = this.props;
+    const {visible, icons, labels} = this.props;
     const button = (
-      <button onClick={this.toggle}
+      <button onClick={this.toggle} title={labels.add}
               className={classNames(
                 'add', visible && 'visible',
-                (this.state.open && this.hasChoice) && 'close')}>
-        <i aria-hidden={true}>+</i>
+                (this.state.open && this.hasChoice) && 'close')}
+              dangerouslySetInnerHTML={{__html: icons.add}}>
       </button>
     );
     if (this.hasChoice) {

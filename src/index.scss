@@ -171,6 +171,10 @@ $screen-xs-max: 799px;
             transition-property: opacity, color;
             font-size: $action-font-size;
 
+            i {
+              font-style: normal;
+            }
+
             &[disabled] {
               opacity: 0.2;
               pointer-events: none;
