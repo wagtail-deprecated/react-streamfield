@@ -53,7 +53,8 @@ class FieldInput extends React.Component {
       }
       return (
         <RawHtmlFieldInput fieldId={fieldId} blockDefinition={blockDefinition}
-                           blockId={blockId} html={html} value={value} />
+                           blockId={blockId} html={html} value={value}
+                           changeBlockValue={this.props.changeBlockValue} />
       );
     }
     const blocksContainer = <BlocksContainer fieldId={fieldId} id={blockId} />;

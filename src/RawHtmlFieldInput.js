@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {changeBlockValue} from './actions';
 import {
   getFieldName,
   isStatic,
@@ -11,12 +8,6 @@ import {
 } from './processing/utils';
 
 
-@connect(null, (dispatch, props) => {
-  const {fieldId, blockId} = props;
-  return bindActionCreators({
-    changeBlockValue: value => changeBlockValue(fieldId, blockId, value),
-  }, dispatch);
-})
 class RawHtmlFieldInput extends React.Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
@@ -24,6 +15,7 @@ class RawHtmlFieldInput extends React.Component {
     blockId: PropTypes.string.isRequired,
     html: PropTypes.string.isRequired,
     value: PropTypes.any,
+    changeBlockValue: PropTypes.func.isRequired,
   };
 
   runInnerScripts() {
