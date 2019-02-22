@@ -91,10 +91,10 @@ class RawHtmlFieldInput extends React.Component {
   }
 
   componentWillUnmount() {
-    for (let observer of this.mutationObservers) {
-      observer.disconnect();
-    }
     if (!isStatic(this.props.blockDefinition)) {
+      for (let observer of this.mutationObservers) {
+        observer.disconnect();
+      }
       for (let input of this.inputs) {
         this.unbindChange(input);
       }
