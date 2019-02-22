@@ -63,7 +63,7 @@ export const insertBlock = (state, fieldId, parentId, index,
 
 
 export const moveBlock = (state, fieldId, blockId, newIndex) => {
-  if (newIndex <= -1) {
+  if (newIndex < 0) {
     throw new Error(`Index ${newIndex} is out of bounds.`);
   }
   const fieldData = state[fieldId];

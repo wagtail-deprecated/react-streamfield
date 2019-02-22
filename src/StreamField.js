@@ -92,20 +92,6 @@ class StreamField extends React.Component {
     maxNum: Infinity,
   };
 
-  constructor(props) {
-    super(props);
-    const {
-      initializeStreamField, required, minNum, maxNum, icons, blockDefinitions,
-      value,
-    } = this.props;
-    initializeStreamField({
-      required, minNum, maxNum, icons, blockDefinitions,
-      isMobile: getIsMobile(),
-      value,
-    });
-    window.addEventListener('resize', this.onWindowResize);
-  }
-
   onWindowResize = () => {
     const value = getIsMobile();
     if (value !== this.props.isMobile) {
@@ -129,6 +115,19 @@ class StreamField extends React.Component {
     if (input !== null) {
       input.parentNode.removeChild(input);
     }
+  }
+
+  componentDidMount() {
+    const {
+      initializeStreamField, required, minNum, maxNum, icons, blockDefinitions,
+      value,
+    } = this.props;
+    initializeStreamField({
+      required, minNum, maxNum, icons, blockDefinitions,
+      isMobile: getIsMobile(),
+      value,
+    });
+    window.addEventListener('resize', this.onWindowResize);
   }
 
   render() {

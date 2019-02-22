@@ -31,7 +31,7 @@ import {refType} from './types';
     duplicateBlock: () => duplicateBlock(fieldId, blockId),
   }, dispatch);
 })
-class BlockActions extends (React.Component) {
+class BlockActions extends React.Component {
   static propTypes = {
     fieldId: PropTypes.string.isRequired,
     blockId: PropTypes.string.isRequired,

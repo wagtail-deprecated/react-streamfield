@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {
   getFieldName, getLabel,
   getNestedBlockDefinition,
-  isRequired
 } from './processing/utils';
 import FieldInput from './FieldInput';
 
@@ -32,7 +31,7 @@ class StructChildField extends React.Component {
     const {fieldId, blockId, blockDefinition} = this.props;
     return (
       <div className={classNames('field',
-                                 isRequired(blockDefinition) && 'required')}>
+                                 !!blockDefinition.required && 'required')}>
         <label htmlFor={getFieldName(blockId)}>
           {getLabel(blockDefinition)}
         </label>

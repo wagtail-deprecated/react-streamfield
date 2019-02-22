@@ -60,11 +60,6 @@ export const isClosed = (blockDefinition, isMobile) => {
 };
 
 
-export const isRequired = blockDefinition => {
-  return (blockDefinition.required !== undefined) && blockDefinition.required;
-};
-
-
 export const shouldRunInnerScripts = blockDefinition => {
   return (blockDefinition.dangerouslyRunInnerScripts !== undefined)
       && (blockDefinition.dangerouslyRunInnerScripts);
@@ -75,7 +70,7 @@ export const getLabel = blockDefinition => {
   let {key, label} = blockDefinition;
   if (label === undefined) {
     label = key.replace('_', ' ');
-    label = label[0].toUpperCase() + label.substring(1);
+    label = `${label[0].toUpperCase()}${label.substring(1)}`;
   }
   return label;
 };
@@ -272,11 +267,7 @@ export const deepCopy = data => {
     return data;
   }
   if (data instanceof Array) {
-    copy = [];
-    for (let value of data) {
-      copy.push(deepCopy(value));
-    }
-    return copy;
+    return data.map(v => deepCopy(v));
   }
   if (data instanceof Object) {
     copy = {};
