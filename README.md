@@ -50,3 +50,7 @@ That’s it for now! See `public/index.html` for more complex examples.
 You can also check out
 [wagtail-react-streamfield](https://github.com/noripyt/wagtail-react-streamfield)
 to see what an integration of this field looks like!
+
+## Webpack stats
+
+https://noripyt.github.io/react-streamfield/public/webpack-stats.html
