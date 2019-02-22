@@ -16,47 +16,76 @@
   "bugs": {
     "url": "https://github.com/noripyt/react-streamfield/issues"
   },
-  "license": "BSD",
+  "license": "BSD-3-Clause",
   "files": [
     "dist",
     "src"
   ],
-  "main": "src/index.js",
-  "devDependencies": {
-    "@babel/cli": "7.1.5",
-    "@babel/core": "7.1.6",
-    "@babel/plugin-proposal-class-properties": "7.1.0",
-    "@babel/plugin-proposal-decorators": "7.1.6",
-    "@babel/plugin-proposal-object-rest-spread": "7.0.0",
-    "@babel/preset-env": "7.1.6",
-    "@babel/preset-react": "7.0.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-loader": "8.0.4",
-    "babel-plugin-transform-react-remove-prop-types": "0.4.21",
-    "classnames": "2.2.6",
-    "css-loader": "1.0.1",
-    "mini-css-extract-plugin": "0.4.5",
-    "node-sass": "4.10.0",
-    "prop-types": "15.6.2",
-    "react": "16.6.3",
-    "react-animate-height": "2.0.7",
-    "react-beautiful-dnd": "10.0.2",
-    "react-dom": "16.6.3",
-    "react-redux": "5.1.1",
-    "redux": "4.0.1",
-    "redux-thunk": "2.3.0",
-    "sass-loader": "7.1.0",
-    "style-loader": "0.23.1",
-    "uglifyjs-webpack-plugin": "2.0.1",
-    "uuid": "3.3.2",
-    "webpack": "4.26.1",
-    "webpack-cli": "3.1.2",
-    "babel-jest": "23.6.0",
-    "jest": "23.6.0"
+  "main": "dist/react-streamfield.cjs.js",
+  "module": "dist/react-streamfield.esm.js",
+  "sideEffects": false,
+  "peerDependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.0",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "react-animate-height": "^2.0.7",
+    "react-beautiful-dnd": "^10.0.2",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-viewport": "^4.1.7",
+    "@storybook/react": "^4.1.7",
+    "autoprefixer": "^9.4.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
+    "css-loader": "^1.0.1",
+    "jest": "^23.6.0",
+    "postcss-cli": "^6.1.1",
+    "postcss-loader": "^3.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "rollup": "^1.1.0",
+    "rollup-plugin-babel": "^4.3.1",
+    "sass": "^1.16.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack-bundle-analyzer": "^3.0.3"
+  },
+  "browserslist": [
+    "Firefox ESR",
+    "ie 11",
+    "last 2 Chrome versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 Edge versions",
+    "last 1 Firefox version",
+    "last 2 iOS versions",
+    "last 2 Safari versions"
+  ],
   "babel": {
     "presets": [
-      "@babel/preset-env",
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ],
       "@babel/preset-react"
     ],
     "plugins": [
@@ -78,12 +107,21 @@
           ]
         }
       ]
-    ]
+    ],
+    "env": {
+      "test": {
+        "presets": [
+          "@babel/preset-env",
+          "@babel/preset-react"
+        ]
+      }
+    }
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js --mode production",
-    "start": "webpack --config webpack.config.js --mode development --watch",
+    "build": "rollup -c && build-storybook -c .storybook -s example -o public && sass src/index.scss | npx postcss --use autoprefixer --no-map > dist/react-streamfield.css",
+    "start": "start-storybook -c .storybook -s example -p 9001",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "prepublishOnly": "npm run build -s"
   }
 }
