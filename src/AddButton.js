@@ -121,7 +121,7 @@ class AddButton extends React.Component {
     );
     if (this.hasChoice) {
       return (
-        <React.Fragment>
+        <>
           {button}
           <AnimateHeight height={this.panelHeight} easing="ease-in-out"
                          contentClassName="add-panel">
@@ -139,7 +139,7 @@ class AddButton extends React.Component {
                 </div>
             ))}
           </AnimateHeight>
-        </React.Fragment>
+        </>
       );
     }
     return button;

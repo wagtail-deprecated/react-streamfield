@@ -350,5 +350,5 @@ export const replaceWithComponent = (string, placeholder, component) => {
       parts[i] = <span key={i} dangerouslySetInnerHTML={{__html: part}} />
     }
   }
-  return <React.Fragment>{parts}</React.Fragment>;
+  return <>{parts}</>;
 };

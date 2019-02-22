@@ -142,7 +142,7 @@ class BlockActions extends (React.Component) {
       <aside>
         <div className="actions">
           {sortableBlock ?
-            <React.Fragment>
+            <>
               <button onClick={this.moveUpHandler}
                       title="Move up" disabled={this.isFirst}>
                 {this.moveUpIcon}
@@ -151,7 +151,7 @@ class BlockActions extends (React.Component) {
                       title="Move down" disabled={this.isLast}>
                 {this.moveDownIcon}
               </button>
-            </React.Fragment>
+            </>
             :
             null}
           <button onClick={this.duplicateHandler}

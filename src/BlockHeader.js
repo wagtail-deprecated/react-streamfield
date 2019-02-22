@@ -112,10 +112,10 @@ class BlockHeader extends React.Component {
     }
 
     return (
-      <React.Fragment>
+      <>
         <h3>{icon}{title}</h3>
         {blockType}
-      </React.Fragment>
+      </>
     );
   }
 
@@ -153,13 +153,13 @@ class BlockHeader extends React.Component {
       );
     } else {
       content = (
-        <React.Fragment>
+        <>
           {this.titleAndType}
           <BlockActions fieldId={fieldId} blockId={blockId}
                         sortableBlock={sortableBlock}
                         canDuplicate={canDuplicate}
                         dragHandleRef={dragHandleRef} />
-        </React.Fragment>
+        </>
       );
     }
     return (

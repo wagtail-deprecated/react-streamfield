@@ -171,7 +171,7 @@ class Block extends React.Component {
       );
     }
     return (
-      <React.Fragment>
+      <>
         <AnimateHeight className="draggable-container"
                    height={this.draggableHeight}
                    onAnimationEnd={this.onDraggableContainerAnimationEnd}>
@@ -179,7 +179,7 @@ class Block extends React.Component {
         </AnimateHeight>
         <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
                    visible={canAdd} />
-      </React.Fragment>
+      </>
     );
   }
 }
