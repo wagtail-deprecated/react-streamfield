@@ -60,11 +60,19 @@ class RawHtmlFieldInput extends React.Component {
 
   bindChange(input) {
     if (input.type === 'hidden') {
-      new MutationObserver(() => {
+      const observer = new MutationObserver(() => {
         input.dispatchEvent(new Event('change'));
-      }).observe(input, {attributes: true, attributeFilter: ['value']});
+      });
+      observer.observe(input, {
+        attributes: true, attributeFilter: ['value'],
+      });
+      this.mutationObservers.push(observer);
     }
     input.addEventListener('change', this.onChange);
+  }
+
+  unbindChange(input) {
+    input.removeEventListener('change', this.onChange);
   }
 
   componentDidMount() {
@@ -76,6 +84,7 @@ class RawHtmlFieldInput extends React.Component {
       if (this.inputs.length === 0) {
         throw Error(`Could not find input with name "${name}"`);
       }
+      this.mutationObservers = [];
       for (let input of this.inputs) {
         this.setValue(input);
         this.bindChange(input);
@@ -84,6 +93,18 @@ class RawHtmlFieldInput extends React.Component {
       }
     }
     this.runInnerScripts();
+  }
+
+  componentWillUnmount() {
+    for (let observer of this.mutationObservers) {
+      console.log('disconnect', observer)
+      observer.disconnect();
+    }
+    if (!isStatic(this.props.blockDefinition)) {
+      for (let input of this.inputs) {
+        this.unbindChange(input);
+      }
+    }
   }
 
   onChange = event => {
