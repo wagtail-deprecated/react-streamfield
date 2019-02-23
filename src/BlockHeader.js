@@ -53,15 +53,6 @@ class BlockHeader extends React.Component {
     canDuplicate: true,
   };
 
-  get icon() {
-    const {blockDefinition} = this.props;
-    if (blockDefinition.icon !== undefined) {
-      return <span className="type-icon" dangerouslySetInnerHTML={
-        {__html: blockDefinition.icon}
-      } />;
-    }
-  }
-
   get title() {
     const {title, blockDefinition, value} = this.props;
     if (isStruct(blockDefinition)) {
@@ -92,30 +83,32 @@ class BlockHeader extends React.Component {
 
   get titleAndType() {
     const title = this.title;
-    const icon = this.icon;
+    let icon = this.props.blockDefinition.icon;
     const blockType = (
       <span className="block-type">
         {getLabel(this.props.blockDefinition)}
       </span>
     );
-    if (title === null) {
-      if (icon === null) {
-        return blockType;
-      }
-
-      return (
-        <span>
-          <h3>{icon}</h3>
-          {blockType}
-        </span>
-      );
+    if (isNA(icon)) {
+      return blockType;
     }
 
+    icon = <span className="type-icon"
+                 dangerouslySetInnerHTML={{__html: icon}} />;
+
+    if (title) {
+      return (
+        <>
+          <h3>{icon}{title}</h3>
+          {blockType}
+        </>
+      );
+    }
     return (
-      <>
+      <span>
         <h3>{icon}{title}</h3>
         {blockType}
-      </>
+      </span>
     );
   }
 
@@ -134,10 +127,10 @@ class BlockHeader extends React.Component {
 
   render() {
     const {
-      fieldId, blockId, isSimpleLayout, dragHandleProps, icons,
-      collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
+      fieldId, blockDefinition, blockId, isSimpleLayout, dragHandleProps,
+      icons, collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
     } = this.props;
-    const icon = this.icon;
+    const icon = blockDefinition.icon;
     let content;
     if (isSimpleLayout) {
       content = (

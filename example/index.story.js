@@ -408,7 +408,7 @@ storiesOf('React StreamField demo', module)
           ],
           label: 'Struct',
           html:
-            'Like for lists, we can add HTML before struct fields <BlocksContainer /> and after as well.'
+            'Like for lists, we can add HTML before struct fields <noscript data-blocks-container /> and after as well.'
         }
       ],
       value: []
