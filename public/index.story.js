@@ -176,7 +176,7 @@ storiesOf('React StreamField demo', module)
             }
           ],
           html:
-            'As you can see by this text, it’s possible <strong>to insert some HTML</strong> before or after the contained blocks. <BlocksContainer /> You can even have multiple times the same blocks container. <BlocksContainer /> Can’t think of a case where that would be useful, but still, it’s possible if you really want it.'
+            'As you can see by this text, it’s possible <strong>to insert some HTML</strong> before or after the contained blocks. <noscript data-blocks-container /> You can even have multiple times the same blocks container. <noscript data-blocks-container /> Can’t think of a case where that would be useful, but still, it’s possible if you really want it.'
         }
       ],
       value: []
@@ -408,7 +408,7 @@ storiesOf('React StreamField demo', module)
           ],
           label: 'Struct',
           html:
-            'Like for lists, we can add HTML before struct fields <BlocksContainer /> and after as well.'
+            'Like for lists, we can add HTML before struct fields <noscript data-blocks-container /> and after as well.'
         }
       ],
       value: []
@@ -486,11 +486,12 @@ storiesOf('React StreamField demo', module)
     const props = {
       required: true,
       icons: {
-        moveUp: '⇑',
-        moveDown: '⇓',
-        duplicate: '+',
-        delete: '-',
-        grip: '↕'
+        add: '<i aria-hidden="true">⊕</i>',
+        moveUp: '<i aria-hidden="true">⇑</i>',
+        moveDown: '<i aria-hidden="true">⇓</i>',
+        duplicate: '<i aria-hidden="true">⎘</i>',
+        delete: '<i aria-hidden="true">×</i>',
+        grip: '<i aria-hidden="true">↕</i>'
       },
       blockDefinitions: [
         {
