@@ -51,6 +51,53 @@ You can also check out
 [wagtail-react-streamfield](https://github.com/noripyt/wagtail-react-streamfield)
 to see what an integration of this field looks like!
 
+
+## Internet Explorer 11 support
+
+These JavaScript features are used in react-streamfield that are not supported
+natively in Internet Explorer 11: 
+
+- `Element.closest(…)`
+- `Array.find(…)`
+- `Object.entries(…)`
+- `CustomEvent`
+
+When using react-streamfield for Internet Explorer 11, you need to include
+the polyfills found in the section below, otherwise the package will not work
+properly.
+
+`position: sticky;`, a CSS feature used in react-streamfield to give a better
+position of type icons in `SIMPLE` layout, is also not supported
+by Internet Explorer 11. No polyfill can be used, the type icons is just less
+fancy on Internet Explorer 11.
+
+
+## Polyfills
+
+React-streamfield uses some JavaScript features only available starting
+ECMAScript 2015. Some of these features are not handled by browsers such as
+Internet Explorer 11.
+
+To maintain compatibility when using react-streamfield, install and import
+these polyfills (a polyfill adds a missing JavaScript browser feature):
+
+```json
+{
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "element-closest": "^3.0.1",
+    "custom-event-polyfill": "^1.0.6"
+  }
+}
+```
+
+```javascript
+import 'core-js/shim'
+import 'element-closest';
+import 'custom-event-polyfill';
+```
+ 
+
 ## Webpack stats
 
 https://noripyt.github.io/react-streamfield/public/webpack-stats.html
