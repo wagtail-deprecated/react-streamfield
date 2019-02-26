@@ -55,7 +55,8 @@ class BlockContent extends React.Component {
         return blocksContainer;
       }
       return replaceWithComponent(
-        html, '<noscript data-blocks-container />', blocksContainer);
+        html, '<noscript data-blocks-container></noscript>',
+        blocksContainer);
     }
     return <FieldInput fieldId={fieldId} blockId={blockId} />;
   }
