@@ -25,7 +25,7 @@ storiesOf('React StreamField demo', module)
       ],
       value: [{ type: 'title', value: 'Wagtail is awesome!' }]
     };
-    return <StreamField {...props} id='stream-1' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('1 open block type', () => {
     const props = {
@@ -41,7 +41,7 @@ storiesOf('React StreamField demo', module)
       ],
       value: [{ type: 'title', value: 'Wagtail is awesome!' }]
     };
-    return <StreamField {...props} id='stream-2' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('1 static block type', () => {
     const props = {
@@ -55,7 +55,7 @@ storiesOf('React StreamField demo', module)
       ],
       value: [{ type: 'static' }]
     };
-    return <StreamField {...props} id='stream-3' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('1 block type, default value', () => {
     const props = {
@@ -71,7 +71,7 @@ storiesOf('React StreamField demo', module)
       ],
       value: [{ type: 'title', value: 'Wagtail is awesome!' }]
     };
-    return <StreamField {...props} id='stream-4' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('1 block type, custom per-value HTML', () => {
     const props = {
@@ -94,7 +94,7 @@ storiesOf('React StreamField demo', module)
         { type: 'title', value: 'This time, no custom HTML.' }
       ]
     };
-    return <StreamField {...props} id='stream-5' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('2 block types', () => {
     const props = {
@@ -118,7 +118,7 @@ storiesOf('React StreamField demo', module)
         { type: 'text', value: 'And it’s always getting better 😃' }
       ]
     };
-    return <StreamField {...props} id='stream-6' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('List block, 1 child block type', () => {
     const props = {
@@ -142,7 +142,7 @@ storiesOf('React StreamField demo', module)
       ]
     };
 
-    return <StreamField {...props} id='stream-7' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('List block, 1 child block type, default value', () => {
     const props = {
@@ -161,7 +161,7 @@ storiesOf('React StreamField demo', module)
       ],
       value: []
     };
-    return <StreamField {...props} id='stream-8' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('List block, 1 child block type, custom HTML', () => {
     const props = {
@@ -176,12 +176,12 @@ storiesOf('React StreamField demo', module)
             }
           ],
           html:
-            'As you can see by this text, it’s possible <strong>to insert some HTML</strong> before or after the contained blocks. <noscript data-blocks-container /> You can even have multiple times the same blocks container. <noscript data-blocks-container /> Can’t think of a case where that would be useful, but still, it’s possible if you really want it.'
+            'As you can see by this text, it’s possible <strong>to insert some HTML</strong> before or after the contained blocks. <noscript data-blocks-container></noscript> You can even have multiple times the same blocks container. <noscript data-blocks-container></noscript> Can’t think of a case where that would be useful, but still, it’s possible if you really want it.'
         }
       ],
       value: []
     };
-    return <StreamField {...props} id='stream-9' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('List block, 2 children block types with groups', () => {
     const props = {
@@ -228,7 +228,7 @@ storiesOf('React StreamField demo', module)
         }
       ]
     };
-    return <StreamField {...props} id='stream-10' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('Simple block layout', () => {
     const props = {
@@ -261,7 +261,7 @@ storiesOf('React StreamField demo', module)
         { type: 'static' }
       ]
     };
-    return <StreamField {...props} id='stream-11' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('Mixed block layouts', () => {
     const props = {
@@ -293,7 +293,20 @@ storiesOf('React StreamField demo', module)
         { type: 'static' }
       ]
     };
-    return <StreamField {...props} id='stream-12' />;
+    return <StreamField {...props} id='stream' />;
+  })
+  .add('Gutter of add buttons', () => {
+    const props = {
+      required: true,
+      gutteredAdd: true,
+      blockDefinitions: [
+        {
+          key: 'text',
+        }
+      ],
+      value: []
+    };
+    return <StreamField {...props} id='stream' />
   })
   .add('Maximum number of blocks', () => {
     const props = {
@@ -319,7 +332,7 @@ storiesOf('React StreamField demo', module)
         }
       ]
     };
-    return <StreamField {...props} id='stream-13' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('Error in one of the nested blocks', () => {
     const props = {
@@ -345,7 +358,7 @@ storiesOf('React StreamField demo', module)
         }
       ]
     };
-    return <StreamField {...props} id='stream-14' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('Struct block', () => {
     const props = {
@@ -366,7 +379,7 @@ storiesOf('React StreamField demo', module)
       ],
       value: []
     };
-    return <StreamField {...props} id='stream-15' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('Struct block with default value', () => {
     const props = {
@@ -390,7 +403,7 @@ storiesOf('React StreamField demo', module)
       value: []
     };
 
-    return <StreamField {...props} id='stream-16' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('Struct block with custom HTML', () => {
     const props = {
@@ -408,12 +421,12 @@ storiesOf('React StreamField demo', module)
           ],
           label: 'Struct',
           html:
-            'Like for lists, we can add HTML before struct fields <noscript data-blocks-container /> and after as well.'
+            'Like for lists, we can add HTML before struct fields <noscript data-blocks-container></noscript> and after as well.'
         }
       ],
       value: []
     };
-    return <StreamField {...props} id='stream-17' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('Struct block as a struct block field', () => {
     const props = {
@@ -449,7 +462,7 @@ storiesOf('React StreamField demo', module)
         }
       ]
     };
-    return <StreamField {...props} id='stream-18' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('StructBlock as a list block child', () => {
     const props = {
@@ -477,10 +490,10 @@ storiesOf('React StreamField demo', module)
       ],
       value: []
     };
-    return <StreamField {...props} id='stream-19' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('Complex nested StreamField', () => {
-    return <StreamField {...complexNestedStreamField} id='stream-20' />;
+    return <StreamField {...complexNestedStreamField} id='stream' />;
   })
   .add('Custom action icons', () => {
     const props = {
@@ -504,7 +517,7 @@ storiesOf('React StreamField demo', module)
       value: [{ type: 'title', value: 'Wagtail is awesome!' }]
     };
 
-    return <StreamField {...props} id='stream-21' />;
+    return <StreamField {...props} id='stream' />;
   })
   .add('JavaScript widget', () => {
     const props = {
@@ -520,5 +533,5 @@ storiesOf('React StreamField demo', module)
       ],
       value: [],
     };
-    return <StreamField {...props} id="stream-22" />;
+    return <StreamField {...props} id="stream" />;
   });

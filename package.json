@@ -1,6 +1,6 @@
 {
   "name": "react-streamfield",
-  "version": "0.6.10",
+  "version": "0.7.0",
   "author": "NoriPyt <contact@noripyt.com> (https://noripyt.com)",
   "description": "Powerful field for inserting multiple blocks with nesting.",
   "keywords": [
@@ -90,11 +90,16 @@
       "@babel/preset-react"
     ],
     "plugins": [
-      "@babel/plugin-proposal-class-properties",
       [
         "@babel/plugin-proposal-decorators",
         {
           "legacy": true
+        }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties",
+        {
+          "loose": true
         }
       ],
       "@babel/plugin-proposal-object-rest-spread",
