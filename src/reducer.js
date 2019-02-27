@@ -21,13 +21,14 @@ export default (state=initialState, action) => {
     case 'INITIALIZE_STREAM_FIELD': {
       const data = deepCopy(action.data);
       const {
-        required, minNum, maxNum, icons, labels, blockDefinitions, isMobile,
-        value,
+        required, minNum, maxNum, icons, labels, gutteredAdd,
+        blockDefinitions, isMobile, value,
       } = data;
       state = {
         ...state,
         [action.id]: {
-          required, minNum, maxNum, icons, labels, blockDefinitions, isMobile,
+          required, minNum, maxNum, icons, labels, gutteredAdd,
+          blockDefinitions, isMobile,
         },
       };
       return valueToState(state, action.id, value);

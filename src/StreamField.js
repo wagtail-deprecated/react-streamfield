@@ -112,6 +112,7 @@ class StreamField extends React.Component {
       duplicate: PropTypes.string,
       delete: PropTypes.string,
     }),
+    gutteredAdd: PropTypes.bool,
     blockDefinitions: PropTypes.arrayOf(BlockDefinitionType).isRequired,
     value: PropTypes.arrayOf(BlockValueType).isRequired,
   };
@@ -145,15 +146,15 @@ class StreamField extends React.Component {
 
   componentDidMount() {
     const {
-      initializeStreamField, required, minNum, maxNum, blockDefinitions, value,
+      initializeStreamField, required, minNum, maxNum, gutteredAdd,
+      blockDefinitions, value,
     } = this.props;
     const defaultProps = StreamFieldDefaultProps;
     const icons = {...defaultProps.icons, ...this.props.icons};
     const labels = {...defaultProps.labels, ...this.props.labels};
     initializeStreamField({
-      required, minNum, maxNum, icons, labels, blockDefinitions,
-      isMobile: getIsMobile(),
-      value,
+      required, minNum, maxNum, icons, labels, gutteredAdd,
+      blockDefinitions, isMobile: getIsMobile(), value,
     });
     window.addEventListener('resize', this.onWindowResize);
   }

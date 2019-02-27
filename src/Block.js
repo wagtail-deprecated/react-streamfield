@@ -171,15 +171,13 @@ class Block extends React.Component {
       );
     }
     return (
-      <>
-        <AnimateHeight className="draggable-container"
-                   height={this.draggableHeight}
-                   onAnimationEnd={this.onDraggableContainerAnimationEnd}>
-          {this.wrapSortable(blockContent)}
-        </AnimateHeight>
+      <AnimateHeight className="draggable-container"
+                     height={this.draggableHeight}
+                     onAnimationEnd={this.onDraggableContainerAnimationEnd}>
+        {this.wrapSortable(blockContent)}
         <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
                    visible={canAdd} />
-      </>
+      </AnimateHeight>
     );
   }
 }

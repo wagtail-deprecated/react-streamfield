@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import {connect} from 'react-redux';
 import {Droppable} from 'react-beautiful-dnd';
 import Block from './Block';
@@ -31,6 +32,7 @@ import {getNestedBlockDefinition, isNA} from './processing/utils';
   }
   return {
     minNum, maxNum,
+    gutteredAdd: fieldData.gutteredAdd,
     blocksIds: blocksIds,
   };
 })
@@ -52,16 +54,8 @@ class BlocksContainer extends React.Component {
     );
   }
 
-  static getClassName(snapshot) {
-    let className = 'children-container';
-    if (snapshot.isDraggingOver) {
-      className += ' is-dragging';
-    }
-    return className;
-  }
-
   render() {
-    const {fieldId, id, blocksIds, maxNum} = this.props;
+    const {fieldId, id, blocksIds, maxNum, gutteredAdd} = this.props;
     const droppableId = `${fieldId}-${id}`;
     const num = blocksIds.length;
     const canAdd = num < maxNum;
@@ -69,7 +63,10 @@ class BlocksContainer extends React.Component {
       <Droppable droppableId={droppableId} type={droppableId}>
         {(provided, snapshot) => (
           <div ref={provided.innerRef}
-               className={BlocksContainer.getClassName(snapshot)}>
+               className={classNames(
+                 'children-container',
+                 snapshot.isDraggingOver && 'is-dragging',
+                 gutteredAdd && 'guttered-add')}>
             <AddButton fieldId={fieldId} parentId={id}
                        open={blocksIds.length === 0} visible={canAdd} />
             {blocksIds.map(blockId => this.renderBlock(blockId, canAdd))}
