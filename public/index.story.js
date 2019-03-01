@@ -4,6 +4,11 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
+// Polyfills
+import 'core-js/shim'
+import 'element-closest';
+import 'custom-event-polyfill';
+
 import { StreamField, streamFieldReducer } from '../src';
 
 import { complexNestedStreamField } from './samples'

@@ -42,10 +42,6 @@ class BlocksContainer extends React.Component {
     id: PropTypes.string,
   };
 
-  static defaultProps = {
-    id: null,
-  };
-
   renderBlock(blockId, canAdd=true) {
     return (
       <Block key={blockId}
