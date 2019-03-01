@@ -52,6 +52,8 @@
     "babel-jest": "^23.6.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
     "css-loader": "^1.0.1",
+    "custom-event-polyfill": "^1.0.6",
+    "element-closest": "^3.0.1",
     "jest": "^23.6.0",
     "npx": "^10.2.0",
     "postcss-cli": "^6.1.1",
