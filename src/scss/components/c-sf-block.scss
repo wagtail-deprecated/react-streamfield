@@ -1,206 +1,193 @@
 .c-sf-block {
-    $c-root: &;
-    position: relative;
-    display: flex;
-    padding: $block-full-padding;
+    flex: 1 1 auto;
+    width: 0; // Trick to prevent overflow from the title.
+    border: 1px solid $block-border-color;
+    border-radius: $border-radius;
+    background: white;
+    transition: border-color $hover-transition-duration ease-in-out;
+    transition-property: border-color, box-shadow;
 
     &.has-error {
-        #{$c-root}__inner {
+        border-color: $error-border-color;
+
+        > header {
+            background: $error-background-color;
+        }
+
+        > .content-container > .content {
             border-color: $error-border-color;
+        }
+
+        &:hover,
+        &:focus,
+        &:focus-within {
+            border-color: $error-border-color-focus;
 
             > header {
                 background: $error-background-color;
             }
 
             > .content-container > .content {
-                border-color: $error-border-color;
+                border-color: $error-border-color-focus;
+            }
+        }
+    }
+
+    &.SIMPLE {
+        display: flex;
+        flex-flow: row nowrap;
+
+        > header {
+            position: relative;
+            flex: 0 0 auto;
+            padding: $header-padding;
+
+            h3 {
+                position: sticky;
+                top: $grid-gutter-width / 4;
+                bottom: $grid-gutter-width / 4;
             }
         }
 
-        &:hover,
-        &:focus,
-        &:focus-within {
-            #{$c-root}__inner {
-                border-color: $error-border-color-focus;
+        > .content-container {
+            flex: 1 1 auto;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-around;
+            width: 0; // Trick to prevent content from overflowing, while
+            // allowing for some overflow, like Draftail tooltips.
+        }
 
-                > header {
-                    background: $error-background-color;
+        > aside {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: flex-end;
+
+            .block-type {
+                margin: 0 $header-padding $header-padding $header-padding;
+            }
+        }
+    }
+
+    &.COLLAPSIBLE {
+        overflow: hidden;
+
+        > header {
+            h3 {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+
+                .type-icon {
+                    margin-right: $header-padding;
+                }
+            }
+
+            > aside {
+                flex: 0 0 auto;
+            }
+        }
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: $header-padding;
+        user-select: none;
+        transition: background-color $hover-transition-duration ease-in-out;
+        cursor: default;
+
+        &.collapsible {
+            cursor: pointer;
+        }
+
+        &.sortable {
+            cursor: grab;
+        }
+
+        h3 {
+            display: inline-block;
+            flex: 1 1 auto;
+            margin: 0;
+            color: $header-text-color;
+            vertical-align: middle;
+
+            .type-icon {
+                color: $header-text-color;
+                transition: color $hover-transition-duration ease-in-out;
+            }
+        }
+    }
+
+    header,
+    & {
+        .block-type {
+            margin-right: $header-padding * 2;
+            text-transform: uppercase;
+            text-align: right;
+            font-size: 80%;
+            line-height: 100%;
+            color: $header-text-color;
+            vertical-align: middle;
+            user-select: none;
+        }
+
+        > aside > .actions {
+            white-space: nowrap;
+
+            > button {
+                appearance: none;
+                border: none;
+                padding: $header-padding;
+                background: none;
+                cursor: pointer;
+                color: $header-text-color;
+                opacity: 1;
+                transition: opacity $hover-transition-duration ease-in-out;
+                transition-property: opacity, color;
+                font-size: $action-font-size;
+
+                i {
+                    font-style: normal;
                 }
 
-                > .content-container > .content {
-                    border-color: $error-border-color-focus;
+                &[disabled] {
+                    opacity: 0.2;
+                    pointer-events: none;
                 }
             }
         }
     }
 
-    &__inner {
-        flex: 1 1 auto;
-        width: 0; // Trick to prevent overflow from the title.
-        border: 1px solid $block-border-color;
-        border-radius: $border-radius;
-        background: white;
-        transition: border-color $hover-transition-duration ease-in-out;
-        transition-property: border-color, box-shadow;
-
-        &.SIMPLE {
-            display: flex;
-            flex-flow: row nowrap;
-
-            > header {
-                position: relative;
-                flex: 0 0 auto;
-                padding: $header-padding;
-
-                h3 {
-                    position: sticky;
-                    top: $grid-gutter-width / 4;
-                    bottom: $grid-gutter-width / 4;
-                }
-            }
-
-            > .content-container {
-                flex: 1 1 auto;
-                display: flex;
-                flex-flow: column nowrap;
-                justify-content: space-around;
-                width: 0; // Trick to prevent content from overflowing, while
-                // allowing for some overflow, like Draftail tooltips.
-            }
-
-            > aside {
-                display: flex;
-                flex-flow: column nowrap;
-                align-items: flex-end;
-
-                .block-type {
-                    margin: 0 $header-padding $header-padding $header-padding;
-                }
-            }
-        }
-
-        &.COLLAPSIBLE {
-            overflow: hidden;
-
-            > header {
-                h3 {
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-
-                    .type-icon {
-                        margin-right: $header-padding;
-                    }
-                }
-
-                > aside {
-                    flex: 0 0 auto;
-                }
-            }
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-left: $header-padding;
-            user-select: none;
-            transition: background-color $hover-transition-duration ease-in-out;
-            cursor: default;
-
-            &.collapsible {
-                cursor: pointer;
-            }
-
-            &.sortable {
-                cursor: grab;
-            }
-
-            h3 {
-                display: inline-block;
-                flex: 1 1 auto;
-                margin: 0;
-                color: $header-text-color;
-                vertical-align: middle;
-
-                .type-icon {
-                    color: $header-text-color;
-                    transition: color $hover-transition-duration ease-in-out;
-                }
-            }
-        }
-
-        header,
-        & {
-            .block-type {
-                margin-right: $header-padding * 2;
-                text-transform: uppercase;
-                text-align: right;
-                font-size: 80%;
-                line-height: 100%;
-                color: $header-text-color;
-                vertical-align: middle;
-                user-select: none;
-            }
-
-            > aside > .actions {
-                white-space: nowrap;
-
-                > button {
-                    appearance: none;
-                    border: none;
-                    padding: $header-padding;
-                    background: none;
-                    cursor: pointer;
-                    color: $header-text-color;
-                    opacity: 1;
-                    transition: opacity $hover-transition-duration ease-in-out;
-                    transition-property: opacity, color;
-                    font-size: $action-font-size;
-
-                    i {
-                        font-style: normal;
-                    }
-
-                    &[disabled] {
-                        opacity: 0.2;
-                        pointer-events: none;
-                    }
-                }
-            }
-        }
-
-        .content-container > .content {
-            padding: 12px;
-        }
+    .content-container > .content {
+        padding: 12px;
     }
 
     &:hover,
     &:focus,
     &:focus-within {
-        #{$c-root}__inner {
+        border-color: $block-border-color-focus;
+        box-shadow: 3px 2px 3px -1px rgba(0, 0, 0, 0.1);
+
+        > header {
+            background: $block-hover-background;
+
+            h3 {
+                color: $header-text-color-focus;
+
+                .type-icon {
+                    color: $header-text-color-focus;
+                }
+            }
+
+            > aside > .actions > button {
+                color: $header-text-color-focus;
+            }
+        }
+
+        > .content-container > .content {
             border-color: $block-border-color-focus;
-            box-shadow: 3px 2px 3px -1px rgba(0, 0, 0, 0.1);
-
-            > header {
-                background: $block-hover-background;
-
-                h3 {
-                    color: $header-text-color-focus;
-
-                    .type-icon {
-                        color: $header-text-color-focus;
-                    }
-                }
-
-                > aside > .actions > button {
-                    color: $header-text-color-focus;
-                }
-            }
-
-            > .content-container > .content {
-                border-color: $block-border-color-focus;
-            }
         }
     }
 }
