@@ -111,7 +111,7 @@ class AddButton extends React.Component {
     const button = (
       <button onClick={this.toggle} title={labels.add}
               className={classNames(
-                'add', visible && 'visible',
+                'c-sf-add-button', visible && 'visible',
                 (this.state.open && this.hasChoice) && 'close')}
               dangerouslySetInnerHTML={{__html: icons.add}}>
       </button>

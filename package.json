@@ -125,7 +125,7 @@
     }
   },
   "scripts": {
-    "build": "rollup -c && build-storybook -c .storybook -s example -o public && sass src/index.scss | npx postcss --use autoprefixer --no-map > dist/react-streamfield.css",
+    "build": "rollup -c && build-storybook -c .storybook -s example -o public && sass src/scss/index.scss | npx postcss --use autoprefixer --no-map > dist/react-streamfield.css",
     "start": "start-storybook -c .storybook -s example -p 9001",
     "test": "jest",
     "test:watch": "jest --watch",

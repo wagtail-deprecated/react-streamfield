@@ -23,27 +23,12 @@ $error-background-color: #fbefef;
 $screen-xs-max: 799px;
 $screen-sm-min: 800px;
 
-.children-container {
-  position: relative;
-  padding: $children-container-padding 0
-           $children-container-padding 0;
-  transition: padding $hover-transition-duration ease-in-out;
-  &.guttered-add {
-    @media (min-width: $screen-sm-min) {
-      padding-left: $add-button-size;
-      button.add {
-        position: absolute;
-        width: $add-button-size;
-        transform: translate(-100%, -50%);
-      }
-    }
-  }
-  &.is-dragging {
-    button.add.visible {
-      opacity: 0;
-      pointer-events: none;
-    }
-  }
+@import 'config';
+
+@import 'components/c-sf-container';
+@import 'components/c-sf-add-button';
+
+
   .block {
     position: relative;
     display: flex;
@@ -212,38 +197,7 @@ $screen-sm-min: 800px;
       }
     }
   }
-  button.add {
-    width: 100%;
-    height: $add-button-size;
-    appearance: none;
-    border: none;
-    color: $teal;
-    font-weight: bold;
-    background: none;
-    padding: 0;
-    cursor: pointer;
-    outline: none;
-    backface-visibility: hidden;
-    overflow: hidden;  // Makes the rotated i box not clickable.
-    user-select: none;
-    opacity: 0;
-    transition: opacity $hover-transition-duration ease-in-out;
-    pointer-events: none;
-    &.visible {
-      opacity: 1;
-      pointer-events: unset;
-    }
-    i {
-      display: block;
-      transition: transform $add-transition-duration $bounce-transition-timing;
-      font-style: normal;
-      font-size: $add-button-font-size;
-      line-height: $add-button-font-size;
-    }
-    &.close i {
-      transform: rotate(45deg);
-    }
-  }
+
 
   label {
     display: block;
@@ -304,4 +258,3 @@ $screen-sm-min: 800px;
       }
     }
   }
-}
