@@ -62,7 +62,7 @@ class BlocksContainer extends React.Component {
                className={classNames(
                  'c-sf-container',
                  snapshot.isDraggingOver && 'is-dragging',
-                 gutteredAdd && 'guttered-add')}>
+                 gutteredAdd && 'c-sf-container--add-in-gutter')}>
             <AddButton fieldId={fieldId} parentId={id}
                        open={blocksIds.length === 0} visible={canAdd} />
             {blocksIds.map(blockId => this.renderBlock(blockId, canAdd))}

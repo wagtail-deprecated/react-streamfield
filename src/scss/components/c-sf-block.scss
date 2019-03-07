@@ -1,11 +1,16 @@
-// TODO: Reduce nesting further.
+// TODO: Reduce nesting further by splitting out more components.
+//
 // Theres quite a lot of nesting in here which makes parsing some segments difficult.
 // Some of this is to deal with the fact that .c-sf-block can contain many .c-sf-block's and so is
-// legitimate. However the new classes adequately sanitise streamfield only CSS so am leaving this for
+// legitimate. A lot of these would ideally be their own components (eg the actions) however there
+// is a lot of interdependancy of the elements because of COLLAPSIBLE vs SIMPLE vs default which
+// makes this hard without fairly intensive rethinking of the HTML.
+//
+// However, the new classes adequately sanitise streamfield only CSS so am leaving this for
 // now to avoid blocking the release of the new Streamfield. -@jonnyscholes
 
 // TODO: Consider visually moving .c-sf-block__type and .c-sf-block__actions based on COLLAPSIBLE vs
-// SIMPLE vs default instead of moving HTML around. -@jonnyscholes
+// SIMPLE vs default using CSS only instead of moving HTML around. -@jonnyscholes
 
 .c-sf-block {
     flex: 1 1 auto;
@@ -25,11 +30,11 @@
         transition: background-color $hover-transition-duration ease-in-out;
         cursor: default;
 
-        &.collapsible {
+        &.is-collapsible {
             cursor: pointer;
         }
 
-        &.sortable {
+        &.is-sortable {
             cursor: grab;
         }
 
