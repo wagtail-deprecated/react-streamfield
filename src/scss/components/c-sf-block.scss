@@ -68,8 +68,12 @@
             transition-property: opacity, color;
             font-size: $action-font-size;
 
+
             i {
                 font-style: normal;
+                &:before {
+                    margin: 0;
+                }
             }
 
             &[disabled] {
