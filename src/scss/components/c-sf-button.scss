@@ -1,0 +1,23 @@
+.c-sf-button {
+  margin: $grid-gutter-width / 4;
+  appearance: none;
+  background: $teal;
+  color: white;
+  padding: 0;
+  border: none;
+  border-radius: $border-radius;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+  &__icon,
+  &__label {
+    display: inline-block;
+    padding: 6px 8px;
+  }
+  &__icon {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  &__label {
+    text-transform: uppercase;
+  }
+}

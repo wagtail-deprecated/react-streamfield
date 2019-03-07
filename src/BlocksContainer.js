@@ -60,7 +60,7 @@ class BlocksContainer extends React.Component {
         {(provided, snapshot) => (
           <div ref={provided.innerRef}
                className={classNames(
-                 'streamfield-container',
+                 'c-sf-container',
                  snapshot.isDraggingOver && 'is-dragging',
                  gutteredAdd && 'guttered-add')}>
             <AddButton fieldId={fieldId} parentId={id}

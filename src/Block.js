@@ -110,7 +110,7 @@ class Block extends React.Component {
       layout, isSimpleLayout, fieldId, id, parentId, index, hasError,
       collapsible, sortable, canAdd,
     } = this.props;
-    const className = `block${hasError ? ' has-error' : ''}`;
+    const className = `c-sf-block${hasError ? ' has-error' : ''}`;
     if (sortable) {
       return (
         <Draggable draggableId={id} index={index}
@@ -119,7 +119,7 @@ class Block extends React.Component {
             <article className={className}
                      ref={provided.innerRef}
                      {...provided.draggableProps}>
-              <div className={`block-container ${layout}`}>
+              <div className={`c-sf-block__inner ${layout}`}>
                 <BlockHeader fieldId={fieldId} blockId={id}
                              collapsibleBlock={collapsible}
                              sortableBlock={sortable}
