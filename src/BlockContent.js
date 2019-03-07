@@ -68,18 +68,18 @@ class BlockContent extends React.Component {
   render() {
     const {isSimpleLayout, blockDefinition, collapsible} = this.props;
     const content = this.html;
-    const className = classNames('content', blockDefinition.className);
+    const className = classNames('c-sf-block__content-inner', blockDefinition.className);
     if (collapsible && !isSimpleLayout) {
       return (
         <AnimateHeight height={this.height} easing="ease-in-out"
-                       className="content-container"
+                       className="c-sf-block__content"
                        contentClassName={className}>
           {content}
         </AnimateHeight>
       );
     }
     return (
-      <div className="content-container">
+      <div className="c-sf-block__content">
         <div className={className}>
           {content}
         </div>

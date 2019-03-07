@@ -3,12 +3,12 @@ body {
   padding: 15px;
 }
 
-.c-sf-block .content-container .content.full {
+.c-sf-block .c-sf-block__content-inner.full {
   padding: 0;
 }
 
-.c-sf-block .content-container .content.full input,
-.c-sf-block .content-container .content.full textarea {
+.c-sf-block .c-sf-block__content-inner.full input,
+.c-sf-block .c-sf-block__content-inner.full textarea {
   display: block;
   min-width: 100%;
   max-width: 100%;
@@ -18,7 +18,7 @@ body {
   outline: none;
 }
 
-.c-sf-block .content-container .content.full input {
+.c-sf-block .c-sf-block__content-inner.full input {
   font-size: 30px;
 }
 

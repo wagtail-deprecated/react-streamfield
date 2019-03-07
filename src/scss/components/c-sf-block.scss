@@ -7,89 +7,7 @@
     transition: border-color $hover-transition-duration ease-in-out;
     transition-property: border-color, box-shadow;
 
-    &.has-error {
-        border-color: $error-border-color;
-
-        > header {
-            background: $error-background-color;
-        }
-
-        > .content-container > .content {
-            border-color: $error-border-color;
-        }
-
-        &:hover,
-        &:focus,
-        &:focus-within {
-            border-color: $error-border-color-focus;
-
-            > header {
-                background: $error-background-color;
-            }
-
-            > .content-container > .content {
-                border-color: $error-border-color-focus;
-            }
-        }
-    }
-
-    &.SIMPLE {
-        display: flex;
-        flex-flow: row nowrap;
-
-        > header {
-            position: relative;
-            flex: 0 0 auto;
-            padding: $header-padding;
-
-            h3 {
-                position: sticky;
-                top: $grid-gutter-width / 4;
-                bottom: $grid-gutter-width / 4;
-            }
-        }
-
-        > .content-container {
-            flex: 1 1 auto;
-            display: flex;
-            flex-flow: column nowrap;
-            justify-content: space-around;
-            width: 0; // Trick to prevent content from overflowing, while
-            // allowing for some overflow, like Draftail tooltips.
-        }
-
-        > aside {
-            display: flex;
-            flex-flow: column nowrap;
-            align-items: flex-end;
-
-            .block-type {
-                margin: 0 $header-padding $header-padding $header-padding;
-            }
-        }
-    }
-
-    &.COLLAPSIBLE {
-        overflow: hidden;
-
-        > header {
-            h3 {
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-
-                .type-icon {
-                    margin-right: $header-padding;
-                }
-            }
-
-            > aside {
-                flex: 0 0 auto;
-            }
-        }
-    }
-
-    header {
+    &__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -106,62 +24,135 @@
             cursor: grab;
         }
 
-        h3 {
+        &__title {
             display: inline-block;
             flex: 1 1 auto;
             margin: 0;
             color: $header-text-color;
             vertical-align: middle;
 
-            .type-icon {
-                color: $header-text-color;
+            &__icon {
+                color: currentColor;
                 transition: color $hover-transition-duration ease-in-out;
             }
         }
     }
 
-    header,
-    & {
-        .block-type {
-            margin-right: $header-padding * 2;
-            text-transform: uppercase;
-            text-align: right;
-            font-size: 80%;
-            line-height: 100%;
-            color: $header-text-color;
-            vertical-align: middle;
-            user-select: none;
+    &__content {
+        &-inner {
+            padding: 12px;
         }
+    }
 
-        > aside > .actions {
-            white-space: nowrap;
+    &__actions {
+        white-space: nowrap;
 
-            > button {
-                appearance: none;
-                border: none;
-                padding: $header-padding;
-                background: none;
-                cursor: pointer;
-                color: $header-text-color;
-                opacity: 1;
-                transition: opacity $hover-transition-duration ease-in-out;
-                transition-property: opacity, color;
-                font-size: $action-font-size;
+        &__single {
+            appearance: none;
+            border: 0 none;
+            padding: $header-padding;
+            background: none;
+            cursor: pointer;
+            color: $header-text-color;
+            opacity: 1;
+            transition: opacity $hover-transition-duration ease-in-out;
+            transition-property: opacity, color;
+            font-size: $action-font-size;
 
-                i {
-                    font-style: normal;
-                }
+            i {
+                font-style: normal;
+            }
 
-                &[disabled] {
-                    opacity: 0.2;
-                    pointer-events: none;
-                }
+            &[disabled] {
+                opacity: 0.2;
+                pointer-events: none;
             }
         }
     }
 
-    .content-container > .content {
-        padding: 12px;
+    &__type {
+        margin-right: $header-padding * 2;
+        text-transform: uppercase;
+        text-align: right;
+        font-size: 80%;
+        line-height: 100%;
+        color: $header-text-color;
+        vertical-align: middle;
+        user-select: none;
+    }
+
+    &.has-error {
+        border-color: $error-border-color;
+
+        > .c-sf-block__header {
+            background: $error-background-color;
+        }
+
+        &:hover,
+        &:focus,
+        &:focus-within {
+            border-color: $error-border-color-focus;
+
+            > .c-sf-block__header {
+                background: $error-background-color;
+            }
+        }
+    }
+
+    &.SIMPLE {
+        display: flex;
+        flex-flow: row nowrap;
+
+        > .c-sf-block__header {
+            position: relative;
+            flex: 0 0 auto;
+            padding: $header-padding;
+
+            .c-sf-block__header__title {
+                position: sticky;
+                top: $grid-gutter-width / 4;
+                bottom: $grid-gutter-width / 4;
+            }
+        }
+
+        > .c-sf-block__content {
+            flex: 1 1 auto;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-around;
+            width: 0; // Trick to prevent content from overflowing, while
+            // allowing for some overflow, like Draftail tooltips.
+        }
+
+        > .c-sf-block__aside {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: flex-end;
+
+            .c-sf-block__type {
+                margin: 0 $header-padding $header-padding $header-padding;
+            }
+        }
+    }
+
+    &.COLLAPSIBLE {
+        overflow: hidden;
+
+        > .c-sf-block__header {
+            .c-sf-block__header__title {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .c-sf-block__header__title__icon {
+                margin-right: $header-padding;
+            }
+
+            > .c-sf-block__aside {
+                flex: 0 0 auto;
+            }
+        }
     }
 
     &:hover,
@@ -170,24 +161,13 @@
         border-color: $block-border-color-focus;
         box-shadow: 3px 2px 3px -1px rgba(0, 0, 0, 0.1);
 
-        > header {
+        > .c-sf-block__header {
             background: $block-hover-background;
 
-            h3 {
-                color: $header-text-color-focus;
-
-                .type-icon {
-                    color: $header-text-color-focus;
-                }
-            }
-
-            > aside > .actions > button {
+            .c-sf-block__header__title,
+            .c-sf-block__actions__single {
                 color: $header-text-color-focus;
             }
-        }
-
-        > .content-container > .content {
-            border-color: $block-border-color-focus;
         }
     }
 }

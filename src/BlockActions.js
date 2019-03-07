@@ -110,27 +110,31 @@ class BlockActions extends React.Component {
       icons, labels,
     } = this.props;
     return (
-      <aside>
-        <div className="actions">
+      <aside className="c-sf-block__aside">
+        <div className="c-sf-block__actions">
           {sortableBlock ?
             <>
-              <button onClick={this.moveUpHandler}
+              <button className="c-sf-block__actions__single"
+                      onClick={this.moveUpHandler}
                       title={labels.moveUp} disabled={this.isFirst}
                       dangerouslySetInnerHTML={{__html: icons.moveUp}} />
-              <button onClick={this.moveDownHandler}
+              <button className="c-sf-block__actions__single"
+                      onClick={this.moveDownHandler}
                       title={labels.moveDown} disabled={this.isLast}
                       dangerouslySetInnerHTML={{__html: icons.moveDown}} />
             </>
             :
             null}
-          <button onClick={this.duplicateHandler}
+          <button className="c-sf-block__actions__single"
+                  onClick={this.duplicateHandler}
                   title={labels.duplicate} disabled={!canDuplicate}
                   dangerouslySetInnerHTML={{__html: icons.duplicate}} />
-          <button onClick={this.deleteHandler} title={labels.delete}
+          <button className="c-sf-block__actions__single"
+                  onClick={this.deleteHandler} title={labels.delete}
                   dangerouslySetInnerHTML={{__html: icons.delete}} />
         </div>
         {isSimpleLayout ?
-          <span className="block-type">
+          <span className="c-sf-block__type">
             {getLabel(blockDefinition)}
           </span>
           :
