@@ -134,7 +134,7 @@ class BlockHeader extends React.Component {
     let content;
     if (isSimpleLayout) {
       content = (
-        <div className={'c-sf-block__header__title'} dangerouslySetInnerHTML={{__html: icon ? icon : icons.grip}} />
+        <div className="c-sf-block__header__title" dangerouslySetInnerHTML={{__html: icon ? icon : icons.grip}} />
       );
     } else {
       content = (
