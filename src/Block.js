@@ -141,7 +141,7 @@ class Block extends React.Component {
     }
     return (
       <div className={className}>
-        <div className="block-container">
+        <div className="c-sf-container__block-container">
           <BlockHeader fieldId={fieldId} blockId={id}
                        collapsibleBlock={collapsible}
                        sortableBlock={sortable}
@@ -163,16 +163,15 @@ class Block extends React.Component {
     );
     if (standalone) {
       return (
-        <div className="block">
-          <div className="block-container">
+        <div className="c-sf-container__block-container">
+          <div className="c-sf-block">
             {blockContent}
           </div>
         </div>
       );
     }
     return (
-      <AnimateHeight className="draggable-container"
-                     height={this.draggableHeight}
+      <AnimateHeight height={this.draggableHeight}
                      onAnimationEnd={this.onDraggableContainerAnimationEnd}>
         {this.wrapSortable(blockContent)}
         <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
