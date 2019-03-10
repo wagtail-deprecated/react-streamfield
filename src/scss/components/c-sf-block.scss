@@ -30,11 +30,11 @@
         transition: background-color $hover-transition-duration ease-in-out;
         cursor: default;
 
-        &.is-collapsible {
+        &--collapsible {
             cursor: pointer;
         }
 
-        &.is-sortable {
+        &--sortable {
             cursor: grab;
         }
 
