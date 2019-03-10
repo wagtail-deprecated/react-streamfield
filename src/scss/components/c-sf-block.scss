@@ -25,7 +25,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-left: $header-padding;
+        padding-left: $header-padding-horizontal;
         user-select: none;
         transition: background-color $hover-transition-duration ease-in-out;
         cursor: default;
@@ -64,7 +64,7 @@
         &__single {
             appearance: none;
             border: 0 none;
-            padding: $header-padding;
+            padding: $header-padding-vertical $header-padding-horizontal;
             background: none;
             cursor: pointer;
             color: $header-text-color;
@@ -89,7 +89,7 @@
     }
 
     &__type {
-        margin-right: $header-padding * 2;
+        margin-right: $header-padding-horizontal * 2;
         text-transform: uppercase;
         text-align: right;
         font-size: 80%;
@@ -124,7 +124,7 @@
         > .c-sf-block__header {
             position: relative;
             flex: 0 0 auto;
-            padding: $header-padding;
+            padding: $header-padding-vertical $header-padding-horizontal;
 
             .c-sf-block__header__title {
                 position: sticky;
@@ -148,7 +148,8 @@
             align-items: flex-end;
 
             .c-sf-block__type {
-                margin: 0 $header-padding $header-padding $header-padding;
+                margin: 0 $header-padding-horizontal
+                        $header-padding-vertical $header-padding-horizontal;
             }
         }
     }
@@ -164,7 +165,7 @@
             }
 
             .c-sf-block__header__title__icon {
-                margin-right: $header-padding;
+                margin-right: $header-padding-horizontal;
             }
 
             > .c-sf-block__aside {

@@ -18,8 +18,13 @@
         font-weight: normal;
     }
 
+    &__icon {
+        padding: $type-button-padding-vertical 0
+                 $type-button-padding-vertical $type-button-padding-horizontal;
+    }
+
     &__label {
-        padding: 6px 8px;
+        padding: $type-button-padding-vertical $type-button-padding-horizontal;
         text-transform: uppercase;
     }
 }
