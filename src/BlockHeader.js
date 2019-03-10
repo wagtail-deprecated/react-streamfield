@@ -55,15 +55,15 @@ class BlockHeader extends React.Component {
 
   get title() {
     const {title, blockDefinition, value} = this.props;
-    if (isStruct(blockDefinition)) {
-      if ((title !== undefined) && (title !== null)) {
-        return title;
-      }
-      if (blockDefinition.titleTemplate !== undefined) {
-        let hasVariables = false;
-        let isEmpty = true;
-        let renderedTitle = blockDefinition.titleTemplate.replace(
-          /\${([^}]+)}/g, (match, varName) => {
+    if ((title !== undefined) && (title !== null)) {
+      return title;
+    }
+    if (blockDefinition.titleTemplate !== undefined) {
+      let hasVariables = false;
+      let isEmpty = true;
+      let renderedTitle = blockDefinition.titleTemplate.replace(
+        /\${([^}]+)}/g, (match, varName) => {
+          if (isStruct(blockDefinition)) {
             let childValue = value[varName];
             if (isNA(childValue)) {
               childValue = '';
@@ -72,10 +72,15 @@ class BlockHeader extends React.Component {
             }
             hasVariables = true;
             return childValue;
-          });
-        if (!hasVariables || !isEmpty) {
-          return renderedTitle;
-        }
+          } else {
+            if (varName === blockDefinition.key) {
+              return value;
+            }
+            return '';
+          }
+        });
+      if (!hasVariables || !isEmpty) {
+        return renderedTitle;
       }
     }
     return null;
