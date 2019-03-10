@@ -109,11 +109,12 @@ class AddButton extends React.Component {
   render() {
     const {visible, icons, labels} = this.props;
     const button = (
-      <button onClick={this.toggle} title={labels.add}
-              className={classNames(
-                'c-sf-add-button', visible && 'is-visible',
-                (this.state.open && this.hasChoice) && 'is-closed')}
-              dangerouslySetInnerHTML={{__html: icons.add}}>
+      <button
+        onClick={this.toggle} title={labels.add}
+        className={classNames(
+          'c-sf-add-button', visible && 'c-sf-add-button--visible',
+          (this.state.open && this.hasChoice) && 'c-sf-add-button--closed')}
+        dangerouslySetInnerHTML={{__html: icons.add}}>
       </button>
     );
     if (this.hasChoice) {

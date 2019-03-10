@@ -99,7 +99,7 @@
         user-select: none;
     }
 
-    &.has-error {
+    &.c-sf-block--error {
         border-color: $error-border-color;
 
         > .c-sf-block__header {

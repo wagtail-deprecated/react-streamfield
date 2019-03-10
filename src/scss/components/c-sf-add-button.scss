@@ -24,12 +24,12 @@
         line-height: $add-button-font-size;
     }
 
-    &.is-visible {
+    &--visible {
         opacity: 1;
         pointer-events: unset;
     }
 
-    &.is-closed i {
+    &--closed i {
         transform: rotate(45deg);
     }
 }

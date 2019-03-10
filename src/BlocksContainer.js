@@ -61,7 +61,7 @@ class BlocksContainer extends React.Component {
           <div ref={provided.innerRef}
                className={classNames(
                  'c-sf-container',
-                 snapshot.isDraggingOver && 'is-dragging',
+                 snapshot.isDraggingOver && 'c-sf-container--dragging',
                  gutteredAdd && 'c-sf-container--add-in-gutter')}>
             <AddButton fieldId={fieldId} parentId={id}
                        open={blocksIds.length === 0} visible={canAdd} />

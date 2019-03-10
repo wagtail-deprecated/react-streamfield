@@ -110,7 +110,8 @@ class Block extends React.Component {
       layout, isSimpleLayout, fieldId, id, parentId, index, hasError,
       collapsible, sortable, canAdd,
     } = this.props;
-    const blockClassName = `c-sf-block ${layout} ${hasError ? 'has-error' : ''}`;
+    const blockClassName =
+      `c-sf-block ${layout} ${hasError ? 'c-sf-block--error' : ''}`;
     if (sortable) {
       return (
         <Draggable draggableId={id} index={index}

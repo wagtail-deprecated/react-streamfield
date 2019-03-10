@@ -21,8 +21,8 @@
         }
     }
 
-    &.is-dragging {
-        .c-sf-add-button.visible {
+    &--dragging {
+        .c-sf-add-button--visible {
             opacity: 0;
             pointer-events: none;
         }
