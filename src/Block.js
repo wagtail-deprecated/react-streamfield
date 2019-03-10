@@ -116,9 +116,8 @@ class Block extends React.Component {
         <Draggable draggableId={id} index={index}
                    type={`${fieldId}-${parentId}`}>
           {(provided, snapshot) => (
-            <article className="c-sf-container__block-container"
-                     ref={provided.innerRef}
-                     {...provided.draggableProps}>
+            <div className="c-sf-container__block-container"
+                 ref={provided.innerRef} {...provided.draggableProps}>
               <div className={blockClassName}>
                 <BlockHeader fieldId={fieldId} blockId={id}
                              collapsibleBlock={collapsible}
@@ -134,13 +133,13 @@ class Block extends React.Component {
                   :
                   null}
               </div>
-            </article>
+            </div>
           )}
         </Draggable>
       );
     }
     return (
-      <article className={className}>
+      <div className={className}>
         <div className="block-container">
           <BlockHeader fieldId={fieldId} blockId={id}
                        collapsibleBlock={collapsible}
@@ -149,7 +148,7 @@ class Block extends React.Component {
                        dragHandleRef={this.dragHandleRef} />
           {blockContent}
         </div>
-      </article>
+      </div>
     );
   }
 
@@ -163,11 +162,11 @@ class Block extends React.Component {
     );
     if (standalone) {
       return (
-        <article className="block">
+        <div className="block">
           <div className="block-container">
             {blockContent}
           </div>
-        </article>
+        </div>
       );
     }
     return (
