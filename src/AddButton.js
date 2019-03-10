@@ -86,7 +86,7 @@ class AddButton extends React.Component {
     if (isNA(icon)) {
       return null;
     }
-    return <span className="icon" dangerouslySetInnerHTML={
+    return <span className="c-sf-button__icon" dangerouslySetInnerHTML={
       {__html: icon}
     } />;
   }
@@ -111,8 +111,8 @@ class AddButton extends React.Component {
     const button = (
       <button onClick={this.toggle} title={labels.add}
               className={classNames(
-                'add', visible && 'visible',
-                (this.state.open && this.hasChoice) && 'close')}
+                'c-sf-add-button', visible && 'is-visible',
+                (this.state.open && this.hasChoice) && 'is-closed')}
               dangerouslySetInnerHTML={{__html: icons.add}}>
       </button>
     );
@@ -121,16 +121,16 @@ class AddButton extends React.Component {
         <>
           {button}
           <AnimateHeight height={this.panelHeight} easing="ease-in-out"
-                         contentClassName="add-panel">
+                         contentClassName="c-sf-add-panel">
             {Object.entries(this.groupedBlockDefinitions).map(
               ([group, blockDefinitions]) => (
                 <div key={group}>
-                  {group ? <h4 className="group-name">{group}</h4> : null}
+                  {group ? <h4 className="c-sf-add-panel__group-title">{group}</h4> : null}
                   {blockDefinitions.map(blockDefinition =>
                     <button key={blockDefinition.key} onClick={this.addHandler}
-                            value={blockDefinition.key} className="type">
+                            value={blockDefinition.key} className="c-sf-button">
                       {this.getIcon(blockDefinition)}
-                      <span className="label">{getLabel(blockDefinition)}</span>
+                      <span className="c-sf-button__label">{getLabel(blockDefinition)}</span>
                     </button>
                   )}
                 </div>

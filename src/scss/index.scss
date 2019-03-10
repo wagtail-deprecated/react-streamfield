@@ -1,0 +1,32 @@
+$grid-gutter-width: 30px;
+$header-padding: 8px;
+$block-vertical-padding: 3px;
+$block-full-padding: $block-vertical-padding 0;
+$add-button-size: 34px;
+$add-button-font-size: 28px;
+$children-container-padding: $add-button-size / 2;
+$action-font-size: 15px;
+$add-transition-duration: 0.3s;
+$hover-transition-duration: 0.3s;
+$bounce-transition-timing: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$border-radius: 3px;
+$teal: #007d7e;
+$header-text-color-focus: #4d4d4d;
+$header-text-color: #888888;
+$block-border-color: #e6e6e6;
+$block-border-color-focus: #bbbbbb;
+$block-hover-background: #f5f5f5;
+$error-color: #cd3238;
+$error-border-color: #dbc7c8;
+$error-border-color-focus: #cdb2b3;
+$error-background-color: #fbefef;
+$screen-xs-max: 799px;
+$screen-sm-min: 800px;
+
+@import 'config';
+
+@import 'components/c-sf-add-button';
+@import 'components/c-sf-add-panel';
+@import 'components/c-sf-button';
+@import 'components/c-sf-block';
+@import 'components/c-sf-container';

@@ -1,0 +1,35 @@
+.c-sf-add-button {
+    width: 100%;
+    height: $add-button-size;
+    appearance: none;
+    border: 0 none;
+    color: $teal;
+    font-weight: bold;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    backface-visibility: hidden;
+    overflow: hidden; // Makes the rotated i box not clickable.
+    user-select: none;
+    opacity: 0;
+    transition: opacity $hover-transition-duration ease-in-out;
+    pointer-events: none;
+
+    i {
+        display: block;
+        transition: transform $add-transition-duration $bounce-transition-timing;
+        font-style: normal;
+        font-size: $add-button-font-size;
+        line-height: $add-button-font-size;
+    }
+
+    &.is-visible {
+        opacity: 1;
+        pointer-events: unset;
+    }
+
+    &.is-closed i {
+        transform: rotate(45deg);
+    }
+}

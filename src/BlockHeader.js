@@ -85,7 +85,7 @@ class BlockHeader extends React.Component {
     const title = this.title;
     let icon = this.props.blockDefinition.icon;
     const blockType = (
-      <span className="block-type">
+      <span className="c-sf-block__type">
         {getLabel(this.props.blockDefinition)}
       </span>
     );
@@ -93,20 +93,20 @@ class BlockHeader extends React.Component {
       return blockType;
     }
 
-    icon = <span className="type-icon"
+    icon = <span className="c-sf-block__header__title__icon"
                  dangerouslySetInnerHTML={{__html: icon}} />;
 
     if (title) {
       return (
         <>
-          <h3>{icon}{title}</h3>
+          <h3 className="c-sf-block__header__title">{icon}{title}</h3>
           {blockType}
         </>
       );
     }
     return (
       <span>
-        <h3>{icon}{title}</h3>
+        <h3 className="c-sf-block__header__title">{icon}{title}</h3>
         {blockType}
       </span>
     );
@@ -134,7 +134,7 @@ class BlockHeader extends React.Component {
     let content;
     if (isSimpleLayout) {
       content = (
-        <h3 dangerouslySetInnerHTML={{__html: icon ? icon : icons.grip}} />
+        <div className="c-sf-block__header__title" dangerouslySetInnerHTML={{__html: icon ? icon : icons.grip}} />
       );
     } else {
       content = (
@@ -148,12 +148,13 @@ class BlockHeader extends React.Component {
       );
     }
     return (
-      <header ref={dragHandleRef}  onClick={this.toggle}
+      <div ref={dragHandleRef}  onClick={this.toggle}
               {...dragHandleProps}
-              className={classNames(collapsibleBlock && 'collapsible',
-                                    sortableBlock && 'sortable')}>
+              className={classNames('c-sf-block__header',
+                                    collapsibleBlock && 'is-collapsible',
+                                    sortableBlock && 'is-sortable')}>
         {content}
-      </header>
+      </div>
     );
   }
 }

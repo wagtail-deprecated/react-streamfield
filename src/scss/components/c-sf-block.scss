@@ -1,0 +1,191 @@
+// TODO: Reduce nesting further by splitting out more components.
+//
+// Theres quite a lot of nesting in here which makes parsing some segments difficult.
+// Some of this is to deal with the fact that .c-sf-block can contain many .c-sf-block's and so is
+// legitimate. A lot of these would ideally be their own components (eg the actions) however there
+// is a lot of interdependancy of the elements because of COLLAPSIBLE vs SIMPLE vs default which
+// makes this hard without fairly intensive rethinking of the HTML.
+//
+// However, the new classes adequately sanitise streamfield only CSS so am leaving this for
+// now to avoid blocking the release of the new Streamfield. -@jonnyscholes
+
+// TODO: Consider visually moving .c-sf-block__type and .c-sf-block__actions based on COLLAPSIBLE vs
+// SIMPLE vs default using CSS only instead of moving HTML around. -@jonnyscholes
+
+.c-sf-block {
+    flex: 1 1 auto;
+    width: 0; // Trick to prevent overflow from the title.
+    border: 1px solid $block-border-color;
+    border-radius: $border-radius;
+    background: white;
+    transition: border-color $hover-transition-duration ease-in-out;
+    transition-property: border-color, box-shadow;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: $header-padding;
+        user-select: none;
+        transition: background-color $hover-transition-duration ease-in-out;
+        cursor: default;
+
+        &.is-collapsible {
+            cursor: pointer;
+        }
+
+        &.is-sortable {
+            cursor: grab;
+        }
+
+        &__title {
+            display: inline-block;
+            flex: 1 1 auto;
+            margin: 0;
+            color: $header-text-color;
+            vertical-align: middle;
+
+            &__icon {
+                color: currentColor;
+                transition: color $hover-transition-duration ease-in-out;
+            }
+        }
+    }
+
+    &__content {
+        &-inner {
+            padding: 12px;
+        }
+    }
+
+    &__actions {
+        white-space: nowrap;
+
+        &__single {
+            appearance: none;
+            border: 0 none;
+            padding: $header-padding;
+            background: none;
+            cursor: pointer;
+            color: $header-text-color;
+            opacity: 1;
+            transition: opacity $hover-transition-duration ease-in-out;
+            transition-property: opacity, color;
+            font-size: $action-font-size;
+
+
+            i {
+                font-style: normal;
+                &:before {
+                    margin: 0;
+                }
+            }
+
+            &[disabled] {
+                opacity: 0.2;
+                pointer-events: none;
+            }
+        }
+    }
+
+    &__type {
+        margin-right: $header-padding * 2;
+        text-transform: uppercase;
+        text-align: right;
+        font-size: 80%;
+        line-height: 100%;
+        color: $header-text-color;
+        vertical-align: middle;
+        user-select: none;
+    }
+
+    &.has-error {
+        border-color: $error-border-color;
+
+        > .c-sf-block__header {
+            background: $error-background-color;
+        }
+
+        &:hover,
+        &:focus,
+        &:focus-within {
+            border-color: $error-border-color-focus;
+
+            > .c-sf-block__header {
+                background: $error-background-color;
+            }
+        }
+    }
+
+    &.SIMPLE {
+        display: flex;
+        flex-flow: row nowrap;
+
+        > .c-sf-block__header {
+            position: relative;
+            flex: 0 0 auto;
+            padding: $header-padding;
+
+            .c-sf-block__header__title {
+                position: sticky;
+                top: $grid-gutter-width / 4;
+                bottom: $grid-gutter-width / 4;
+            }
+        }
+
+        > .c-sf-block__content {
+            flex: 1 1 auto;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-around;
+            width: 0; // Trick to prevent content from overflowing, while
+            // allowing for some overflow, like Draftail tooltips.
+        }
+
+        > .c-sf-block__aside {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: flex-end;
+
+            .c-sf-block__type {
+                margin: 0 $header-padding $header-padding $header-padding;
+            }
+        }
+    }
+
+    &.COLLAPSIBLE {
+        overflow: hidden;
+
+        > .c-sf-block__header {
+            .c-sf-block__header__title {
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+
+            .c-sf-block__header__title__icon {
+                margin-right: $header-padding;
+            }
+
+            > .c-sf-block__aside {
+                flex: 0 0 auto;
+            }
+        }
+    }
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+        border-color: $block-border-color-focus;
+        box-shadow: 3px 2px 3px -1px rgba(0, 0, 0, 0.1);
+
+        > .c-sf-block__header {
+            background: $block-hover-background;
+
+            .c-sf-block__header__title,
+            .c-sf-block__actions__single {
+                color: $header-text-color-focus;
+            }
+        }
+    }
+}

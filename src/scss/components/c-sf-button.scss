@@ -1,0 +1,25 @@
+.c-sf-button {
+    margin: $grid-gutter-width / 4;
+    appearance: none;
+    background: $teal;
+    padding: 0;
+    border: 0 none;
+    border-radius: $border-radius;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+
+    &__icon,
+    &__label {
+        display: inline-block;
+
+        // Fixes for label elements getting global `label` styles from Wagtail -@jonnyscholes
+        color: white;
+        font-weight: normal;
+    }
+
+    &__label {
+        padding: 6px 8px;
+        text-transform: uppercase;
+    }
+}

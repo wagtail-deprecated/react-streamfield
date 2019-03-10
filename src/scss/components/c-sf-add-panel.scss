@@ -1,0 +1,10 @@
+.c-sf-add-panel {
+  position: relative;
+  padding: $grid-gutter-width / 4;
+  background: #EEEEEE;
+  border-radius: $border-radius;
+  user-select: none;
+  &__group-title {
+    margin: $grid-gutter-width / 4 $grid-gutter-width / 4 0;
+  }
+}
