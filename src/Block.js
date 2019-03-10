@@ -112,6 +112,10 @@ class Block extends React.Component {
     } = this.props;
     const blockClassName =
       `c-sf-block ${layout} ${hasError ? 'c-sf-block--error' : ''}`;
+    const addButton = (
+      <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
+                 visible={canAdd} />
+    );
     if (sortable) {
       return (
         <Draggable draggableId={id} index={index}
@@ -134,14 +138,15 @@ class Block extends React.Component {
                   :
                   null}
               </div>
+              {addButton}
             </div>
           )}
         </Draggable>
       );
     }
     return (
-      <div className={className}>
-        <div className="c-sf-container__block-container">
+      <div className="c-sf-container__block-container">
+        <div className={blockClassName}>
           <BlockHeader fieldId={fieldId} blockId={id}
                        collapsibleBlock={collapsible}
                        sortableBlock={sortable}
@@ -149,6 +154,7 @@ class Block extends React.Component {
                        dragHandleRef={this.dragHandleRef} />
           {blockContent}
         </div>
+        {addButton}
       </div>
     );
   }
@@ -174,8 +180,6 @@ class Block extends React.Component {
       <AnimateHeight height={this.draggableHeight}
                      onAnimationEnd={this.onDraggableContainerAnimationEnd}>
         {this.wrapSortable(blockContent)}
-        <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
-                   visible={canAdd} />
       </AnimateHeight>
     );
   }

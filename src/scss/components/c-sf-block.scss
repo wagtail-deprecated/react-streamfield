@@ -14,7 +14,7 @@
 
 .c-sf-block {
     flex: 1 1 auto;
-    width: 0; // Trick to prevent overflow from the title.
+    margin: $block-margin-vertical $block-margin-horizontal;
     border: 1px solid $block-border-color;
     border-radius: $border-radius;
     background: white;

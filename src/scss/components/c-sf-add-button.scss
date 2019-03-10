@@ -21,7 +21,7 @@
         transition: transform $add-transition-duration $bounce-transition-timing;
         font-style: normal;
         font-size: $add-button-font-size;
-        line-height: $add-button-font-size;
+        line-height: $add-button-size;
     }
 
     &--visible {

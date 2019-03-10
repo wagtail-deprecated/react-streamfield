@@ -1,12 +1,14 @@
 .c-sf-container {
     position: relative;
+    display: flex;
+    flex-flow: column nowrap;
     padding: $children-container-padding 0;
     transition: padding $hover-transition-duration ease-in-out;
 
     &__block-container {
         position: relative;
         display: flex;
-        padding: $block-full-padding;
+        flex-flow: column nowrap;
     }
 
     &--add-in-gutter {
@@ -14,17 +16,11 @@
             padding-left: $add-button-size;
 
             .c-sf-add-button {
-                position: absolute;
                 width: $add-button-size;
-                transform: translate(-100%, -50%);
+                height: 0;
+                transform: translate(-100%, -$add-button-size / 2);
+                overflow: visible;
             }
-        }
-    }
-
-    &--dragging {
-        .c-sf-add-button--visible {
-            opacity: 0;
-            pointer-events: none;
         }
     }
 
