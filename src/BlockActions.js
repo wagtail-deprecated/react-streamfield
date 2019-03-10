@@ -110,7 +110,7 @@ class BlockActions extends React.Component {
       icons, labels,
     } = this.props;
     return (
-      <aside className="c-sf-block__aside">
+      <div className="c-sf-block__aside">
         <div className="c-sf-block__actions">
           {sortableBlock ?
             <>
@@ -140,7 +140,7 @@ class BlockActions extends React.Component {
           :
           null
         }
-      </aside>
+      </div>
     );
   }
 }
