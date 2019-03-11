@@ -153,12 +153,11 @@ class BlockHeader extends React.Component {
       );
     }
     return (
-      <div ref={dragHandleRef}  onClick={this.toggle}
-              {...dragHandleProps}
-              className={classNames(
-                'c-sf-block__header',
-                collapsibleBlock && 'c-sf-block__header--collapsible',
-                sortableBlock && 'c-sf-block__header--sortable')}>
+      <div ref={dragHandleRef}  onClick={this.toggle} {...dragHandleProps}
+           className={classNames(
+             'c-sf-block__header',
+             collapsibleBlock && 'c-sf-block__header--collapsible',
+             sortableBlock && 'c-sf-block__header--sortable')}>
         {content}
       </div>
     );
