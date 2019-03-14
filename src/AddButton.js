@@ -127,13 +127,15 @@ class AddButton extends React.Component {
               ([group, blockDefinitions]) => (
                 <div key={group}>
                   {group ? <h4 className="c-sf-add-panel__group-title">{group}</h4> : null}
-                  {blockDefinitions.map(blockDefinition =>
-                    <button key={blockDefinition.key} onClick={this.addHandler}
-                            value={blockDefinition.key} className="c-sf-button">
-                      {this.getIcon(blockDefinition)}
-                      <span className="c-sf-button__label">{getLabel(blockDefinition)}</span>
-                    </button>
-                  )}
+                  <div className="c-sf-add-panel__grid">
+                    {blockDefinitions.map(blockDefinition =>
+                      <button key={blockDefinition.key} onClick={this.addHandler}
+                              value={blockDefinition.key} className="c-sf-button">
+                        {this.getIcon(blockDefinition)}
+                        <span className="c-sf-button__label">{getLabel(blockDefinition)}</span>
+                      </button>
+                    )}
+                  </div>
                 </div>
             ))}
           </AnimateHeight>

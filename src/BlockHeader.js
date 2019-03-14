@@ -89,14 +89,6 @@ class BlockHeader extends React.Component {
   get titleAndType() {
     const title = this.title;
     let icon = this.props.blockDefinition.icon;
-    const blockType = (
-      <span className="c-sf-block__type">
-        {getLabel(this.props.blockDefinition)}
-      </span>
-    );
-    if (isNA(icon)) {
-      return blockType;
-    }
 
     icon = <span className="c-sf-block__header__title__icon"
                  dangerouslySetInnerHTML={{__html: icon}} />;
@@ -105,14 +97,12 @@ class BlockHeader extends React.Component {
       return (
         <>
           <h3 className="c-sf-block__header__title">{icon}{title}</h3>
-          {blockType}
         </>
       );
     }
     return (
       <span>
         <h3 className="c-sf-block__header__title">{icon}{title}</h3>
-        {blockType}
       </span>
     );
   }

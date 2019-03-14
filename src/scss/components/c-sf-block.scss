@@ -24,7 +24,7 @@
     &__header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: start;
         padding-left: $header-padding-horizontal;
         user-select: none;
         transition: background-color $hover-transition-duration ease-in-out;
@@ -45,8 +45,10 @@
             margin: 0;
             color: $header-text-color;
             vertical-align: middle;
+            font-size: 12px;
 
             &__icon {
+                font-size: 20px;
                 color: currentColor;
                 transition: color $hover-transition-duration ease-in-out;
             }
@@ -55,30 +57,49 @@
 
     &__content {
         &-inner {
-            padding: 12px;
+            padding: 44px 24px 24px;
         }
     }
 
     &__actions {
         white-space: nowrap;
+        padding-right: 4px;
 
         &__single {
             appearance: none;
             border: 0 none;
-            padding: $header-padding-vertical $header-padding-horizontal;
             background: none;
             cursor: pointer;
             color: $header-text-color;
             opacity: 1;
-            transition: opacity $hover-transition-duration ease-in-out;
-            transition-property: opacity, color;
+            transition: opacity $hover-transition-duration ease-in-out, background-color $hover-transition-duration ease-in-out;
+            transition-property: opacity, color, background-color;
             font-size: $action-font-size;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 0 8px;
 
+            &:not(:last-of-type) {
+                margin-right: 3px;
+            }
+
+            &:hover {
+                background-color: #eee;
+
+                i {
+                    color: #333;
+                }
+            }
 
             i {
                 font-style: normal;
+                transition: color $hover-transition-duration ease-in-out;
+
                 &:before {
-                    margin: 0;
+                    vertical-align: top;
+                    margin: 0 0 0 -2px;
                 }
             }
 
@@ -91,13 +112,15 @@
 
     &__type {
         margin-right: $header-padding-horizontal * 2;
-        text-transform: uppercase;
         text-align: right;
-        font-size: 80%;
+        font-size: 12px;
         line-height: 100%;
         color: $header-text-color;
-        vertical-align: middle;
         user-select: none;
+        margin-top: 5px;
+        vertical-align: 2px;
+        margin: $header-padding-vertical $header-padding-horizontal
+                0 $header-padding-horizontal;
     }
 
     &.c-sf-block--error {
@@ -132,6 +155,14 @@
                 position: sticky;
                 top: $grid-gutter-width / 4;
                 bottom: $grid-gutter-width / 4;
+
+                i {
+                    font-size: 20px;
+
+                    &::before {
+                        margin-right: 1px;
+                    }
+                }
             }
         }
 
@@ -145,20 +176,20 @@
         }
 
         > .c-sf-block__aside {
+            position: absolute;
+            top: 10px;
+            right: 0;
             display: flex;
             flex-flow: column nowrap;
             align-items: flex-end;
-
-            .c-sf-block__type {
-                margin: 0 $header-padding-horizontal
-                        $header-padding-vertical $header-padding-horizontal;
-            }
         }
     }
 
     &.COLLAPSIBLE {
         > .c-sf-block__header {
             border-top-right-radius: $border-radius;
+            padding: 4px 0 4px 8px;
+
             .c-sf-block__header__title {
                 white-space: nowrap;
                 text-overflow: ellipsis;
