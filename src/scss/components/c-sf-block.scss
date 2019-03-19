@@ -187,6 +187,12 @@
     }
 
     &.COLLAPSIBLE {
+        .c-sf-block__content {
+            > .c-sf-block__content-inner {
+                padding-top: 16px;
+            }
+        }
+
         > .c-sf-block__header {
             border-top-right-radius: $border-radius;
             padding: 4px 0 4px 8px;
