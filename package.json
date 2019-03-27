@@ -1,20 +1,20 @@
 {
   "name": "react-streamfield",
   "version": "0.8.1",
-  "author": "NoriPyt <contact@noripyt.com> (https://noripyt.com)",
+  "author": "Wagtail <hello@wagtail.io> (https://wagtail.io)",
   "description": "Powerful field for inserting multiple blocks with nesting.",
   "keywords": [
     "react",
     "react-component",
     "field"
   ],
-  "homepage": "https://github.com/noripyt/react-streamfield",
+  "homepage": "https://github.com/wagtail/react-streamfield",
   "repository": {
     "type": "git",
-    "url": "https://github.com/noripyt/react-streamfield"
+    "url": "https://github.com/wagtail/react-streamfield"
   },
   "bugs": {
-    "url": "https://github.com/noripyt/react-streamfield/issues"
+    "url": "https://github.com/wagtail/react-streamfield/issues"
   },
   "license": "BSD-3-Clause",
   "files": [

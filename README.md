@@ -5,12 +5,12 @@ Powerful field for inserting multiple blocks with nesting.
 Originally created for the [Wagtail CMS](https://wagtail.io/)
 thanks to [a Kickstarter campaign](https://kickstarter.com/projects/noripyt/wagtails-first-hatch).
 
-![React StreamField screenshot](https://raw.github.com/noripyt/react-streamfield/master/react-streamfield-screenshot.png)
+![React StreamField screenshot](https://raw.github.com/wagtail/react-streamfield/master/react-streamfield-screenshot.png)
 
 
 ## Demo
 
-https://noripyt.github.io/react-streamfield/public/
+https://wagtail.github.io/react-streamfield/public/
 
 
 ## Getting started
@@ -48,7 +48,7 @@ That’s it for now! See `public/index.html` for more complex examples.
 **More documentation, a better API and live demos will arrive soon!** 
 
 You can also check out
-[wagtail-react-streamfield](https://github.com/noripyt/wagtail-react-streamfield)
+[wagtail-react-streamfield](https://github.com/wagtail/wagtail-react-streamfield)
 to see what an integration of this field looks like!
 
 
@@ -100,4 +100,4 @@ import 'custom-event-polyfill';
 
 ## Webpack stats
 
-https://noripyt.github.io/react-streamfield/public/webpack-stats.html
+https://wagtail.github.io/react-streamfield/public/webpack-stats.html
