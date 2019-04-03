@@ -106,12 +106,16 @@ class BlockActions extends React.Component {
 
   render() {
     const {
-      blockDefinition, isSimpleLayout, sortableBlock, canDuplicate,
+      blockDefinition, sortableBlock, canDuplicate,
       icons, labels,
     } = this.props;
     return (
       <div className="c-sf-block__aside">
         <div className="c-sf-block__actions">
+          <span className="c-sf-block__type">
+            {getLabel(blockDefinition)}
+          </span>
+
           {sortableBlock ?
             <>
               <button className="c-sf-block__actions__single"
@@ -133,13 +137,6 @@ class BlockActions extends React.Component {
                   onClick={this.deleteHandler} title={labels.delete}
                   dangerouslySetInnerHTML={{__html: icons.delete}} />
         </div>
-        {isSimpleLayout ?
-          <span className="c-sf-block__type">
-            {getLabel(blockDefinition)}
-          </span>
-          :
-          null
-        }
       </div>
     );
   }

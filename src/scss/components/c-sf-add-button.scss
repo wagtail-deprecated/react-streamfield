@@ -13,8 +13,13 @@
     overflow: hidden; // Makes the rotated i box not clickable.
     user-select: none;
     opacity: 0;
-    transition: opacity $hover-transition-duration ease-in-out;
     pointer-events: none;
+    transition: transform 100ms ease-in-out, opacity 100ms ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+        opacity: 1;
+    }
 
     i {
         display: block;
@@ -25,7 +30,7 @@
     }
 
     &--visible {
-        opacity: 1;
+        opacity: 0.8;
         pointer-events: unset;
     }
 

@@ -1,10 +1,31 @@
 .c-sf-add-panel {
     position: relative;
-    padding: $grid-gutter-width / 4;
-    background: #EEEEEE;
+    padding: ($grid-gutter-width / 4) 0 $grid-gutter-width;
     border-radius: $border-radius;
     user-select: none;
+
+    @media (min-width: $screen-l-min) {
+        padding: ($grid-gutter-width / 4) 80px ($grid-gutter-width * 2);
+    }
+
     &__group-title {
-        margin: $grid-gutter-width / 4 $grid-gutter-width / 4 0;
+        margin: $grid-gutter-width 0 5px;
+        font-weight: 600;
+    }
+
+    @supports (display: grid) {
+        &__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 8px;
+
+            @media (min-width: 900px) {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            @media (min-width: $screen-l-min) {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
     }
 }
