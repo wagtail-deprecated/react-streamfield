@@ -15,7 +15,8 @@ https://wagtail.github.io/react-streamfield/public/
 
 ## Example usage
 
-<iframe src="https://codesandbox.io/embed/lyz2k28jpm?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+To have an idea on how to fully integrate react-streamfield, please check 
+[this CodeSandbox demo](https://codesandbox.io/s/lyz2k28jpm?fontsize=14).
 
 For more complex examples, see `example/index.story.js` and
 [the corresponding demos](https://wagtail.github.io/react-streamfield/public/)
