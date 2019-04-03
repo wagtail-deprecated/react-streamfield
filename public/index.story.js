@@ -25,6 +25,7 @@ storiesOf('React StreamField demo', module)
           key: 'title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           html: '<input type="text" name="field-__ID__" />'
         }
       ],
@@ -40,6 +41,7 @@ storiesOf('React StreamField demo', module)
           key: 'title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           closed: false,
           html: '<input type="text" name="field-__ID__" />'
         }
@@ -71,6 +73,7 @@ storiesOf('React StreamField demo', module)
           default: 'The default title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           html: '<input type="text" name="field-__ID__" />'
         }
       ],
@@ -86,6 +89,7 @@ storiesOf('React StreamField demo', module)
           key: 'title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           html: '<input type="text" name="field-__ID__" />'
         }
       ],
@@ -94,7 +98,8 @@ storiesOf('React StreamField demo', module)
           type: 'title',
           html:
             '<div style="padding: 6px 12px 0; color: grey;">Do you see it?</div> <input type="text" name="field-__ID__" />',
-          value: 'Custom HTML for this value!'
+          value: 'Custom HTML for this value!',
+          titleTemplate: '${title}',
         },
         { type: 'title', value: 'This time, no custom HTML.' }
       ]
@@ -109,12 +114,14 @@ storiesOf('React StreamField demo', module)
           key: 'title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           html: '<input type="text" name="field-__ID__" />'
         },
         {
           key: 'text',
           icon: '<i class="fas fa-align-justify fa-fw"></i>',
           className: 'full',
+          titleTemplate: '${text}',
           html: '<textarea name="field-__ID__"></textarea>'
         }
       ],
