@@ -1,42 +1,41 @@
 body {
-  background: #F6F6F6;
-  padding: 15px;
+    background: #F6F6F6;
+    padding: 15px;
 }
 
-.c-sf-block .c-sf-block__content-inner.full {
-  padding: 0;
-}
-
-.c-sf-block .c-sf-block__content-inner.full input,
-.c-sf-block .c-sf-block__content-inner.full textarea {
-  display: block;
-  min-width: 100%;
-  max-width: 100%;
-  height: 100%;
-  padding: 12px;
-  border: none;
-  outline: none;
-}
-
-.c-sf-block .c-sf-block__content-inner.full input {
-  font-size: 30px;
+.c-sf-block .c-sf-block__content-inner {
+    &.full {
+        padding: 0;
+        input, textarea {
+            display: block;
+            min-width: 100%;
+            max-width: 100%;
+            height: 100%;
+            padding: 16px 24px;
+            border: none;
+            outline: none;
+        }
+        input {
+            font-size: 30px;
+        }
+    }
 }
 
 input[type="text"], input[type="password"], input[type="email"],
 input[type="date"], input[type="time"], input[type="number"], select {
-  padding: 5px 8px;
-  border: 1px solid lightGrey;
-  border-radius: 3px;
+    padding: 5px 8px;
+    border: 1px solid lightGrey;
+    border-radius: 3px;
 }
 
 input[type="color"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  background: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    background: none;
 }
 
 textarea {
-  max-width: 100%;
+    max-width: 100%;
 }

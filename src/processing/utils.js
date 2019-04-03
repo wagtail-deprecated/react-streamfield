@@ -35,27 +35,8 @@ export const isStatic = blockDefinition => {
 };
 
 
-export const getIsMobile = () => {
-  return window.matchMedia('(max-width: 799px)').matches;
-};
-
-
-export const getLayout = (blockDefinition, isMobile) => {
-  if ((blockDefinition.layout === undefined) || isMobile) {
-    return 'COLLAPSIBLE';
-  }
-  return blockDefinition.layout;
-};
-
-
-export const isSimpleLayout = (blockDefinition, isMobile) => {
-  return getLayout(blockDefinition, isMobile) === 'SIMPLE';
-};
-
-
-export const isClosed = (blockDefinition, isMobile) => {
-  return !isSimpleLayout(blockDefinition, isMobile)
-      && ((blockDefinition.closed === undefined)
+export const isClosed = blockDefinition => {
+  return ((blockDefinition.closed === undefined)
           || blockDefinition.closed);
 };
 

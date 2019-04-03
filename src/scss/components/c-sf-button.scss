@@ -1,16 +1,16 @@
 .c-sf-button {
     $root: &;
-    margin: 0;
+    display: flex;
+    flex: 1 1 200px;
+    margin: $add-panel-gutter;
     appearance: none;
     background: #eee;
-    padding: 0;
+    padding: $type-button-padding-vertical $type-button-padding-horizontal;
     border: 0 none;
     border-radius: $border-radius;
     outline: none;
     cursor: pointer;
     overflow: hidden;
-    display: flex;
-    padding: $type-button-padding-vertical $type-button-padding-horizontal;
     transition: background-color $hover-transition-duration ease-in-out;
 
     &:hover,
@@ -37,7 +37,7 @@
         color: #333;
         font-weight: 600;
         font-size: 12px;
-        font-family: 'Open Sans';
+        font-family: 'Open Sans', sans-serif;
         transition: color $hover-transition-duration ease-in-out;
     }
 

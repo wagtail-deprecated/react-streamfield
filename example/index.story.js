@@ -25,6 +25,7 @@ storiesOf('React StreamField demo', module)
           key: 'title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           html: '<input type="text" name="field-__ID__" />'
         }
       ],
@@ -40,6 +41,7 @@ storiesOf('React StreamField demo', module)
           key: 'title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           closed: false,
           html: '<input type="text" name="field-__ID__" />'
         }
@@ -71,6 +73,7 @@ storiesOf('React StreamField demo', module)
           default: 'The default title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           html: '<input type="text" name="field-__ID__" />'
         }
       ],
@@ -86,6 +89,7 @@ storiesOf('React StreamField demo', module)
           key: 'title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           html: '<input type="text" name="field-__ID__" />'
         }
       ],
@@ -94,7 +98,8 @@ storiesOf('React StreamField demo', module)
           type: 'title',
           html:
             '<div style="padding: 6px 12px 0; color: grey;">Do you see it?</div> <input type="text" name="field-__ID__" />',
-          value: 'Custom HTML for this value!'
+          value: 'Custom HTML for this value!',
+          titleTemplate: '${title}',
         },
         { type: 'title', value: 'This time, no custom HTML.' }
       ]
@@ -109,12 +114,14 @@ storiesOf('React StreamField demo', module)
           key: 'title',
           icon: '<i class="fas fa-heading fa-fw"></i>',
           className: 'full title',
+          titleTemplate: '${title}',
           html: '<input type="text" name="field-__ID__" />'
         },
         {
           key: 'text',
           icon: '<i class="fas fa-align-justify fa-fw"></i>',
           className: 'full',
+          titleTemplate: '${text}',
           html: '<textarea name="field-__ID__"></textarea>'
         }
       ],
@@ -231,71 +238,6 @@ storiesOf('React StreamField demo', module)
             { type: 'bool', value: false }
           ]
         }
-      ]
-    };
-    return <StreamField {...props} id='stream' />;
-  })
-  .add('Simple block layout', () => {
-    const props = {
-      required: true,
-      blockDefinitions: [
-        {
-          key: 'title',
-          layout: 'SIMPLE',
-          icon: '<i class="fas fa-heading fa-fw"></i>',
-          className: 'full title',
-          html: '<input type="text" name="field-__ID__" />'
-        },
-        {
-          key: 'text',
-          layout: 'SIMPLE',
-          icon: '<i class="fas fa-align-justify fa-fw"></i>',
-          className: 'full',
-          html: '<textarea name="field-__ID__"></textarea>'
-        },
-        {
-          key: 'static',
-          layout: 'SIMPLE',
-          isStatic: true,
-          html: 'Some static block'
-        }
-      ],
-      value: [
-        { type: 'title', value: 'Wagtail is awesome!' },
-        { type: 'text', value: 'And it’s always getting better 😃' },
-        { type: 'static' }
-      ]
-    };
-    return <StreamField {...props} id='stream' />;
-  })
-  .add('Mixed block layouts', () => {
-    const props = {
-      required: true,
-      blockDefinitions: [
-        {
-          key: 'title',
-          layout: 'SIMPLE',
-          icon: '<i class="fas fa-heading fa-fw"></i>',
-          className: 'full title',
-          html: '<input type="text" name="field-__ID__" />'
-        },
-        {
-          key: 'text',
-          icon: '<i class="fas fa-align-justify fa-fw"></i>',
-          className: 'full',
-          html: '<textarea name="field-__ID__"></textarea>'
-        },
-        {
-          key: 'static',
-          layout: 'SIMPLE',
-          isStatic: true,
-          html: 'Some static block'
-        }
-      ],
-      value: [
-        { type: 'title', value: 'Wagtail is awesome!' },
-        { type: 'text', value: 'And it’s always getting better 😃' },
-        { type: 'static' }
       ]
     };
     return <StreamField {...props} id='stream' />;
@@ -514,7 +456,6 @@ storiesOf('React StreamField demo', module)
       blockDefinitions: [
         {
           key: 'title',
-          layout: 'SIMPLE',
           className: 'full title',
           html: '<input type="text" name="field-__ID__" />'
         }
@@ -530,7 +471,6 @@ storiesOf('React StreamField demo', module)
       blockDefinitions: [
         {
           key: 'date',
-          layout: 'SIMPLE',
           dangerouslyRunInnerScripts: true,
           html: '<input type="text" name="field-__ID__" id="field-__ID__" />' +
             '<script>flatpickr("#field-__ID__");</script>',

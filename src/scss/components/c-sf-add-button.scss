@@ -14,10 +14,9 @@
     user-select: none;
     opacity: 0;
     pointer-events: none;
-    transition: transform 100ms ease-in-out, opacity 100ms ease-in-out;
+    transition: opacity 100ms ease-in-out;
 
     &:hover {
-        transform: scale(1.1);
         opacity: 1;
     }
 

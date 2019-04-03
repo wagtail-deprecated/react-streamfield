@@ -6,10 +6,8 @@ import {DragDropContext} from 'react-beautiful-dnd';
 import {
   moveBlock,
   initializeStreamField,
-  setIsMobile
 } from './actions';
 import {stateToValue} from './processing/conversions';
-import {getIsMobile} from './processing/utils';
 import BlocksContainer from './BlocksContainer';
 
 
@@ -30,7 +28,6 @@ const BlockDefinitionType = PropTypes.shape({
   className: PropTypes.string,
   minNum: PropTypes.number,
   maxNum: PropTypes.number,
-  layout: PropTypes.oneOf(['SIMPLE', 'COLLAPSIBLE']),
   closed: PropTypes.bool,
   titleTemplate: PropTypes.string,
   html: PropTypes.string,
@@ -81,13 +78,11 @@ const StreamFieldDefaultProps = {
   const fieldData = state[id];
   return {
     generatedValue: fieldData === undefined ? '' : stateToValue(state, id),
-    isMobile: fieldData === undefined ? null : fieldData.isMobile,
   };
 }, (dispatch, props) => {
   const {id} = props;
   return bindActionCreators({
     initializeStreamField: data => initializeStreamField(id, data),
-    setIsMobile: isMobile => setIsMobile(id, isMobile),
     moveBlock: (blockId, newIndex) => moveBlock(id, blockId, newIndex),
   }, dispatch);
 })
@@ -119,13 +114,6 @@ class StreamField extends React.Component {
 
   static defaultProps = StreamFieldDefaultProps;
 
-  onWindowResize = () => {
-    const value = getIsMobile();
-    if (value !== this.props.isMobile) {
-      this.props.setIsMobile(value);
-    }
-  };
-
   onDragEnd = result => {
     const {draggableId, source, destination} = result;
     if (!destination || (result.reason === 'CANCEL')
@@ -154,9 +142,8 @@ class StreamField extends React.Component {
     const labels = {...defaultProps.labels, ...this.props.labels};
     initializeStreamField({
       required, minNum, maxNum, icons, labels, gutteredAdd,
-      blockDefinitions, isMobile: getIsMobile(), value,
+      blockDefinitions, value,
     });
-    window.addEventListener('resize', this.onWindowResize);
   }
 
   render() {

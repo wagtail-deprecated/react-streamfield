@@ -13,39 +13,15 @@ thanks to [a Kickstarter campaign](https://kickstarter.com/projects/noripyt/wagt
 https://wagtail.github.io/react-streamfield/public/
 
 
-## Getting started
+## Example usage
 
-First, install the package from NPM:
+<iframe src="https://codesandbox.io/embed/lyz2k28jpm?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-```sh
-npm install react-streamfield
-```
+For more complex examples, see `example/index.story.js` and
+[the corresponding demos](https://wagtail.github.io/react-streamfield/public/)
+for more complex examples.
 
-As of now, there is no definitive React interface, so the only way to use
-react-streamfield is to include `import 'react-streamfield';`
-in your JavaScript. Create a JSON script in your HTML, it will automatically
-create a stream field:
-
-```html
-<script type="application/json" data-streamfield="your-field-name">
-  {
-    "required": true,
-    "minNum": null,
-    "maxNum": null,
-    "blockDefinitions": [
-      {
-        "key": "title",
-        "icon": "<i class=\"fas fa-heading\"></i>"
-      }
-    ],
-    "value": [{"type": "title", "value": "Wagtail is awesome!"}]
-  }
-</script>
-``` 
-
-That’s it for now! See `public/index.html` for more complex examples.
-
-**More documentation, a better API and live demos will arrive soon!** 
+**More documentation will arrive soon!** 
 
 You can also check out
 [wagtail-react-streamfield](https://github.com/wagtail/wagtail-react-streamfield)
@@ -65,11 +41,6 @@ natively in Internet Explorer 11:
 When using react-streamfield for Internet Explorer 11, you need to include
 the polyfills found in the section below, otherwise the package will not work
 properly.
-
-`position: sticky;`, a CSS feature used in react-streamfield to give a better
-position of type icons in `SIMPLE` layout, is also not supported
-by Internet Explorer 11. No polyfill can be used, the type icons is just less
-fancy on Internet Explorer 11.
 
 
 ## Polyfills

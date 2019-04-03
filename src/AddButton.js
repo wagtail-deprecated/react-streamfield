@@ -125,7 +125,7 @@ class AddButton extends React.Component {
                          contentClassName="c-sf-add-panel">
             {Object.entries(this.groupedBlockDefinitions).map(
               ([group, blockDefinitions]) => (
-                <div key={group}>
+                <React.Fragment key={group}>
                   {group ? <h4 className="c-sf-add-panel__group-title">{group}</h4> : null}
                   <div className="c-sf-add-panel__grid">
                     {blockDefinitions.map(blockDefinition =>
@@ -136,7 +136,7 @@ class AddButton extends React.Component {
                       </button>
                     )}
                   </div>
-                </div>
+                </React.Fragment>
             ))}
           </AnimateHeight>
         </>

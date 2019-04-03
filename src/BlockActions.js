@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {
   getLabel,
   getNestedBlockDefinition,
-  getSiblingsIds, isSimpleLayout,
+  getSiblingsIds,
   triggerCustomEvent, triggerKeyboardEvent
 } from './processing/utils';
 import {duplicateBlock, hideBlock} from './actions';
@@ -19,7 +19,6 @@ import {refType} from './types';
   const siblings = getSiblingsIds(state, fieldId, blockId);
   const field = state[fieldId];
   return {
-    isSimpleLayout: isSimpleLayout(blockDefinition, field.isMobile),
     blockDefinition,
     siblings,
     icons: field.icons,
@@ -110,33 +109,31 @@ class BlockActions extends React.Component {
       icons, labels,
     } = this.props;
     return (
-      <div className="c-sf-block__aside">
-        <div className="c-sf-block__actions">
-          <span className="c-sf-block__type">
-            {getLabel(blockDefinition)}
-          </span>
+      <div className="c-sf-block__actions">
+        <span className="c-sf-block__type">
+          {getLabel(blockDefinition)}
+        </span>
 
-          {sortableBlock ?
-            <>
-              <button className="c-sf-block__actions__single"
-                      onClick={this.moveUpHandler}
-                      title={labels.moveUp} disabled={this.isFirst}
-                      dangerouslySetInnerHTML={{__html: icons.moveUp}} />
-              <button className="c-sf-block__actions__single"
-                      onClick={this.moveDownHandler}
-                      title={labels.moveDown} disabled={this.isLast}
-                      dangerouslySetInnerHTML={{__html: icons.moveDown}} />
-            </>
-            :
-            null}
-          <button className="c-sf-block__actions__single"
-                  onClick={this.duplicateHandler}
-                  title={labels.duplicate} disabled={!canDuplicate}
-                  dangerouslySetInnerHTML={{__html: icons.duplicate}} />
-          <button className="c-sf-block__actions__single"
-                  onClick={this.deleteHandler} title={labels.delete}
-                  dangerouslySetInnerHTML={{__html: icons.delete}} />
-        </div>
+        {sortableBlock ?
+          <>
+            <button className="c-sf-block__actions__single"
+                    onClick={this.moveUpHandler}
+                    title={labels.moveUp} disabled={this.isFirst}
+                    dangerouslySetInnerHTML={{__html: icons.moveUp}} />
+            <button className="c-sf-block__actions__single"
+                    onClick={this.moveDownHandler}
+                    title={labels.moveDown} disabled={this.isLast}
+                    dangerouslySetInnerHTML={{__html: icons.moveDown}} />
+          </>
+          :
+          null}
+        <button className="c-sf-block__actions__single"
+                onClick={this.duplicateHandler}
+                title={labels.duplicate} disabled={!canDuplicate}
+                dangerouslySetInnerHTML={{__html: icons.duplicate}} />
+        <button className="c-sf-block__actions__single"
+                onClick={this.deleteHandler} title={labels.delete}
+                dangerouslySetInnerHTML={{__html: icons.delete}} />
       </div>
     );
   }

@@ -1,16 +1,13 @@
 // TODO: Reduce nesting further by splitting out more components.
 //
-// Theres quite a lot of nesting in here which makes parsing some segments difficult.
+// There's quite a lot of nesting in here which makes parsing some segments difficult.
 // Some of this is to deal with the fact that .c-sf-block can contain many .c-sf-block's and so is
 // legitimate. A lot of these would ideally be their own components (eg the actions) however there
-// is a lot of interdependancy of the elements because of COLLAPSIBLE vs SIMPLE vs default which
-// makes this hard without fairly intensive rethinking of the HTML.
+// is a lot of interdependency of the elements which makes this hard
+// without fairly intensive rethinking of the HTML.
 //
 // However, the new classes adequately sanitise streamfield only CSS so am leaving this for
 // now to avoid blocking the release of the new Streamfield. -@jonnyscholes
-
-// TODO: Consider visually moving .c-sf-block__type and .c-sf-block__actions based on COLLAPSIBLE vs
-// SIMPLE vs default using CSS only instead of moving HTML around. -@jonnyscholes
 
 .c-sf-block {
     flex: 1 1 auto;
@@ -24,12 +21,14 @@
     &__header {
         display: flex;
         justify-content: space-between;
-        align-items: start;
-        padding-left: $header-padding-horizontal;
+        align-items: center;
+        padding: $header-padding-vertical $header-padding-horizontal
+                 $header-padding-vertical $content-padding-horizontal;
         user-select: none;
         transition: background-color $hover-transition-duration ease-in-out;
         cursor: default;
         border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
 
         &--collapsible {
             cursor: pointer;
@@ -39,31 +38,36 @@
             cursor: grab;
         }
 
+        &__title, &__icon {
+            color: $header-text-color;
+        }
+
         &__title {
             display: inline-block;
             flex: 1 1 auto;
             margin: 0;
-            color: $header-text-color;
-            vertical-align: middle;
             font-size: 12px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
 
-            &__icon {
-                font-size: 20px;
-                color: currentColor;
-                transition: color $hover-transition-duration ease-in-out;
-            }
+        &__icon {
+            margin-right: $header-gutter;
+            font-size: 20px;
+            transition: color $hover-transition-duration ease-in-out;
         }
     }
 
     &__content {
         &-inner {
-            padding: 44px 24px 24px;
+            padding: $content-padding-vertical $content-padding-horizontal;
         }
     }
 
     &__actions {
+        flex: 0 0 auto;
         white-space: nowrap;
-        padding-right: 4px;
 
         &__single {
             appearance: none;
@@ -112,16 +116,13 @@
     }
 
     &__type {
-        margin-right: $header-padding-horizontal * 2;
+        margin: 0 $header-gutter;
         text-align: right;
         font-size: 12px;
         line-height: 100%;
         color: $header-text-color;
         user-select: none;
-        margin-top: 5px;
         vertical-align: 2px;
-        margin: $header-padding-vertical $header-padding-horizontal
-                0 $header-padding-horizontal;
     }
 
     &.c-sf-block--error {
@@ -138,77 +139,6 @@
 
             > .c-sf-block__header {
                 background: $error-background-color;
-            }
-        }
-    }
-
-    &.SIMPLE {
-        display: flex;
-        flex-flow: row nowrap;
-
-        > .c-sf-block__header {
-            position: relative;
-            flex: 0 0 auto;
-            padding: $header-padding-vertical $header-padding-horizontal;
-            border-bottom-left-radius: $border-radius;
-
-            .c-sf-block__header__title {
-                position: sticky;
-                top: $grid-gutter-width / 4;
-                bottom: $grid-gutter-width / 4;
-
-                i {
-                    font-size: 20px;
-
-                    &::before {
-                        margin-right: 1px;
-                    }
-                }
-            }
-        }
-
-        > .c-sf-block__content {
-            flex: 1 1 auto;
-            display: flex;
-            flex-flow: column nowrap;
-            justify-content: space-around;
-            width: 0; // Trick to prevent content from overflowing, while
-            // allowing for some overflow, like Draftail tooltips.
-        }
-
-        > .c-sf-block__aside {
-            position: absolute;
-            top: 10px;
-            right: 0;
-            display: flex;
-            flex-flow: column nowrap;
-            align-items: flex-end;
-        }
-    }
-
-    &.COLLAPSIBLE {
-        .c-sf-block__content {
-            > .c-sf-block__content-inner {
-                padding-top: 16px;
-            }
-        }
-
-        > .c-sf-block__header {
-            border-top-right-radius: $border-radius;
-            padding: 4px 0 4px 8px;
-
-            .c-sf-block__header__title {
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-            }
-
-            .c-sf-block__header__title__icon {
-                margin-right: $header-padding-horizontal;
-            }
-
-            > .c-sf-block__aside {
-                flex: 0 0 auto;
             }
         }
     }

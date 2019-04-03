@@ -235,71 +235,6 @@ storiesOf('React StreamField demo', module)
     };
     return <StreamField {...props} id='stream' />;
   })
-  .add('Simple block layout', () => {
-    const props = {
-      required: true,
-      blockDefinitions: [
-        {
-          key: 'title',
-          layout: 'SIMPLE',
-          icon: '<i class="fas fa-heading fa-fw"></i>',
-          className: 'full title',
-          html: '<input type="text" name="field-__ID__" />'
-        },
-        {
-          key: 'text',
-          layout: 'SIMPLE',
-          icon: '<i class="fas fa-align-justify fa-fw"></i>',
-          className: 'full',
-          html: '<textarea name="field-__ID__"></textarea>'
-        },
-        {
-          key: 'static',
-          layout: 'SIMPLE',
-          isStatic: true,
-          html: 'Some static block'
-        }
-      ],
-      value: [
-        { type: 'title', value: 'Wagtail is awesome!' },
-        { type: 'text', value: 'And it’s always getting better 😃' },
-        { type: 'static' }
-      ]
-    };
-    return <StreamField {...props} id='stream' />;
-  })
-  .add('Mixed block layouts', () => {
-    const props = {
-      required: true,
-      blockDefinitions: [
-        {
-          key: 'title',
-          layout: 'SIMPLE',
-          icon: '<i class="fas fa-heading fa-fw"></i>',
-          className: 'full title',
-          html: '<input type="text" name="field-__ID__" />'
-        },
-        {
-          key: 'text',
-          icon: '<i class="fas fa-align-justify fa-fw"></i>',
-          className: 'full',
-          html: '<textarea name="field-__ID__"></textarea>'
-        },
-        {
-          key: 'static',
-          layout: 'SIMPLE',
-          isStatic: true,
-          html: 'Some static block'
-        }
-      ],
-      value: [
-        { type: 'title', value: 'Wagtail is awesome!' },
-        { type: 'text', value: 'And it’s always getting better 😃' },
-        { type: 'static' }
-      ]
-    };
-    return <StreamField {...props} id='stream' />;
-  })
   .add('Gutter of add buttons', () => {
     const props = {
       required: true,
@@ -514,7 +449,6 @@ storiesOf('React StreamField demo', module)
       blockDefinitions: [
         {
           key: 'title',
-          layout: 'SIMPLE',
           className: 'full title',
           html: '<input type="text" name="field-__ID__" />'
         }
@@ -530,7 +464,6 @@ storiesOf('React StreamField demo', module)
       blockDefinitions: [
         {
           key: 'date',
-          layout: 'SIMPLE',
           dangerouslyRunInnerScripts: true,
           html: '<input type="text" name="field-__ID__" id="field-__ID__" />' +
             '<script>flatpickr("#field-__ID__");</script>',

@@ -6,7 +6,7 @@ import AnimateHeight from 'react-animate-height';
 import {
   getNestedBlockDefinition,
   isStruct,
-  getDescendantsIds, isSimpleLayout, replaceWithComponent, isNA,
+  getDescendantsIds, replaceWithComponent, isNA,
 } from './processing/utils';
 import StructChildField from './StructChildField';
 import FieldInput from './FieldInput';
@@ -21,7 +21,6 @@ import FieldInput from './FieldInput';
   const hasDescendantError = getDescendantsIds(state, fieldId, blockId, true)
     .some(descendantBlockId => blocks[descendantBlockId].hasError);
   return {
-    isSimpleLayout: isSimpleLayout(blockDefinition, fieldData.isMobile),
     blockDefinition,
     html: block.html,
     closed: block.closed && !hasDescendantError,
@@ -66,10 +65,10 @@ class BlockContent extends React.Component {
   }
 
   render() {
-    const {isSimpleLayout, blockDefinition, collapsible} = this.props;
+    const {blockDefinition, collapsible} = this.props;
     const content = this.html;
     const className = classNames('c-sf-block__content-inner', blockDefinition.className);
-    if (collapsible && !isSimpleLayout) {
+    if (collapsible) {
       return (
         <AnimateHeight height={this.height} easing="ease-in-out"
                        className="c-sf-block__content"

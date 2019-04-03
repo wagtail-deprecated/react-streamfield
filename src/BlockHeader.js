@@ -5,8 +5,7 @@ import classNames from 'classnames';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {
-  getLabel,
-  getNestedBlockDefinition, isNA, isSimpleLayout,
+  getNestedBlockDefinition, isNA,
   isStruct, structValueToObject, triggerCustomEvent
 } from './processing/utils';
 import {toggleBlock} from './actions';
@@ -22,7 +21,6 @@ import {refType} from './types';
   const blockDefinition = getNestedBlockDefinition(state, fieldId, blockId);
   const value = block.value;
   return {
-    isSimpleLayout: isSimpleLayout(blockDefinition, fieldData.isMobile),
     blockDefinition,
     icons: fieldData.icons,
     value: isStruct(blockDefinition) ?
@@ -71,10 +69,10 @@ class BlockHeader extends React.Component {
               isEmpty = false;
             }
             hasVariables = true;
-            return childValue;
+            return childValue || '';
           } else {
             if (varName === blockDefinition.key) {
-              return value;
+              return value || '';
             }
             return '';
           }
@@ -86,69 +84,34 @@ class BlockHeader extends React.Component {
     return null;
   }
 
-  get titleAndType() {
-    const title = this.title;
-    let icon = this.props.blockDefinition.icon;
-
-    icon = <span className="c-sf-block__header__title__icon"
-                 dangerouslySetInnerHTML={{__html: icon}} />;
-
-    if (title) {
-      return (
-        <>
-          <h3 className="c-sf-block__header__title">{icon}{title}</h3>
-        </>
-      );
-    }
-    return (
-      <span>
-        <h3 className="c-sf-block__header__title">{icon}{title}</h3>
-      </span>
-    );
-  }
-
   triggerCustomEvent(name, data=null) {
     triggerCustomEvent(ReactDOM.findDOMNode(this), name, data);
   }
 
   toggle = () => {
-    const {isSimpleLayout, toggleBlock, closed} = this.props;
-    if (isSimpleLayout) {
-      return;
-    }
+    const {toggleBlock, closed} = this.props;
     toggleBlock();
     this.triggerCustomEvent('toggle', {closed: !closed});
   };
 
   render() {
     const {
-      fieldId, blockDefinition, blockId, isSimpleLayout, dragHandleProps,
-      icons, collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
+      blockDefinition, fieldId, blockId, dragHandleProps,
+      collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
     } = this.props;
-    const icon = blockDefinition.icon;
-    let content;
-    if (isSimpleLayout) {
-      content = (
-        <div className="c-sf-block__header__title" dangerouslySetInnerHTML={{__html: icon ? icon : icons.grip}} />
-      );
-    } else {
-      content = (
-        <>
-          {this.titleAndType}
-          <BlockActions fieldId={fieldId} blockId={blockId}
-                        sortableBlock={sortableBlock}
-                        canDuplicate={canDuplicate}
-                        dragHandleRef={dragHandleRef} />
-        </>
-      );
-    }
     return (
       <div ref={dragHandleRef}  onClick={this.toggle} {...dragHandleProps}
            className={classNames(
              'c-sf-block__header',
              collapsibleBlock && 'c-sf-block__header--collapsible',
              sortableBlock && 'c-sf-block__header--sortable')}>
-        {content}
+        <span className="c-sf-block__header__icon"
+              dangerouslySetInnerHTML={{__html: blockDefinition.icon}} />
+        <h3 className="c-sf-block__header__title">{this.title || ''}</h3>
+        <BlockActions fieldId={fieldId} blockId={blockId}
+                      sortableBlock={sortableBlock}
+                      canDuplicate={canDuplicate}
+                      dragHandleRef={dragHandleRef} />
       </div>
     );
   }

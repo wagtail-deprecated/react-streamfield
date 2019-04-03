@@ -11,15 +11,14 @@ import {
   showBlock,
 } from './actions';
 import {
-  getDescendantsIds, getLayout,
+  getDescendantsIds,
   getNestedBlockDefinition,
-  getSiblingsIds, isSimpleLayout,
+  getSiblingsIds,
   triggerCustomEvent,
 } from './processing/utils';
 import AddButton from './AddButton';
 import BlockContent from './BlockContent';
 import BlockHeader from './BlockHeader';
-import BlockActions from './BlockActions';
 
 
 @connect((state, props) => {
@@ -33,8 +32,6 @@ import BlockActions from './BlockActions';
     .some(descendantBlockId => blocks[descendantBlockId].hasError);
   return {
     blockDefinition,
-    layout: getLayout(blockDefinition, fieldData.isMobile),
-    isSimpleLayout: isSimpleLayout(blockDefinition, fieldData.isMobile),
     parentId: block.parent,
     hasError: hasDescendantError,
     closed: block.closed,
@@ -75,7 +72,7 @@ class Block extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    return nextProps.shouldUpdate || (nextProps.layout !== this.props.layout);
+    return nextProps.shouldUpdate;
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -107,11 +104,11 @@ class Block extends React.Component {
 
   wrapSortable(blockContent) {
     const {
-      layout, isSimpleLayout, fieldId, id, parentId, index, hasError,
+      fieldId, id, parentId, index, hasError,
       collapsible, sortable, canAdd,
     } = this.props;
     const blockClassName =
-      `c-sf-block ${layout} ${hasError ? 'c-sf-block--error' : ''}`;
+      `c-sf-block ${hasError ? 'c-sf-block--error' : ''}`;
     const addButton = (
       <AddButton fieldId={fieldId} parentId={parentId} blockId={id}
                  visible={canAdd} />
@@ -131,12 +128,6 @@ class Block extends React.Component {
                              dragHandleRef={this.dragHandleRef}
                              dragHandleProps={provided.dragHandleProps} />
                 {blockContent}
-                {isSimpleLayout ?
-                  <BlockActions fieldId={fieldId} blockId={id}
-                                sortableBlock={sortable} canDuplicate={canAdd}
-                                dragHandleRef={this.dragHandleRef} />
-                  :
-                  null}
               </div>
               {addButton}
             </div>
@@ -160,9 +151,7 @@ class Block extends React.Component {
   }
 
   render() {
-    const {
-      fieldId, id, parentId, standalone, collapsible, canAdd,
-    } = this.props;
+    const {fieldId, id, standalone, collapsible} = this.props;
     const blockContent = (
       <BlockContent ref={this.contentRef} fieldId={fieldId} blockId={id}
                     collapsible={collapsible} />
