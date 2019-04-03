@@ -133,7 +133,16 @@
         }
 
         &:hover,
-        &:focus,
+        &:focus {
+            border-color: $error-border-color-focus;
+
+            > .c-sf-block__header {
+                background: $error-background-color;
+            }
+        }
+
+        // Duplicated because of
+        // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/16651302/
         &:focus-within {
             border-color: $error-border-color-focus;
 
@@ -144,7 +153,22 @@
     }
 
     &:hover,
-    &:focus,
+    &:focus {
+        border-color: $block-border-color-focus;
+        box-shadow: 3px 2px 3px -1px rgba(0, 0, 0, 0.1);
+
+        > .c-sf-block__header {
+            background: $block-hover-background;
+
+            .c-sf-block__header__title,
+            .c-sf-block__actions__single {
+                color: $header-text-color-focus;
+            }
+        }
+    }
+
+    // Duplicated because of
+    // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/16651302/
     &:focus-within {
         border-color: $block-border-color-focus;
         box-shadow: 3px 2px 3px -1px rgba(0, 0, 0, 0.1);
