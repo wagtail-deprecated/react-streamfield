@@ -22,13 +22,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: $header-padding-vertical $header-padding-horizontal
-                 $header-padding-vertical $content-padding-horizontal;
+        padding: $header-padding-vertical $header-padding-horizontal;
         user-select: none;
         transition: background-color $hover-transition-duration ease-in-out;
         cursor: default;
         border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
+
+        @media (min-width: $screen-sm-min) {
+            padding-left: $content-padding-horizontal - $header-gutter;
+        }
 
         &--collapsible {
             cursor: pointer;
@@ -44,7 +47,7 @@
 
         &__title {
             display: inline-block;
-            flex: 1 1 auto;
+            flex: 1 10 auto;
             margin: 0;
             font-size: 12px;
             white-space: nowrap;
@@ -53,7 +56,7 @@
         }
 
         &__icon {
-            margin-right: $header-gutter;
+            margin: 0 $header-gutter;
             font-size: 20px;
             transition: color $hover-transition-duration ease-in-out;
         }
@@ -66,8 +69,11 @@
     }
 
     &__actions {
-        flex: 0 0 auto;
+        flex: 0 1 auto;
+        display: flex;
+        align-items: center;
         white-space: nowrap;
+        overflow-x: hidden;
 
         &__single {
             appearance: none;
@@ -123,6 +129,8 @@
         color: $header-text-color;
         user-select: none;
         vertical-align: 2px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &.c-sf-block--error {
