@@ -125,11 +125,10 @@
         margin: 0 $header-gutter;
         text-align: right;
         font-size: 12px;
-        line-height: 100%;
         color: $header-text-color;
         user-select: none;
         vertical-align: 2px;
-        overflow: hidden;
+        overflow-x: hidden;
         text-overflow: ellipsis;
     }
 
