@@ -227,7 +227,7 @@ export const getNewBlock = (parentId, blockDefinition, value=null) => {
       type: blockDefinition.key,
       value: value,
       hidden: true,
-      closed: false,
+      closed: blockDefinition.closed === undefined ? false : blockDefinition.closed,
       shouldUpdate: false,
     },
     extraBlocks,

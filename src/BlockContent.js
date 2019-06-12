@@ -44,7 +44,8 @@ class BlockContent extends React.Component {
         childBlockDefinition =>
           <StructChildField key={childBlockDefinition.key} fieldId={fieldId}
                             parentBlockId={blockId}
-                            type={childBlockDefinition.key}/>
+                            type={childBlockDefinition.key}
+                            collapsible={childBlockDefinition.collapsible} />
       );
       let html = this.props.html;
       if (isNA(html)) {

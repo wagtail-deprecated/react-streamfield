@@ -39,7 +39,7 @@ class FieldInput extends React.Component {
     if (isStruct(blockDefinition)) {  // Nested StructBlock
       return (
         <Block fieldId={fieldId} id={blockId}
-               standalone sortable={false} collapsible={false} />
+               standalone sortable={false} />
       );
     }
     let html = this.props.html;

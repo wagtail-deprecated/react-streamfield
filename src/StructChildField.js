@@ -6,6 +6,7 @@ import {
   getFieldName, getLabel,
   getNestedBlockDefinition,
 } from './processing/utils';
+import NestedBlockHeader from './NestedBlockHeader';
 import FieldInput from './FieldInput';
 
 
@@ -25,17 +26,29 @@ class StructChildField extends React.Component {
     fieldId: PropTypes.string.isRequired,
     parentBlockId: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
+    collapsible: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    collapsible: false,
   };
 
   render() {
-    const {fieldId, blockId, blockDefinition} = this.props;
+    const {fieldId, blockId, blockDefinition, collapsible} = this.props;
+
+    let header = (<label className='field__label' htmlFor={getFieldName(blockId)}>
+                    {getLabel(blockDefinition)}
+                  </label>);
+    if (collapsible) {
+      header = (<NestedBlockHeader fieldId={fieldId} blockId={blockId}
+        collapsibleBlock={collapsible} blockDefinition={blockDefinition} />);
+    }
+
     return (
       <div className={classNames('field',
                                  !!blockDefinition.required && 'required')}>
-        <label className='field__label' htmlFor={getFieldName(blockId)}>
-          {getLabel(blockDefinition)}
-        </label>
-        <FieldInput fieldId={fieldId} blockId={blockId} />
+        {header}
+        <FieldInput fieldId={fieldId} blockId={blockId} header={header} collapsible={collapsible} />
       </div>
     );
   }

@@ -411,6 +411,45 @@ storiesOf('React StreamField demo', module)
     };
     return <StreamField {...props} id='stream' />;
   })
+  .add('Struct block as a struct block field collapsible', () => {
+    const props = {
+      value: [],
+      blockDefinitions: [
+        {
+          key: 'struct',
+          isStruct: true,
+          children: [
+            {
+              key: 'some_field'
+            },
+            {
+              key: 'link',
+              isStruct: true,
+              collapsible: true,
+              closed: true,
+              titleTemplate: '${label}',
+              children: [
+                {
+                  key: 'label',
+                  label: 'Label',
+                  default: 'label'
+                },
+                {
+                  key: 'email',
+                  label: 'E-mail'
+                }
+              ],
+            },
+            {
+              key: 'another_field'
+            }
+          ],
+          label: 'Struct'
+        }
+      ]
+    };
+    return <StreamField {...props} id='stream' />;
+  })
   .add('StructBlock as a list block child', () => {
     const props = {
       required: true,

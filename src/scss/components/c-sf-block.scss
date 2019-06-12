@@ -190,3 +190,15 @@
         }
     }
 }
+
+.c-sf-nested-block {
+    &__header {
+        background: $nested-header-background;
+        border: 1px solid $block-border-color;
+        border-radius: 3px;
+    }
+
+    &__header--collapsible {
+        cursor: pointer;
+    }
+}
