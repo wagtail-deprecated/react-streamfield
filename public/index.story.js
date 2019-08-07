@@ -511,6 +511,34 @@ storiesOf('React StreamField demo', module)
 
     return <StreamField {...props} id='stream' />;
   })
+  .add('Radio buttons', () => {
+    const props = {
+      required: true,
+      blockDefinitions: [
+        {
+          key: 'date',
+          dangerouslyRunInnerScripts: true,
+          html: '<label><input type="radio" name="field-__ID__" id="field-__ID__" value="1" />1</label><label><input type="radio" name="field-__ID__" id="field-__ID__" value="2" />2</label>',
+        },
+      ],
+      value: [],
+    };
+    return <StreamField {...props} id="stream" />;
+  })
+  .add('Checkboxes', () => {
+    const props = {
+      required: true,
+      blockDefinitions: [
+        {
+          key: 'date',
+          dangerouslyRunInnerScripts: true,
+          html: '<label><input type="checkbox" name="field-__ID__" id="field-__ID__" value="1" />1</label><label><input type="checkbox" name="field-__ID__" id="field-__ID__" value="2" />2</label>',
+        },
+      ],
+      value: [],
+    };
+    return <StreamField {...props} id="stream" />;
+  })
   .add('JavaScript widget', () => {
     const props = {
       required: true,

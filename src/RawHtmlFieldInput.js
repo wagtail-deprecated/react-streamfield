@@ -101,6 +101,17 @@ class RawHtmlFieldInput extends React.Component {
     } else if (input.type === 'checkbox' || input.type === 'radio') {
       const boxes = this.inputs;
       value = boxes.filter(box => box.checked).map(box => box.value);
+      const previousValue = this.props.value;
+      if (input.type === 'radio' && previousValue) {
+        // Makes it possible to select only one radio button at a time.
+        for (const item of previousValue) {
+          boxes.filter(box => box.value === item)[0].checked = false;
+          const index = value.indexOf(item);
+          if (index > -1) {
+            value.splice(index, 1);
+          }
+        }
+      }
     } else if (input.tagName === 'SELECT') {
       value = input.options[input.selectedIndex].value;
     } else {
