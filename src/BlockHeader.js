@@ -41,6 +41,7 @@ class BlockHeader extends React.Component {
     collapsibleBlock: PropTypes.bool,
     sortableBlock: PropTypes.bool,
     canDuplicate: PropTypes.bool,
+    standalone: PropTypes.bool,
     dragHandleRef: refType,
     dragHandleProps: PropTypes.object,
   };
@@ -49,6 +50,7 @@ class BlockHeader extends React.Component {
     collapsibleBlock: true,
     sortableBlock: true,
     canDuplicate: true,
+    standalone: false,
   };
 
   get title() {
@@ -96,8 +98,8 @@ class BlockHeader extends React.Component {
 
   render() {
     const {
-      blockDefinition, fieldId, blockId, dragHandleProps,
-      collapsibleBlock, sortableBlock, canDuplicate, dragHandleRef,
+      blockDefinition, fieldId, blockId, dragHandleProps, collapsibleBlock,
+      sortableBlock, canDuplicate, standalone, dragHandleRef,
     } = this.props;
     return (
       <div ref={dragHandleRef}  onClick={this.toggle} {...dragHandleProps}
@@ -111,6 +113,7 @@ class BlockHeader extends React.Component {
         <BlockActions fieldId={fieldId} blockId={blockId}
                       sortableBlock={sortableBlock}
                       canDuplicate={canDuplicate}
+                      standalone={standalone}
                       dragHandleRef={dragHandleRef} />
       </div>
     );

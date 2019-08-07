@@ -105,7 +105,7 @@ class Block extends React.Component {
   wrapSortable(blockContent) {
     const {
       fieldId, id, parentId, index, hasError,
-      collapsible, sortable, canAdd,
+      collapsible, sortable, canAdd, standalone,
     } = this.props;
     const blockClassName =
       `c-sf-block ${hasError ? 'c-sf-block--error' : ''}`;
@@ -125,6 +125,7 @@ class Block extends React.Component {
                              collapsibleBlock={collapsible}
                              sortableBlock={sortable}
                              canDuplicate={canAdd}
+                             standalone={standalone}
                              dragHandleRef={this.dragHandleRef}
                              dragHandleProps={provided.dragHandleProps} />
                 {blockContent}
@@ -142,10 +143,11 @@ class Block extends React.Component {
                        collapsibleBlock={collapsible}
                        sortableBlock={sortable}
                        canDuplicate={canAdd}
+                       standalone={standalone}
                        dragHandleRef={this.dragHandleRef} />
           {blockContent}
         </div>
-        {addButton}
+        {standalone ? null : addButton}
       </div>
     );
   }
@@ -156,7 +158,7 @@ class Block extends React.Component {
       <BlockContent ref={this.contentRef} fieldId={fieldId} blockId={id}
                     collapsible={collapsible} />
     );
-    if (standalone) {
+    if (standalone && !collapsible) {
       return (
         <div className="c-sf-container__block-container">
           <div className="c-sf-block">

@@ -28,6 +28,7 @@
         cursor: default;
         border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
+        min-height: 30px;
 
         @media (min-width: $screen-sm-min) {
             padding-left: $content-padding-horizontal - $header-gutter;

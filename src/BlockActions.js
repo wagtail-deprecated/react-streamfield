@@ -38,12 +38,14 @@ class BlockActions extends React.Component {
     blockId: PropTypes.string.isRequired,
     sortableBlock: PropTypes.bool,
     canDuplicate: PropTypes.bool,
+    standalone: PropTypes.bool,
     dragHandleRef: refType,
   };
 
   static defaultProps = {
     sortableBlock: true,
     canDuplicate: true,
+    standalone: false,
   };
 
   get isFirst() {
@@ -105,7 +107,7 @@ class BlockActions extends React.Component {
 
   render() {
     const {
-      blockDefinition, sortableBlock, canDuplicate,
+      blockDefinition, sortableBlock, canDuplicate, standalone,
       icons, labels,
     } = this.props;
     return (
@@ -114,26 +116,32 @@ class BlockActions extends React.Component {
           {getLabel(blockDefinition)}
         </span>
 
-        {sortableBlock ?
-          <>
-            <button className="c-sf-block__actions__single"
-                    onClick={this.moveUpHandler}
-                    title={labels.moveUp} disabled={this.isFirst}
-                    dangerouslySetInnerHTML={{__html: icons.moveUp}} />
-            <button className="c-sf-block__actions__single"
-                    onClick={this.moveDownHandler}
-                    title={labels.moveDown} disabled={this.isLast}
-                    dangerouslySetInnerHTML={{__html: icons.moveDown}} />
-          </>
+        {standalone ?
+          null
           :
-          null}
-        <button className="c-sf-block__actions__single"
-                onClick={this.duplicateHandler}
-                title={labels.duplicate} disabled={!canDuplicate}
-                dangerouslySetInnerHTML={{__html: icons.duplicate}} />
-        <button className="c-sf-block__actions__single"
-                onClick={this.deleteHandler} title={labels.delete}
-                dangerouslySetInnerHTML={{__html: icons.delete}} />
+          <>
+            {sortableBlock ?
+              <>
+                <button className="c-sf-block__actions__single"
+                        onClick={this.moveUpHandler}
+                        title={labels.moveUp} disabled={this.isFirst}
+                        dangerouslySetInnerHTML={{__html: icons.moveUp}} />
+                <button className="c-sf-block__actions__single"
+                        onClick={this.moveDownHandler}
+                        title={labels.moveDown} disabled={this.isLast}
+                        dangerouslySetInnerHTML={{__html: icons.moveDown}} />
+              </>
+              :
+              null}
+            <button className="c-sf-block__actions__single"
+                    onClick={this.duplicateHandler}
+                    title={labels.duplicate} disabled={!canDuplicate}
+                    dangerouslySetInnerHTML={{__html: icons.duplicate}} />
+            <button className="c-sf-block__actions__single"
+                    onClick={this.deleteHandler} title={labels.delete}
+                    dangerouslySetInnerHTML={{__html: icons.delete}} />
+          </>
+        }
       </div>
     );
   }
