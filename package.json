@@ -1,6 +1,6 @@
 {
   "name": "react-streamfield",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "author": "Wagtail <hello@wagtail.io> (https://wagtail.io)",
   "description": "Powerful field for inserting multiple blocks with nesting.",
   "keywords": [
