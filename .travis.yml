@@ -6,7 +6,7 @@ install:
   - npm ci
 script:
   - npm run build
-  - npm run test
+  - npx jest --coverage
   # List the published package’s content.
   - npm pack --loglevel notice 2>&1 >/dev/null | sed -e 's/^npm notice //' && rm *.tgz
 notifications:
