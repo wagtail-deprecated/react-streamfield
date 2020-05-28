@@ -19,7 +19,7 @@
   "license": "BSD-3-Clause",
   "files": [
     "dist",
-    "src"
+    "src/scss"
   ],
   "main": "dist/react-streamfield.cjs.js",
   "module": "dist/react-streamfield.esm.js",
