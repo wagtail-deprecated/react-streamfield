@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "prettier-stylelint": "^0.4.2",
     "react-animate-height": "^2.0.7",
     "react-beautiful-dnd": "^10.0.2",
     "uuid": "^3.3.2"
