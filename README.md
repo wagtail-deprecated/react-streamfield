@@ -1,4 +1,4 @@
-# React StreamField [![npm](https://img.shields.io/npm/v/react-streamfield.svg)](https://www.npmjs.com/package/react-streamfield)
+# React StreamField [![npm](https://img.shields.io/npm/v/react-streamfield.svg)](https://www.npmjs.com/package/react-streamfield) [![Build Status](https://travis-ci.org/wagtail/react-streamfield.svg?branch=master)](https://travis-ci.org/wagtail/react-streamfield)
 
 Powerful field for inserting multiple blocks with nesting.
 
