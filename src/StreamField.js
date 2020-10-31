@@ -21,6 +21,7 @@ function lazyFunction(f) {
 const BlockDefinitionType = PropTypes.shape({
   key: PropTypes.string.isRequired,
   label: PropTypes.string,
+  labelClass: PropTypes.string,
   required: PropTypes.bool,
   default: PropTypes.any,
   icon: PropTypes.string,

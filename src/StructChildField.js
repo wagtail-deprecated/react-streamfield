@@ -31,8 +31,8 @@ class StructChildField extends React.Component {
     const {fieldId, blockId, blockDefinition} = this.props;
     return (
       <div className={classNames('field',
-                                 !!blockDefinition.required && 'required')}>
-        <label className='field__label' htmlFor={getFieldName(blockId)}>
+                                 !!blockDefinition.required && 'required', )}>
+        <label className={classNames('field__label', blockDefinition.labelClass)} htmlFor={getFieldName(blockId)}>
           {getLabel(blockDefinition)}
         </label>
         <FieldInput fieldId={fieldId} blockId={blockId} />
