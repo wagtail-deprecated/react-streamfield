@@ -30,6 +30,7 @@ const BlockDefinitionType = PropTypes.shape({
   minNum: PropTypes.number,
   maxNum: PropTypes.number,
   closed: PropTypes.bool,
+  closedOnAdd: PropTypes.bool,
   titleTemplate: PropTypes.string,
   html: PropTypes.string,
   isStruct: PropTypes.bool,
