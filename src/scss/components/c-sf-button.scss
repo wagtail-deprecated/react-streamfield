@@ -16,6 +16,7 @@
     &:hover,
     &:focus {
         background-color: $teal;
+        background-color: var(--color-primary, $teal);
 
         #{$root}__icon,
         #{$root}__label {

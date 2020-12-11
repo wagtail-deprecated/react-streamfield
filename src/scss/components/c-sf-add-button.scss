@@ -4,6 +4,7 @@
     appearance: none;
     border: 0 none;
     color: $teal;
+    color: var(--color-primary, $teal);
     font-weight: bold;
     background: none;
     padding: 0;
