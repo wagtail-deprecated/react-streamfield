@@ -1,3 +1,5 @@
+> :warning: **No longer maintained**: Features have been merged into Wagtail see [2.13 Release Notes](https://docs.wagtail.io/en/stable/releases/2.13.html#streamfield-performance-and-functionality-updates).
+
 # React StreamField [![npm](https://img.shields.io/npm/v/react-streamfield.svg)](https://www.npmjs.com/package/react-streamfield) [![Build Status](https://travis-ci.org/wagtail/react-streamfield.svg?branch=master)](https://travis-ci.org/wagtail/react-streamfield)
 
 Powerful field for inserting multiple blocks with nesting.
