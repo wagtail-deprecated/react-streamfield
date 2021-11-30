@@ -21,6 +21,7 @@ function lazyFunction(f) {
 const BlockDefinitionType = PropTypes.shape({
   key: PropTypes.string.isRequired,
   label: PropTypes.string,
+  labelClass: PropTypes.string,
   required: PropTypes.bool,
   default: PropTypes.any,
   icon: PropTypes.string,
@@ -29,6 +30,7 @@ const BlockDefinitionType = PropTypes.shape({
   minNum: PropTypes.number,
   maxNum: PropTypes.number,
   closed: PropTypes.bool,
+  closedOnAdd: PropTypes.bool,
   titleTemplate: PropTypes.string,
   html: PropTypes.string,
   isStruct: PropTypes.bool,
